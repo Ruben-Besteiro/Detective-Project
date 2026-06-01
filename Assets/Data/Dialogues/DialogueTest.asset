@@ -1,0 +1,51 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 50b1869994199a640a1a9467adae8432, type: 3}
+  m_Name: DialogueTest
+  m_EditorClassIdentifier: 
+  nodes:
+  - nodeType: 0
+    dialogueLine:
+      speakerName: 
+      text: 
+      leftPortrait: {fileID: 0}
+      rightPortrait: {fileID: 0}
+    condition:
+      flagName: 
+      expectedValue: 0
+      trueContinueCurrent: 0
+      trueNextDialogue: {fileID: 0}
+      falseContinueCurrent: 0
+      falseNextDialogue: {fileID: 0}
+    choice:
+      options: []
+    flagAction:
+      flagName: 
+      newValue: 0
+  - nodeType: 0
+    dialogueLine:
+      speakerName: 
+      text: 
+      leftPortrait: {fileID: 0}
+      rightPortrait: {fileID: 0}
+    condition:
+      flagName: 
+      expectedValue: 0
+      trueContinueCurrent: 0
+      trueNextDialogue: {fileID: 0}
+      falseContinueCurrent: 0
+      falseNextDialogue: {fileID: 0}
+    choice:
+      options: []
+    flagAction:
+      flagName: 
+      newValue: 0
