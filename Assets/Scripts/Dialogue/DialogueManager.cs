@@ -8,6 +8,7 @@ using System;
 public class DialogueManager : MonoBehaviour
 {
     [Header("UI")]
+    [SerializeField] private GameObject interactCanvas;
     [SerializeField] private GameObject dialoguePanel;
     [SerializeField] private TMP_Text speakerNameText;
     [SerializeField] private TMP_Text dialogueText;
@@ -86,8 +87,9 @@ public class DialogueManager : MonoBehaviour
     // MAIN COROUTINE
     private IEnumerator PlayDialogue()
     {
+        interactCanvas?.SetActive(false);
         OnDialogueStarted?.Invoke();
-
+        GetComponent<Canvas>().enabled = true;
         Debug.Log($"[Dialogue] START: {currentDialogue.name}");
 
         currentNodeIndex = 0;
@@ -99,7 +101,7 @@ public class DialogueManager : MonoBehaviour
 
             yield return ProcessNode(node);
 
-            // Si se ha solicitado cambio de diálogo, salimos inmediatamente
+            // Si se ha solicitado cambio de diï¿½logo, salimos inmediatamente
             if (skipCurrentDialogue)
             {
                 yield break;
@@ -107,9 +109,10 @@ public class DialogueManager : MonoBehaviour
 
             currentNodeIndex++;
         }
-
+        GetComponent<Canvas>().enabled = false;
         Debug.Log($"[Dialogue] END: {currentDialogue.name}");
 
+        interactCanvas?.SetActive(true);
         OnDialogueFinished?.Invoke();
         runningDialogue = null;
     }
@@ -193,7 +196,7 @@ public class DialogueManager : MonoBehaviour
         if (img.sprite == newSprite)
             yield break;
 
-        // CASO 4: cambio de sprite -> pulso rápido
+        // CASO 4: cambio de sprite -> pulso rï¿½pido
         yield return img.transform
             .DOPunchScale(Vector3.one * 0.15f, 0.2f)
             .WaitForCompletion();

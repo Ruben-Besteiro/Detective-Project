@@ -6,8 +6,9 @@ public class PlayerController : MonoBehaviour
 {
     [SerializeField] float speed = 5f;
 
-    InputActions input;
     CharacterController cc;
+    InputActions input;
+    InteractableObject currentInteractable;
 
     void Awake()
     {
@@ -15,8 +16,30 @@ public class PlayerController : MonoBehaviour
         cc = GetComponent<CharacterController>();
     }
 
-    void OnEnable() => input.Player.Enable();
-    void OnDisable() => input.Player.Disable();
+    void OnEnable()
+    {
+        input.Player.Enable();
+        InteractableObject.OnFocusChanged += OnFocusChanged;
+        input.Player.Interact.performed += OnInteract;
+        DialogueManager.OnDialogueStarted  += OnDialogueStarted;
+        DialogueManager.OnDialogueFinished += OnDialogueFinished;
+    }
+
+    void OnDisable()
+    {
+        input.Player.Disable();
+        InteractableObject.OnFocusChanged -= OnFocusChanged;
+        input.Player.Interact.performed -= OnInteract;
+        DialogueManager.OnDialogueStarted  -= OnDialogueStarted;
+        DialogueManager.OnDialogueFinished -= OnDialogueFinished;
+    }
+
+    void OnDialogueStarted()  => input.Player.Disable();
+    void OnDialogueFinished() => input.Player.Enable();
+
+    void OnFocusChanged(InteractableObject obj) => currentInteractable = obj;
+
+    void OnInteract(InputAction.CallbackContext ctx) => currentInteractable?.Interact();
 
     void Update()
     {
@@ -25,10 +48,14 @@ public class PlayerController : MonoBehaviour
 
         // Movimiento relativo a la cámara proyectado en el plano XZ
         Transform cam = Camera.main.transform;
-        Vector3 camForward = cam.forward; camForward.y = 0f; camForward.Normalize();
-        Vector3 camRight   = cam.right;   camRight.y   = 0f; camRight.Normalize();
+        Vector3 camF = cam.forward;
+        Vector3 camR = cam.right;
+        camF.y = 0f;
+        camF.Normalize();
+        camR.y = 0f;
+        camR.Normalize();
 
-        Vector3 dir = (camForward * raw.y + camRight * raw.x).normalized;
+        Vector3 dir = (camF * raw.y + camR * raw.x).normalized;
         cc.SimpleMove(dir * speed);
         transform.forward = dir;
     }
