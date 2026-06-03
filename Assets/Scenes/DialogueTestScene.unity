@@ -888,38 +888,16 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 5257339871731692033, guid: 637847215dfd42942b962b5d48a39547,
-        type: 3}
-      propertyPath: buttonPrefab
-      value: 
-      objectReference: {fileID: 8145051308725838185, guid: 4ac9e40fabb8879428e5ff9914552a06,
-        type: 3}
-    - target: {fileID: 5257339871731692033, guid: 637847215dfd42942b962b5d48a39547,
-        type: 3}
-      propertyPath: buttonContainer
-      value: 
-      objectReference: {fileID: 1291067277739994463}
     - target: {fileID: 5437591495961760043, guid: 637847215dfd42942b962b5d48a39547,
         type: 3}
       propertyPath: m_Name
       value: DialogueManager
-      objectReference: {fileID: 0}
-    - target: {fileID: 7416483978736180982, guid: 637847215dfd42942b962b5d48a39547,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 637847215dfd42942b962b5d48a39547, type: 3}
---- !u!224 &1291067277739994463 stripped
-RectTransform:
-  m_CorrespondingSourceObject: {fileID: 1359936041569637048, guid: 637847215dfd42942b962b5d48a39547,
-    type: 3}
-  m_PrefabInstance: {fileID: 1291067277739994462}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

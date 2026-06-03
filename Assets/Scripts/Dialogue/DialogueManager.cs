@@ -116,21 +116,25 @@ public class DialogueManager : MonoBehaviour
 
         currentNodeIndex = 0;
 
-        while (currentDialogue != null &&
-               currentNodeIndex < currentDialogue.nodes.Count)
+        while (currentDialogue != null && currentNodeIndex < currentDialogue.nodes.Count)
         {
             var node = currentDialogue.nodes[currentNodeIndex];
 
             yield return ProcessNode(node);
 
-            // Si se ha solicitado cambio de di�logo, salimos inmediatamente
-            if (skipCurrentDialogue)
+            if (pendingDialogue != null)
             {
-                yield break;
+                currentDialogue = pendingDialogue;
+                pendingDialogue = null;
+
+                currentNodeIndex = 0;
+
+                continue;
             }
 
             currentNodeIndex++;
         }
+
         GetComponent<Canvas>().enabled = false;
         Debug.Log($"[Dialogue] END: {currentDialogue.name}");
         dialoguePanel.SetActive(false);

@@ -475,8 +475,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ChoiceManager
   panel: {fileID: 7416483978736180982}
   panelTransform: {fileID: 934411885410552205}
-  buttonPrefab: {fileID: 0}
-  buttonContainer: {fileID: 0}
+  buttonPrefab: {fileID: 8145051308725838185, guid: 4ac9e40fabb8879428e5ff9914552a06,
+    type: 3}
+  buttonContainer: {fileID: 1359936041569637048}
 --- !u!1 &4570532035515241649
 GameObject:
   m_ObjectHideFlags: 0
@@ -693,7 +694,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &934411885410552205
 RectTransform:
   m_ObjectHideFlags: 0
@@ -712,7 +713,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 180, y: 250}
+  m_SizeDelta: {x: 220, y: 250}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &3784396026995756522
 CanvasRenderer:

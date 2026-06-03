@@ -64,14 +64,11 @@ MonoBehaviour:
       falseNextDialogue: {fileID: 0}
     choice:
       options:
-      - optionText: "Opci\xF3n 1"
+      - optionText: Seguir hablando
         continueCurrentDialogue: 0
-        nextDialogue: {fileID: 0}
-      - optionText: "Opci\xF3n 2"
-        continueCurrentDialogue: 0
-        nextDialogue: {fileID: 0}
-      - optionText: "Opci\xF3n 3"
-        continueCurrentDialogue: 0
+        nextDialogue: {fileID: 11400000, guid: 44ed3deab7a37cc4caaa7d3b37411f6d, type: 2}
+      - optionText: Irse
+        continueCurrentDialogue: 1
         nextDialogue: {fileID: 0}
     flagAction:
       flagName: 
