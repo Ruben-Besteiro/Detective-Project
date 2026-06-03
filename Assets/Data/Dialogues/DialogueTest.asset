@@ -17,7 +17,7 @@ MonoBehaviour:
     dialogueLine:
       speakerName: A
       text: "Buenos d\xEDas"
-      leftPortrait: {fileID: 0}
+      leftPortrait: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
       rightPortrait: {fileID: 0}
     condition:
       flagName: 
@@ -35,8 +35,8 @@ MonoBehaviour:
     dialogueLine:
       speakerName: B
       text: Buenas tardes
-      leftPortrait: {fileID: 0}
-      rightPortrait: {fileID: 0}
+      leftPortrait: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
+      rightPortrait: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
     condition:
       flagName: 
       expectedValue: 0
@@ -46,6 +46,60 @@ MonoBehaviour:
       falseNextDialogue: {fileID: 0}
     choice:
       options: []
+    flagAction:
+      flagName: 
+      newValue: 0
+  - nodeType: 2
+    dialogueLine:
+      speakerName: B
+      text: Buenas tardes
+      leftPortrait: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
+      rightPortrait: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
+    condition:
+      flagName: 
+      expectedValue: 0
+      trueContinueCurrent: 0
+      trueNextDialogue: {fileID: 0}
+      falseContinueCurrent: 0
+      falseNextDialogue: {fileID: 0}
+    choice:
+      options:
+      - optionText: "Opci\xF3n 1"
+        continueCurrentDialogue: 0
+        nextDialogue: {fileID: 0}
+      - optionText: "Opci\xF3n 2"
+        continueCurrentDialogue: 0
+        nextDialogue: {fileID: 0}
+      - optionText: "Opci\xF3n 3"
+        continueCurrentDialogue: 0
+        nextDialogue: {fileID: 0}
+    flagAction:
+      flagName: 
+      newValue: 0
+  - nodeType: 0
+    dialogueLine:
+      speakerName: B
+      text: "Adi\xF3s"
+      leftPortrait: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
+      rightPortrait: {fileID: 10911, guid: 0000000000000000f000000000000000, type: 0}
+    condition:
+      flagName: 
+      expectedValue: 0
+      trueContinueCurrent: 0
+      trueNextDialogue: {fileID: 0}
+      falseContinueCurrent: 0
+      falseNextDialogue: {fileID: 0}
+    choice:
+      options:
+      - optionText: "Opci\xF3n 1"
+        continueCurrentDialogue: 0
+        nextDialogue: {fileID: 0}
+      - optionText: "Opci\xF3n 2"
+        continueCurrentDialogue: 0
+        nextDialogue: {fileID: 0}
+      - optionText: "Opci\xF3n 3"
+        continueCurrentDialogue: 0
+        nextDialogue: {fileID: 0}
     flagAction:
       flagName: 
       newValue: 0

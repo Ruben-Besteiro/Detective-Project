@@ -4,11 +4,11 @@ using System.Collections;
 using TMPro;
 using UnityEngine.UI;
 using System;
+using UnityEngine.InputSystem;
 
 public class DialogueManager : MonoBehaviour
 {
     [Header("UI")]
-    [SerializeField] private GameObject interactCanvas;
     [SerializeField] private GameObject dialoguePanel;
     [SerializeField] private TMP_Text speakerNameText;
     [SerializeField] private TMP_Text dialogueText;
@@ -25,10 +25,12 @@ public class DialogueManager : MonoBehaviour
     public static event Action OnDialogueFinished;
 
     private DialogueData currentDialogue;
+    private DialogueData pendingDialogue;
     private int currentNodeIndex;
     private bool skipCurrentDialogue;
 
     private Coroutine runningDialogue;
+    private InputAction advanceDialogueAction;
 
     private void Awake()
     {
@@ -39,10 +41,30 @@ public class DialogueManager : MonoBehaviour
         }
 
         Instance = this;
+
+        advanceDialogueAction = new InputAction(
+            "AdvanceDialogue",
+            InputActionType.Button);
+
+        advanceDialogueAction.AddBinding("<Mouse>/leftButton");
+        advanceDialogueAction.AddBinding("<Keyboard>/space");
     }
+    private void OnEnable()
+    {
+        advanceDialogueAction?.Enable();
+    }
+    private void OnDisable()
+    {
+        advanceDialogueAction?.Disable();
+    }
+    private bool AdvancePressed()
+    {
+        return advanceDialogueAction.WasPressedThisFrame();
+    }
+
     private void Update()
     {
-        if (Input.GetMouseButtonDown(0) || Input.GetKeyDown(KeyCode.Space))
+        if (AdvancePressed())
         {
             if (!isWaitingForInput)
             {
@@ -70,6 +92,7 @@ public class DialogueManager : MonoBehaviour
 
     private void SwitchDialogue(DialogueData newDialogue)
     {
+        dialoguePanel.SetActive(true);
         // Si ya hay uno corriendo, lo detenemos
         if (runningDialogue != null)
         {
@@ -87,7 +110,6 @@ public class DialogueManager : MonoBehaviour
     // MAIN COROUTINE
     private IEnumerator PlayDialogue()
     {
-        interactCanvas?.SetActive(false);
         OnDialogueStarted?.Invoke();
         GetComponent<Canvas>().enabled = true;
         Debug.Log($"[Dialogue] START: {currentDialogue.name}");
@@ -111,8 +133,7 @@ public class DialogueManager : MonoBehaviour
         }
         GetComponent<Canvas>().enabled = false;
         Debug.Log($"[Dialogue] END: {currentDialogue.name}");
-
-        interactCanvas?.SetActive(true);
+        dialoguePanel.SetActive(false);
         OnDialogueFinished?.Invoke();
         runningDialogue = null;
     }
@@ -148,11 +169,11 @@ public class DialogueManager : MonoBehaviour
         var line = node.dialogueLine;
 
         ResetPortraits();
-
-        yield return HandlePortrait(leftPortrait, line.leftPortrait, true);
-        yield return HandlePortrait(rightPortrait, line.rightPortrait, false);
-
+        dialogueText.text = "";
         yield return UpdateSpeakerName(line.speakerName);
+
+        StartCoroutine(HandlePortrait(leftPortrait, line.leftPortrait, true));
+        yield return HandlePortrait(rightPortrait, line.rightPortrait, false);
 
         yield return TypeText(line.text);
 
@@ -196,7 +217,7 @@ public class DialogueManager : MonoBehaviour
         if (img.sprite == newSprite)
             yield break;
 
-        // CASO 4: cambio de sprite -> pulso r�pido
+        // CASO 4: cambio de sprite -> pulso rápido
         yield return img.transform
             .DOPunchScale(Vector3.one * 0.15f, 0.2f)
             .WaitForCompletion();
@@ -229,8 +250,7 @@ public class DialogueManager : MonoBehaviour
     {
         isWaitingForInput = true;
 
-        while (!Input.GetMouseButtonDown(0) &&
-               !Input.GetKeyDown(KeyCode.Space))
+        while (!AdvancePressed())
         {
             yield return null;
         }
@@ -240,21 +260,60 @@ public class DialogueManager : MonoBehaviour
 
     private IEnumerator ProcessCondition(DialogueNode node)
     {
-        Debug.Log("[Condition] Evaluating condition node");
-        yield return new WaitForSeconds(1f);
+        var condition = node.condition;
+
+        bool result =
+            FlagManager.Instance.HasFlag(condition.flagName)
+            == condition.expectedValue;
+
+        Debug.Log(
+            $"[Condition] {condition.flagName} == {condition.expectedValue} => {result}");
+
+        if (result)
+        {
+            if (!condition.trueContinueCurrent)
+            {
+                RequestDialogueSwitch(
+                    condition.trueNextDialogue);
+            }
+        }
+        else
+        {
+            if (!condition.falseContinueCurrent)
+            {
+                RequestDialogueSwitch(
+                    condition.falseNextDialogue);
+            }
+        }
+
+        yield return null;
+    }
+    private void RequestDialogueSwitch(DialogueData dialogue)
+    {
+        pendingDialogue = dialogue;
     }
 
     private IEnumerator ProcessChoice(DialogueNode node)
     {
-        Debug.Log("[Choice] Presenting options");
-        yield return new WaitForSeconds(1f);
+        ChoiceNode choiceNode = node.choice;
+
+        int selectedIndex = -1;
+
+        yield return StartCoroutine(ChoiceManager.Instance.ShowChoices(choiceNode.options, result => selectedIndex = result));
+        ChoiceOption selectedOption = choiceNode.options[selectedIndex];
+        if (!selectedOption.continueCurrentDialogue)
+        {
+            RequestDialogueSwitch(
+                selectedOption.nextDialogue);
+        }
     }
 
     private IEnumerator ProcessFlagAction(DialogueNode node)
     {
-        Debug.Log($"[Flag] {node.flagAction.flagName}");
+        FlagManager.Instance.SetFlag(
+            node.flagAction.flagName,
+            node.flagAction.newValue);
 
-        yield return new WaitForSeconds(1f);
-
+        yield return null;
     }
 }

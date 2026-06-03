@@ -35,8 +35,6 @@ public class ChoiceOption
 {
     public string optionText;
 
-    public string flagToSet;
-
     [Header("Flow")]
     public bool continueCurrentDialogue = true;
 
