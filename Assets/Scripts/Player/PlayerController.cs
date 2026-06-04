@@ -5,7 +5,6 @@ using UnityEngine.InputSystem;
 public class PlayerController : MonoBehaviour
 {
     [SerializeField] float speed = 5f;
-    [SerializeField] GameObject pauseCanvas;
 
     CharacterController cc;
     InputActions input;
@@ -25,8 +24,9 @@ public class PlayerController : MonoBehaviour
         input.Player.Pause.performed += OnPause;
         DialogueManager.OnDialogueStarted  += OnDialogueStarted;
         DialogueManager.OnDialogueFinished += OnDialogueFinished;
+        PauseController.OnPauseStarted += DisableInput;
+        PauseController.OnPauseEnded += EnableInput;
     }
-
     void OnDisable()
     {
         input.Player.Disable();
@@ -35,24 +35,28 @@ public class PlayerController : MonoBehaviour
         input.Player.Pause.performed -= OnPause;
         DialogueManager.OnDialogueStarted  -= OnDialogueStarted;
         DialogueManager.OnDialogueFinished -= OnDialogueFinished;
+        PauseController.OnPauseStarted -= DisableInput;
+        PauseController.OnPauseEnded -= EnableInput;
+    }
+
+    //Activamos y desactivamos controles al pausar el juego
+    private void DisableInput()
+    {
+        input.Player.Move.Disable();
+        input.Player.Interact.Disable();
+    }
+
+    private void EnableInput()
+    {
+        input.Player.Move.Enable();
+        input.Player.Interact.Enable();
     }
 
     void OnPause(InputAction.CallbackContext ctx)
     {
-        if (pauseCanvas.activeSelf) OnUnpause();
+        if (PauseController.IsPaused) PauseController.Unpause();
         else
-        {
-            pauseCanvas.SetActive(true);
-            input.Player.Move.Disable();
-            input.Player.Interact.Disable();
-        }
-    }
-
-    public void OnUnpause()
-    {
-        pauseCanvas.SetActive(false);
-        input.Player.Move.Enable();
-        input.Player.Interact.Enable();
+        { PauseController.Pause(); }
     }
 
     void OnDialogueStarted()  => input.Player.Disable();

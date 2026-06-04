@@ -27,7 +27,6 @@ public class DialogueManager : MonoBehaviour
     private DialogueData currentDialogue;
     private DialogueData pendingDialogue;
     private int currentNodeIndex;
-    private bool skipCurrentDialogue;
 
     private Coroutine runningDialogue;
     private InputAction advanceDialogueAction;
@@ -96,13 +95,11 @@ public class DialogueManager : MonoBehaviour
         // Si ya hay uno corriendo, lo detenemos
         if (runningDialogue != null)
         {
-            skipCurrentDialogue = true;
             StopCoroutine(runningDialogue);
         }
 
         currentDialogue = newDialogue;
         currentNodeIndex = 0;
-        skipCurrentDialogue = false;
 
         runningDialogue = StartCoroutine(PlayDialogue());
     }
