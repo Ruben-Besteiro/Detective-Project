@@ -7,10 +7,10 @@ public class PlayerController : MonoBehaviour
 {
     public static PlayerController Instance;
 
-    [SerializeField] float speed = 5f;
+    [SerializeField] public float speed = 5f;
 
     CharacterController cc;
-    InputActions input;
+    public InputActions input;
 
     void Awake()
     {
@@ -23,36 +23,36 @@ public class PlayerController : MonoBehaviour
         cc = GetComponent<CharacterController>();
     }
 
-    void OnEnable()
+    public void OnEnable()
     {
         input.Player.Enable();
         input.Player.Pause.performed += OnPause;
         DialogueManager.OnDialogueStarted  += DisableMovement;
         DialogueManager.OnDialogueFinished += EnableMovement;
         PauseController.OnPauseStarted += DisableMovement;
-        PauseController.OnPauseEnded   += EnableMovement;
+        PauseController.OnPauseEnded  += EnableMovement;
     }
 
-    void OnDisable()
+    public void OnDisable()
     {
         input.Player.Disable();
         input.Player.Pause.performed -= OnPause;
         DialogueManager.OnDialogueStarted  -= DisableMovement;
         DialogueManager.OnDialogueFinished -= EnableMovement;
         PauseController.OnPauseStarted -= DisableMovement;
-        PauseController.OnPauseEnded   -= EnableMovement;
+        PauseController.OnPauseEnded  -= EnableMovement;
     }
 
     void DisableMovement() => input.Player.Move.Disable();
-    void EnableMovement()  => input.Player.Move.Enable();
+    void EnableMovement() => input.Player.Move.Enable();
 
-    void OnPause(InputAction.CallbackContext ctx)
+    public void OnPause(InputAction.CallbackContext ctx)
     {
         if (PauseController.IsPaused) PauseController.Unpause();
         else PauseController.Pause();
     }
 
-    void Update()
+    public void Update()
     {
         Vector2 raw = input.Player.Move.ReadValue<Vector2>();
         if (raw.sqrMagnitude < 0.01f) return;
