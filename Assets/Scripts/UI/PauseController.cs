@@ -61,8 +61,6 @@ public class PauseController : MonoBehaviour
 
     private void StartPause()
     {
-        SoundManager.Instance.PauseMusic();
-        SoundManager.Instance.PlaySFX(SFX.Pause);
         isPaused = true;
         OnPauseStarted?.Invoke();
 
@@ -78,8 +76,6 @@ public class PauseController : MonoBehaviour
 
     private IEnumerator UnpauseRoutine()
     {
-        SoundManager.Instance.PlaySFX(SFX.Yes);
-        SoundManager.Instance.ResumeMusic();
         pauseMenu.DOAnchorPosX(-pauseMenu.rect.width, animationDuration).SetEase(Ease.InBack).SetUpdate(true);
 
         yield return new WaitForSecondsRealtime(animationDuration);

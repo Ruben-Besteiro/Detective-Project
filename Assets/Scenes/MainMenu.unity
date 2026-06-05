@@ -231,16 +231,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 5156846395935518668, guid: fbfd956b16a199143978b5633793bdf9,
-        type: 3}
-      propertyPath: m_Sprite
-      value: 
-      objectReference: {fileID: 21300000, guid: a780f2c9fc08bcd42b271c710c7750ff,
-        type: 3}
     - target: {fileID: 5360215740487006652, guid: fbfd956b16a199143978b5633793bdf9,
         type: 3}
       propertyPath: m_Name
-      value: SceneTransitionUI
+      value: Managers
       objectReference: {fileID: 0}
     - target: {fileID: 9047541912289676015, guid: fbfd956b16a199143978b5633793bdf9,
         type: 3}
@@ -347,24 +341,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fbfd956b16a199143978b5633793bdf9, type: 3}
---- !u!224 &146176201 stripped
-RectTransform:
-  m_CorrespondingSourceObject: {fileID: 3338164017834661712, guid: fbfd956b16a199143978b5633793bdf9,
-    type: 3}
-  m_PrefabInstance: {fileID: 146176200}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &146176202 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 3441981450888250976, guid: fbfd956b16a199143978b5633793bdf9,
-    type: 3}
-  m_PrefabInstance: {fileID: 146176200}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &269581784
 GameObject:
   m_ObjectHideFlags: 0
@@ -502,74 +478,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 269581784}
   m_CullTransparentMesh: 1
---- !u!1001 &304423571
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 2154332454343481033, guid: 08a71186170096645b4a7985e1666245,
-        type: 3}
-      propertyPath: m_Name
-      value: SoundManager
-      objectReference: {fileID: 0}
-    - target: {fileID: 5357561042299716183, guid: 08a71186170096645b4a7985e1666245,
-        type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 124.66305
-      objectReference: {fileID: 0}
-    - target: {fileID: 5357561042299716183, guid: 08a71186170096645b4a7985e1666245,
-        type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 104.75091
-      objectReference: {fileID: 0}
-    - target: {fileID: 5357561042299716183, guid: 08a71186170096645b4a7985e1666245,
-        type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -33.96536
-      objectReference: {fileID: 0}
-    - target: {fileID: 5357561042299716183, guid: 08a71186170096645b4a7985e1666245,
-        type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5357561042299716183, guid: 08a71186170096645b4a7985e1666245,
-        type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5357561042299716183, guid: 08a71186170096645b4a7985e1666245,
-        type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5357561042299716183, guid: 08a71186170096645b4a7985e1666245,
-        type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5357561042299716183, guid: 08a71186170096645b4a7985e1666245,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5357561042299716183, guid: 08a71186170096645b4a7985e1666245,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5357561042299716183, guid: 08a71186170096645b4a7985e1666245,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 08a71186170096645b4a7985e1666245, type: 3}
 --- !u!1 &362687304
 GameObject:
   m_ObjectHideFlags: 0
@@ -707,53 +615,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 362687304}
   m_CullTransparentMesh: 1
---- !u!1 &545724226
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 545724228}
-  - component: {fileID: 545724229}
-  m_Layer: 0
-  m_Name: Managers
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &545724228
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 545724226}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &545724229
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 545724226}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 95c173c6818d0ca499a218affc8de102, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::GameSceneManager
-  fadePanel: {fileID: 146176202}
-  loadingIcon: {fileID: 146176201}
-  fadeDuration: 0.5
 --- !u!1 &673213011
 GameObject:
   m_ObjectHideFlags: 0
@@ -1302,16 +1163,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::SceneButton
   transitionType: 1
   loadingIcon: 1
-  sfx: 0
+  sfx:
+    Guid:
+      Data1: 1533602466
+      Data2: 1156579405
+      Data3: -1812657020
+      Data4: -617279240
+    Path: event:/YesSFX
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
   - {fileID: 1033304664}
   - {fileID: 137647520}
-  - {fileID: 545724228}
   - {fileID: 1383795367}
   - {fileID: 146176200}
   - {fileID: 673213014}
-  - {fileID: 304423571}
   - {fileID: 1622909475}

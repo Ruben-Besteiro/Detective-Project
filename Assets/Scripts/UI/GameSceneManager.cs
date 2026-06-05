@@ -29,6 +29,8 @@ public class GameSceneManager : MonoBehaviour
 
         Instance = this;
 
+        DontDestroyOnLoad(gameObject);
+
         fadePanel.gameObject.SetActive(false);
         fadePanel.color = new Color(0, 0, 0, 0);
         loadingIcon.gameObject.SetActive(false);
@@ -38,7 +40,7 @@ public class GameSceneManager : MonoBehaviour
 
     public void LoadScene(string sceneName, SceneTransition transition, bool showLoadingIcon)
     {
-        SoundManager.Instance.StopMusic();
+        //SoundManager.Instance.StopMusic();
         
         if (transition == SceneTransition.Instant)
         {
