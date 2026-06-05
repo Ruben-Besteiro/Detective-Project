@@ -453,8 +453,8 @@ MonoBehaviour:
   switchSettingsMigration: 1
   HasSourceProject: 1
   HasPlatforms: 1
-  sourceProjectPath: ../../FMOD/audio-system_Detective-Proyect/audio-system_Detective-proyect.fspro
-  sourceBankPath: ../../FMOD/audio-system_Detective-Proyect/Build
+  sourceProjectPath: audio-system_Detective-proyect/audio-system_Detective-proyect.fspro
+  sourceBankPath: audio-system_Detective-proyect/Build
   sourceBankPathUnformatted: 
   BankRefreshCooldown: 5
   ShowBankRefreshWindow: 1
