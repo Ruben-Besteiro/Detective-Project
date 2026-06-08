@@ -5,9 +5,11 @@ public class PlayerCombatController : MonoBehaviour
 {
     public static PlayerCombatController Instance;
 
-    // Patrón Decorator
-    [SerializeField] PlayerController baseController;       // DEBE ESTAR DESACTIVADO EN EL INSPECTOR
+    [SerializeField] PlayerController baseController;
     public InputActions input;
+
+    public State currentState;
+    public Vector2 MoveInput => baseController.input.Player.Move.ReadValue<Vector2>();
 
     void Awake()
     {
@@ -16,12 +18,24 @@ public class PlayerCombatController : MonoBehaviour
         else
             Destroy(gameObject);
         input = new InputActions();
+        baseController.Initialize();
     }
 
     void Start()
     {
         baseController.speed *= 1.5f;
+        currentState = new IdleState(this);
+        currentState.Enter();
     }
+
+    public void ChangeState(State newState)
+    {
+        currentState.Exit();
+        currentState = newState;
+        currentState.Enter();
+    }
+
+    public void Move() => baseController.Update();
 
     void OnEnable()
     {
@@ -38,9 +52,13 @@ public class PlayerCombatController : MonoBehaviour
         baseController.OnPause(ctx);
     }
 
-    public void Update()
+    void Update()
     {
-        baseController.Update();
+        if (!PauseController.IsPaused)
+        {
+            currentState?.HandleInput();
+            currentState?.Update();
+        }
     }
 
     // TO DO: Añadir Attack, Dash, Sidestep, etc...

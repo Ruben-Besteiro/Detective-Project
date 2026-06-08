@@ -19,9 +19,16 @@ public class PlayerController : MonoBehaviour
         else
             Destroy(gameObject);
 
+        Initialize();
+    }
+
+    public void Initialize()
+    {
+        if (input != null) return;
         input = new InputActions();
         cc = GetComponent<CharacterController>();
     }
+
 
     public void OnEnable()
     {
@@ -35,12 +42,12 @@ public class PlayerController : MonoBehaviour
 
     public void OnDisable()
     {
-        input.Player.Disable();
         input.Player.Pause.performed -= OnPause;
         DialogueManager.OnDialogueStarted  -= DisableMovement;
         DialogueManager.OnDialogueFinished -= EnableMovement;
         PauseController.OnPauseStarted -= DisableMovement;
         PauseController.OnPauseEnded  -= EnableMovement;
+        input.Player.Disable();
     }
 
     void DisableMovement() => input.Player.Move.Disable();
