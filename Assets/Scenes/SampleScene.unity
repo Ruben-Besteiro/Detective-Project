@@ -2483,7 +2483,7 @@ GameObject:
   - component: {fileID: 1711101447}
   - component: {fileID: 1711101446}
   - component: {fileID: 1711101445}
-  - component: {fileID: 1711101444}
+  - component: {fileID: 1711101449}
   m_Layer: 0
   m_Name: Interactable Object 2 (1)
   m_TagString: Untagged
@@ -2491,21 +2491,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1711101444
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1711101443}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5717d90cacf53044485f7002a6360468, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::PickupInteractable
-  displayName: Cosaa
-  interactCanvas: {fileID: 1531143994}
-  itemData: {fileID: 11400000, guid: 8fb5c12e472136441b8831f7a3f70cae, type: 2}
 --- !u!135 &1711101445
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -2599,6 +2584,22 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1711101449
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1711101443}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c5245f6b617e7aa4391cba7e6497cb26, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ConsumeInteractable
+  displayName: Candado
+  interactCanvas: {fileID: 1531143994}
+  acceptedItems:
+  - {fileID: 1360899269}
 --- !u!1 &1810700648
 GameObject:
   m_ObjectHideFlags: 0

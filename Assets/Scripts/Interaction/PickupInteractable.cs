@@ -4,6 +4,7 @@ using UnityEngine;
 public class PickupInteractable : Interactable
 {
     [SerializeField] ItemData itemData;
+    public ItemData ItemData => itemData;
 
     protected override void OnTriggerEnter(Collider other)
     {

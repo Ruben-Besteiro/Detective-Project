@@ -19,7 +19,7 @@ public class BossController : MonoBehaviour
     [HideInInspector] public bool startled;
     [HideInInspector] public int currentAttack = -1;
 
-    BossBehaviourTree _tree;
+    BossBehaviourTree _tree; 
 
     void Awake()
     {
