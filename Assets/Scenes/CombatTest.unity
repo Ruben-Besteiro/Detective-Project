@@ -609,6 +609,7 @@ GameObject:
   - component: {fileID: 406139045}
   - component: {fileID: 406139044}
   - component: {fileID: 406139043}
+  - component: {fileID: 406139047}
   m_Layer: 0
   m_Name: Enemy Boss
   m_TagString: Untagged
@@ -711,6 +712,29 @@ Transform:
   - {fileID: 1506666718}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
+--- !u!114 &406139047
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 406139042}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 82eb07c9644159f4e9b6b41bfaed987f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::BossController
+  detectionRadius: 20
+  moveSpeed: 4
+  stopDistance: 1.5
+  attackCooldown: 1.5
+  projectilePrefab: {fileID: 1227268554403163030, guid: 19fd74b10080d0c418682cae274a0bb7,
+    type: 3}
+  projectileForce: 12
+  circleCount: 8
+  circleRadius: 3
+  startled: 0
+  currentAttack: -1
 --- !u!1001 &475688404
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1949,7 +1973,7 @@ Transform:
   m_GameObject: {fileID: 1867383652}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -8.58546, y: 1.518, z: 0.5862}
+  m_LocalPosition: {x: 23.2, y: 1.518, z: -39.3}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:

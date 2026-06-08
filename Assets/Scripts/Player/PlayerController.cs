@@ -64,15 +64,7 @@ public class PlayerController : MonoBehaviour
         Vector2 raw = input.Player.Move.ReadValue<Vector2>();
         if (raw.sqrMagnitude < 0.01f) return;
 
-        Transform cam = Camera.main.transform;
-        Vector3 camF = cam.forward;
-        Vector3 camR = cam.right;
-        camF.y = 0f;
-        camF.Normalize();
-        camR.y = 0f;
-        camR.Normalize();
-
-        Vector3 dir = (camF * raw.y + camR * raw.x).normalized;
+        Vector3 dir = (MainCamera.IsoForward * raw.y + MainCamera.IsoRight * raw.x).normalized;
         cc.SimpleMove(dir * speed);
         transform.forward = dir;
     }
