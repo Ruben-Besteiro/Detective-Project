@@ -19,7 +19,8 @@ public class PickupInteractable : Interactable
 
     private IEnumerator IE_Pickup()
     {
-        promptText.text = "Has obtenido " + itemData.itemName;
+        promptText.text = "";
+        FeedbackAnimationManager.Instance.PlayPickupAnimation(itemData.image, itemData.name);
         // "Destruimos" el objeto
         GetComponent<Renderer>().enabled = false;
         GetComponent<Collider>().enabled = false;

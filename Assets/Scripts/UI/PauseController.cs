@@ -23,10 +23,19 @@ public class PauseController : MonoBehaviour
     [Header("Animation")]
     [SerializeField] private float animationDuration = 0.3f;
 
-    private bool isPaused;
+    private PauseReason pauseReason = PauseReason.None;
 
     public static bool IsPaused =>
-        Instance != null && Instance.isPaused;
+    Instance != null &&
+    Instance.pauseReason != PauseReason.None;
+
+    public static bool IsMenuPaused =>
+        Instance != null &&
+        Instance.pauseReason == PauseReason.Menu;
+
+    public static bool IsFeedbackPaused =>
+        Instance != null &&
+        Instance.pauseReason == PauseReason.FeedbackAnimation;
 
     private void Awake()
     {
@@ -51,7 +60,7 @@ public class PauseController : MonoBehaviour
 
     public static void Pause()
     {
-        if (Instance == null || Instance.isPaused)
+        if (Instance == null || Instance.pauseReason != PauseReason.None)
             return;
 
         Instance.StartPause();
@@ -59,15 +68,20 @@ public class PauseController : MonoBehaviour
 
     public static void Unpause()
     {
-        if (Instance == null || !Instance.isPaused)
+        if (Instance == null)
             return;
 
-        Instance.StartCoroutine(Instance.UnpauseRoutine());
+        if (Instance.pauseReason != PauseReason.Menu)
+            return;
+
+        Instance.StartCoroutine(
+            Instance.UnpauseRoutine()
+        );
     }
 
     private void StartPause()
     {
-        isPaused = true;
+        pauseReason = PauseReason.Menu;
         OnPauseStarted?.Invoke();
 
         overlayPanel.SetActive(true);
@@ -95,8 +109,42 @@ public class PauseController : MonoBehaviour
         pauseMenu.gameObject.SetActive(false);
         inventoryPanel.gameObject.SetActive(false);
 
-        isPaused = false;
+        pauseReason = PauseReason.None;
 
         OnPauseEnded?.Invoke();
     }
+
+    public static void PauseForFeedback()
+    {
+        if (Instance == null)
+            return;
+
+        if (Instance.pauseReason != PauseReason.None)
+            return;
+
+        Instance.pauseReason =
+            PauseReason.FeedbackAnimation;
+
+        OnPauseStarted?.Invoke();
+    }
+    public static void ResumeFeedback()
+    {
+        if (Instance == null)
+            return;
+
+        if (Instance.pauseReason != PauseReason.FeedbackAnimation)
+            return;
+
+        Instance.pauseReason =
+            PauseReason.None;
+
+        OnPauseEnded?.Invoke();
+    }
+}
+
+public enum PauseReason
+{
+    None,
+    Menu,
+    FeedbackAnimation
 }
