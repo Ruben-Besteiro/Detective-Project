@@ -6,6 +6,7 @@ using UnityEngine;
 public class MainCamera : MonoBehaviour
 {
     [SerializeField] Transform target;
+    [SerializeField] Transform cam;
     // Offset de vista isométrica clásica
     [SerializeField] Vector3 offset = new Vector3(-10f, 10f, -10f);
 
@@ -24,7 +25,7 @@ public class MainCamera : MonoBehaviour
         GetComponent<CinemachineFollow>().FollowOffset = offset;
 
         // Apuntar la cámara hacia el jugador desde el offset
-        transform.rotation = Quaternion.LookRotation(-offset);
+        cam.rotation = Quaternion.LookRotation(-offset);
 
         // Calcular ejes de movimiento isométrico desde el offset configurado.
         // Usamos el offset, no la posición en runtime, para evitar bucles de
