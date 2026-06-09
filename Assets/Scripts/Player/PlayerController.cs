@@ -9,7 +9,7 @@ public class PlayerController : MonoBehaviour
 
     [SerializeField] public float speed = 5f;
 
-    CharacterController cc;
+    public CharacterController cc;
     public InputActions input;
 
     void Awake()
