@@ -68,4 +68,9 @@ public class PlayerController : MonoBehaviour
         cc.SimpleMove(dir * speed);
         transform.forward = dir;
     }
+
+    public void MoveInDirection(Vector3 worldDir, float speed)
+    {
+        cc.SimpleMove(worldDir * speed);
+    }
 }
