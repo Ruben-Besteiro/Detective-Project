@@ -479,7 +479,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!135 &406139043
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -1728,6 +1728,12 @@ MonoBehaviour:
   cursorIndicatorPrefab: {fileID: 5818880969413910629, guid: c90430e1588efa043acf513e989685bb,
     type: 3}
   mainCamera: {fileID: 0}
+  bulletPrefab: {fileID: 1227268554403163030, guid: 4c08a88cb091bf34d9a805a6b71ee047,
+    type: 3}
+  projectileSpeed: 15
+  projectileLifetime: 5
+  meleeOffset: 1
+  meleeBoxHalfExtents: {x: 0.5, y: 0.8, z: 0.8}
 --- !u!143 &1867383655
 CharacterController:
   m_ObjectHideFlags: 0
