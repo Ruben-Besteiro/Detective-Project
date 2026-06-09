@@ -16,6 +16,10 @@ public class PauseController : MonoBehaviour
     [SerializeField] private RectTransform pauseMenu;
                      private Vector2 pauseMenuOGPos;
 
+    [Header("Inventory")]
+    [SerializeField] private RectTransform inventoryPanel;
+    private Vector2 inventoryPanelOGPos;
+
     [Header("Animation")]
     [SerializeField] private float animationDuration = 0.3f;
 
@@ -35,12 +39,14 @@ public class PauseController : MonoBehaviour
         Instance = this;
 
         pauseMenuOGPos = pauseMenu.anchoredPosition;
+        inventoryPanelOGPos = inventoryPanel.anchoredPosition;
     }
 
     private void Start()
     {
         overlayPanel.SetActive(false);
         pauseMenu.gameObject.SetActive(false);
+        inventoryPanel.gameObject.SetActive(false);
     }
 
     public static void Pause()
@@ -66,22 +72,28 @@ public class PauseController : MonoBehaviour
 
         overlayPanel.SetActive(true);
         pauseMenu.gameObject.SetActive(true);
+        inventoryPanel.gameObject.SetActive(true);
 
         Vector2 startPosition = new Vector2(-pauseMenu.rect.width, pauseMenu.anchoredPosition.y);
+        Vector2 inventoryStartPos = new Vector2(Screen.width, inventoryPanelOGPos.y);
 
         pauseMenu.anchoredPosition = startPosition;
+        inventoryPanel.anchoredPosition = inventoryStartPos;
 
         pauseMenu.DOAnchorPos(pauseMenuOGPos, animationDuration).SetEase(Ease.OutBack);
+        inventoryPanel.DOAnchorPos(inventoryPanelOGPos, animationDuration).SetEase(Ease.OutBack);
     }
 
     private IEnumerator UnpauseRoutine()
     {
         pauseMenu.DOAnchorPosX(-pauseMenu.rect.width, animationDuration).SetEase(Ease.InBack).SetUpdate(true);
+        inventoryPanel.DOAnchorPosX(Screen.width, animationDuration).SetEase(Ease.InBack).SetUpdate(true);
 
         yield return new WaitForSecondsRealtime(animationDuration);
 
         overlayPanel.SetActive(false);
         pauseMenu.gameObject.SetActive(false);
+        inventoryPanel.gameObject.SetActive(false);
 
         isPaused = false;
 

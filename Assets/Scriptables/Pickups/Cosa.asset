@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ItemData
   itemName: Cosa
   description: Objeto de Debug
-  image: {fileID: 0}
+  image: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
