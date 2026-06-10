@@ -24,7 +24,7 @@ public class MoveState : State
             }
         }
 
-        if (controller.MoveInput.sqrMagnitude < 0.01f)
+        if (controller.moveInput.sqrMagnitude < 0.01f)
             controller.ChangeState(new IdleState(controller));
     }
 

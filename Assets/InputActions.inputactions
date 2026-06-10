@@ -68,6 +68,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "Lock-On",
+                    "type": "Button",
+                    "id": "c1c906cd-5d69-4c0a-94b2-b9f45067aef6",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -195,7 +204,7 @@
                 {
                     "name": "",
                     "id": "cdb1fddb-b13b-46f6-ab9f-d2736b0cc228",
-                    "path": "<Gamepad>/buttonNorth",
+                    "path": "<Gamepad>/buttonEast",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -261,7 +270,7 @@
                 {
                     "name": "",
                     "id": "c0e43f27-10ea-4a05-9ff3-4d6f35088812",
-                    "path": "<Gamepad>/leftTrigger",
+                    "path": "<Gamepad>/rightShoulder",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -283,7 +292,7 @@
                 {
                     "name": "",
                     "id": "d4e5f6a7-b8c9-0123-efab-234567890123",
-                    "path": "<Gamepad>/leftShoulder",
+                    "path": "<Gamepad>/buttonWest",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -305,11 +314,33 @@
                 {
                     "name": "",
                     "id": "f6a7b8c9-d0e1-2345-abcd-456789012345",
-                    "path": "<Gamepad>/rightShoulder",
+                    "path": "<Gamepad>/buttonSouth",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
                     "action": "Dodge",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "c356b268-866a-495d-887d-6bc4765e1fbe",
+                    "path": "<Keyboard>/tab",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Lock-On",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "c9d7b38f-303e-4639-96bc-c5d322af2920",
+                    "path": "<Gamepad>/rightTrigger",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Lock-On",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

@@ -12,7 +12,7 @@ public class PlayerController : MonoBehaviour
     public CharacterController cc;
     public InputActions input;
 
-    void Awake()
+    private void Awake()
     {
         if (Instance == null)
             Instance = this;
@@ -30,7 +30,7 @@ public class PlayerController : MonoBehaviour
     }
 
 
-    public void OnEnable()
+    protected virtual void OnEnable()
     {
         input.Player.Enable();
         input.Player.Pause.performed += OnPause;
@@ -40,7 +40,7 @@ public class PlayerController : MonoBehaviour
         PauseController.OnPauseEnded  += EnableMovement;
     }
 
-    public void OnDisable()
+    protected virtual void OnDisable()
     {
         input.Player.Pause.performed -= OnPause;
         DialogueManager.OnDialogueStarted  -= DisableMovement;
@@ -50,21 +50,22 @@ public class PlayerController : MonoBehaviour
         input.Player.Disable();
     }
 
-    void DisableMovement() => input.Player.Move.Disable();
-    void EnableMovement() => input.Player.Move.Enable();
+    protected void DisableMovement() => input.Player.Move.Disable();
+    protected void EnableMovement() => input.Player.Move.Enable();
 
-    public void OnPause(InputAction.CallbackContext ctx)
+    protected virtual void OnPause(InputAction.CallbackContext ctx)
     {
         if (PauseController.IsPaused) PauseController.Unpause();
         else PauseController.Pause();
     }
 
-    public void Update()
+    protected void Update()
     {
         Vector2 raw = input.Player.Move.ReadValue<Vector2>();
         if (raw.sqrMagnitude < 0.01f) return;
 
-        Vector3 dir = (MainCamera.IsoForward * raw.y + MainCamera.IsoRight * raw.x).normalized;
+        // Movimiento isométrico
+        Vector3 dir = (MainCamera.isoForward * raw.y + MainCamera.isoRight * raw.x).normalized;
         cc.SimpleMove(dir * speed);
         transform.forward = dir;
     }

@@ -479,7 +479,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!135 &406139043
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -1602,6 +1602,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PauseController
   overlayPanel: {fileID: 1272979640}
   pauseMenu: {fileID: 372431433}
+  inventoryPanel: {fileID: 1713457874}
   animationDuration: 0.3
 --- !u!114 &1713457871
 MonoBehaviour:
@@ -1701,7 +1702,6 @@ GameObject:
   - component: {fileID: 1867383656}
   - component: {fileID: 1867383655}
   - component: {fileID: 1867383653}
-  - component: {fileID: 1867383660}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -1721,19 +1721,29 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dd29d2932f12eb442a4b1dfaec418511, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerCombatController
-  baseController: {fileID: 1867383660}
+  speed: 5
+  cc: {fileID: 1867383655}
+  moveInput: {x: 0, y: 0}
   aimLayers:
     serializedVersion: 2
     m_Bits: 4294967295
   cursorIndicatorPrefab: {fileID: 5818880969413910629, guid: c90430e1588efa043acf513e989685bb,
     type: 3}
-  mainCamera: {fileID: 0}
   bulletPrefab: {fileID: 1227268554403163030, guid: 4c08a88cb091bf34d9a805a6b71ee047,
     type: 3}
   projectileSpeed: 15
   projectileLifetime: 5
   meleeOffset: 1
   meleeBoxHalfExtents: {x: 0.5, y: 0.8, z: 0.8}
+  dashSpeed: 25
+  dodgeSpeed: 25
+  boss: {fileID: 406139042}
+  minRadius: 1.5
+  maxRadius: 15
+  reticlePrefab: {fileID: 5818880969413910629, guid: c90430e1588efa043acf513e989685bb,
+    type: 3}
+  isLockedOn: 0
+  lockOnTarget: {fileID: 406139046}
 --- !u!143 &1867383655
 CharacterController:
   m_ObjectHideFlags: 0
@@ -1855,19 +1865,6 @@ Transform:
   - {fileID: 2010145859}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1867383660
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1867383652}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 389e6c999eb123d4a8fa304c342f2753, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::PlayerController
-  speed: 5
 --- !u!1 &1898856872
 GameObject:
   m_ObjectHideFlags: 0
@@ -2473,6 +2470,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::IsoCameraFollow
   target: {fileID: 0}
+  cam: {fileID: 0}
   offset: {x: -10, y: 10, z: -10}
 --- !u!114 &2037068714
 MonoBehaviour:

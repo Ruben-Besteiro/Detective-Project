@@ -25,14 +25,14 @@ public class DodgeState : State
     {
         if (dodgeTimer > 0f)
         {
-            controller.MoveInDirection(direction, controller.DodgeSpeed);
+            controller.MoveInDirection(direction, controller.dodgeSpeed);
             dodgeTimer -= Time.deltaTime;
         }
         else
         {
             cooldownTimer -= Time.deltaTime;
             if (cooldownTimer <= 0f)
-                controller.ChangeState(controller.MoveInput.sqrMagnitude > 0.01f
+                controller.ChangeState(controller.moveInput.sqrMagnitude > 0.01f
                     ? (State)new MoveState(controller)
                     : new IdleState(controller));
         }

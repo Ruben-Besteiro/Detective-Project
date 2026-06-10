@@ -5,18 +5,18 @@ using UnityEngine;
 [RequireComponent(typeof(CinemachineFollow))]
 public class MainCamera : MonoBehaviour
 {
-    [SerializeField] Transform target;
-    [SerializeField] Transform cam;
-    // Offset de vista isométrica clásica
+    Transform target;
+    Transform cam;
+    // Offset de vista isométrica
     [SerializeField] Vector3 offset = new Vector3(-10f, 10f, -10f);
 
-    public static Vector3 IsoForward { get; private set; }
-    public static Vector3 IsoRight   { get; private set; }
+    public static Vector3 isoForward { get; private set; }
+    public static Vector3 isoRight { get; private set; }
 
     void Awake()
     {
-        if (target == null)
-            target = GameObject.FindWithTag("Player").transform;
+        target = GameObject.FindWithTag("Player").transform;
+        cam = GetComponent<Transform>();
 
         var cinemachineTarget = GetComponent<CinemachineCamera>().Target;
         cinemachineTarget.TrackingTarget = target;
@@ -31,7 +31,7 @@ public class MainCamera : MonoBehaviour
         // Usamos el offset, no la posición en runtime, para evitar bucles de
         // retroalimentación cuando CinemachineFollow orbita con la rotación del personaje.
         Vector3 flat = new Vector3(-offset.x, 0f, -offset.z);
-        IsoForward = flat.normalized;
-        IsoRight   = Vector3.Cross(Vector3.up, IsoForward);
+        isoForward = flat.normalized;
+        isoRight = Vector3.Cross(Vector3.up, isoForward);
     }
 }
