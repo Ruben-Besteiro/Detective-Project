@@ -8,6 +8,12 @@ public class IdleState : State
         Debug.Log("Has entrado en estado IDLE");
     }
 
+    public override void Update()
+    {
+        if (controller.isLockedOn)
+            controller.Move();
+    }
+
     public override void HandleInput()
     {
         if (Mouse.current != null)
@@ -24,7 +30,7 @@ public class IdleState : State
             }
         }
 
-        if (controller.MoveInput.sqrMagnitude > 0.01f)
+        if (controller.moveInput.sqrMagnitude > 0.01f)
             controller.ChangeState(new MoveState(controller));
     }
 }

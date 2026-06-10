@@ -31,7 +31,7 @@ public class DashState : State
         {
             cooldownTimer -= Time.deltaTime;
             if (cooldownTimer <= 0f)
-                controller.ChangeState(controller.MoveInput.sqrMagnitude > 0.01f
+                controller.ChangeState(controller.moveInput.sqrMagnitude > 0.01f
                     ? (State)new MoveState(controller)
                     : new IdleState(controller));
         }

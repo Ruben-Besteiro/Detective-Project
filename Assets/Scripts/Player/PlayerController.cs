@@ -64,7 +64,7 @@ public class PlayerController : MonoBehaviour
         Vector2 raw = input.Player.Move.ReadValue<Vector2>();
         if (raw.sqrMagnitude < 0.01f) return;
 
-        Vector3 dir = (MainCamera.IsoForward * raw.y + MainCamera.IsoRight * raw.x).normalized;
+        Vector3 dir = (MainCamera.isoForward * raw.y + MainCamera.isoRight * raw.x).normalized;
         cc.SimpleMove(dir * speed);
         transform.forward = dir;
     }

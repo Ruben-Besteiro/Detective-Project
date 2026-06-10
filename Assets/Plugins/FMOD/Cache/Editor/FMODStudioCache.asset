@@ -15,7 +15,7 @@ MonoBehaviour:
   Path: audio-system_Detective-proyect/Build/Desktop/Master.strings.bank
   Name: Master.strings
   StudioPath: bank:/Master.strings
-  lastModified: 639162860103797556
+  lastModified: 639162943298800132
   FileSizes:
   - Name: Desktop
     Value: 802
@@ -43,7 +43,7 @@ MonoBehaviour:
   - {fileID: 2202780413636417937}
   StringsBanks:
   - {fileID: -4324091709904890464}
-  cacheTime: 639162860104888839
+  cacheTime: 639162943298810052
   cacheVersion: 131636
 --- !u!114 &346711881113603697
 MonoBehaviour:
@@ -87,7 +87,7 @@ MonoBehaviour:
   Path: audio-system_Detective-proyect/Build/Desktop/Master.bank
   Name: Master
   StudioPath: bank:/Master
-  lastModified: 639162860103754620
+  lastModified: 639162943298750156
   FileSizes:
   - Name: Desktop
     Value: 1036
@@ -107,7 +107,7 @@ MonoBehaviour:
   Path: audio-system_Detective-proyect/Build/Desktop/SFX.bank
   Name: SFX
   StudioPath: bank:/SFX
-  lastModified: 639162860104888839
+  lastModified: 639162943298810052
   FileSizes:
   - Name: Desktop
     Value: 7680
