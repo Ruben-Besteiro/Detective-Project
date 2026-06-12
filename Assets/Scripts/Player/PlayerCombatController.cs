@@ -16,15 +16,10 @@ public class PlayerCombatController : PlayerController
     GameObject reticle;
     Vector3 cursorWorldPosition;
     bool cursorHasHit;
+    Transform enemyThatTheReticleIsOnTopOf;
 
     [Header("Pistola")]
-    [SerializeField] GameObject bulletPrefab;
-    [SerializeField] float projectileSpeed = 10;
-    [SerializeField] float projectileLifetime = 2;
-
-    [Header("Cuchillo")]
-    [SerializeField] float meleeOffset = 1;
-    [SerializeField] Vector3 meleeBoxHalfExtents = new Vector3(0.5f, 0.8f, 0.8f);
+    [SerializeField] public GameObject bulletPrefab;
 
     [Header("Dash")]
     [SerializeField] public float dashSpeed = 25;
@@ -209,35 +204,6 @@ public class PlayerCombatController : PlayerController
 
     // --- UTILIDADES ---
 
-    // Esto se llama desde ShootState y MeleeState respectivamente
-
-    public IEnumerator IE_Shoot()
-    {
-        float t = projectileLifetime;
-        Vector3 spawnPos = transform.position + transform.forward + Vector3.up * 0.5f;
-        GameObject bullet = Instantiate(bulletPrefab, spawnPos, transform.rotation);
-
-        while (t > 0)
-        {
-            t -= Time.deltaTime;
-            bullet.transform.position += bullet.transform.forward * projectileSpeed * Time.deltaTime;
-            yield return null;
-        }
-        Destroy(bullet);
-    }
-
-    public void PerformMelee()
-    {
-        Vector3 boxCenter = transform.position + transform.forward * meleeOffset + Vector3.up * 0.5f;
-        Collider[] hits = Physics.OverlapBox(boxCenter, meleeBoxHalfExtents, transform.rotation);
-        DebugBoxDrawer.DrawBox(boxCenter, meleeBoxHalfExtents * 2f, transform.rotation, new Color(1f, 0.4f, 0f, 0.6f), 0.5f);
-        foreach (var hit in hits)
-        {
-            if (hit.transform == transform) continue;
-            // TO DO: Hacer daño
-        }
-    }
-
     private void UpdateReticle()
     {
         if (reticle == null || Mouse.current == null) return;
@@ -253,6 +219,7 @@ public class PlayerCombatController : PlayerController
         {
             cursorHasHit = true;
             cursorWorldPosition = hit.point;
+            enemyThatTheReticleIsOnTopOf = hit.collider.CompareTag("Enemy") ? hit.collider.transform : null;
             reticle.SetActive(true);
             reticle.transform.SetPositionAndRotation(
                 hit.point + hit.normal * 0.02f,
@@ -261,6 +228,7 @@ public class PlayerCombatController : PlayerController
         else
         {
             cursorHasHit = false;
+            enemyThatTheReticleIsOnTopOf = null;
             reticle.SetActive(false);
         }
     }
@@ -275,7 +243,8 @@ public class PlayerCombatController : PlayerController
     public void RotateTowardCursor()
     {
         if (isLockedOn || !cursorHasHit) return;
-        Vector3 dir = cursorWorldPosition - transform.position;
+        Vector3 target = enemyThatTheReticleIsOnTopOf != null ? enemyThatTheReticleIsOnTopOf.position : cursorWorldPosition;
+        Vector3 dir = target - transform.position;
         dir.y = 0;
         if (dir.sqrMagnitude > 0.001f)
             transform.forward = dir.normalized;

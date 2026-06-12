@@ -5,6 +5,9 @@ public class ShootState : State
     float timer;
     const float cooldown = 1f;
 
+    float projectileSpeed = 10;
+    float projectileLifetime = 2;
+
     public ShootState(PlayerCombatController controller) : base(controller)
     {
         Debug.Log("Has entrado en estado SHOOT");
@@ -14,7 +17,10 @@ public class ShootState : State
     {
         timer = cooldown;
         controller.RotateTowardCursor();
-        controller.StartCoroutine(controller.IE_Shoot());
+        
+        Vector3 spawnPos = controller.transform.position + controller.transform.forward + Vector3.up * 0.5f;
+        GameObject bullet = Object.Instantiate(controller.bulletPrefab, spawnPos, controller.transform.rotation);
+        bullet.GetComponent<Bullet>().Initialize(projectileSpeed, projectileLifetime);
     }
 
     public override void Update()

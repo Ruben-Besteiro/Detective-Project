@@ -2,11 +2,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class PlayerInteractionController : MonoBehaviour
+public class PlayerInvestigationController : PlayerController
 {
-    public static PlayerInteractionController Instance;
+    public static PlayerInvestigationController Instance;
 
-    InputActions input;
     List<Interactable> interactablesInRange = new();
     Interactable currentInteractableObject;
     public LinkableInteractable currentlySelectedLinkable;
@@ -18,11 +17,12 @@ public class PlayerInteractionController : MonoBehaviour
         else
             Destroy(gameObject);
 
-        input = new InputActions();
+        Initialize();
     }
 
-    void OnEnable()
+    protected override void OnEnable()
     {
+        base.OnEnable();
         input.Player.Interact.Enable();
         input.Player.Interact.performed += OnInteract;
         Interactable.OnEnterRange += OnEnterRange;
@@ -33,22 +33,24 @@ public class PlayerInteractionController : MonoBehaviour
         PauseController.OnPauseEnded   += EnableInteract;
     }
 
-    void OnDisable()
+    protected override void OnDisable()
     {
-        input.Player.Interact.Disable();
         input.Player.Interact.performed -= OnInteract;
+        input.Player.Interact.Disable();
         Interactable.OnEnterRange -= OnEnterRange;
         Interactable.OnExitRange  -= OnExitRange;
         DialogueManager.OnDialogueStarted  -= DisableInteract;
         DialogueManager.OnDialogueFinished -= EnableInteract;
         PauseController.OnPauseStarted -= DisableInteract;
         PauseController.OnPauseEnded   -= EnableInteract;
+        base.OnDisable();
     }
 
     void DisableInteract() => input.Player.Interact.Disable();
     void EnableInteract()  => input.Player.Interact.Enable();
 
-    void OnEnterRange(Interactable interactable) => interactablesInRange.Add(interactable);
+    void OnEnterRange(Interactable interactable)
+        => interactablesInRange.Add(interactable);
 
     void OnExitRange(Interactable interactable)
     {
@@ -58,18 +60,19 @@ public class PlayerInteractionController : MonoBehaviour
             currentInteractableObject = null;
     }
 
-    void OnInteract(InputAction.CallbackContext ctx) => currentInteractableObject?.OnInteract();
+    void OnInteract(InputAction.CallbackContext ctx)
+        => currentInteractableObject?.OnInteract();
 
     void Update()
     {
+        base.Update();
         UpdateCurrentInteractable();
     }
 
     void UpdateCurrentInteractable()
     {
-        interactablesInRange.RemoveAll(i => i == null);     // Quitamos objetos destruidos
+        interactablesInRange.RemoveAll(i => i == null);     // Borramos objetos destruidos
 
-        // Si hay varios en rango, pillamos el más cercano
         Interactable closest = null;
 
         if (interactablesInRange.Count > 0)

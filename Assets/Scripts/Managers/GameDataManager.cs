@@ -6,6 +6,7 @@ public class GameDataManager : MonoBehaviour
     public static GameDataManager Instance;
 
     public List<PickupData> inventory = new();
+    public Hypotheses currentHypothesis = Hypotheses.None;
 
     void Awake()
     {
@@ -26,4 +27,10 @@ public struct PickupData
 {
     public ItemData item;
     public int quantity;
+}
+
+public enum Hypotheses
+{
+    // TO DO: Ponerles nombre o algo
+    H1, H2, H3, None
 }

@@ -14,19 +14,19 @@ public class LinkableInteractable : Interactable
 
     public override void OnInteract()
     {
-        LinkableInteractable selected = PlayerInteractionController.Instance.currentlySelectedLinkable;
+        LinkableInteractable selected = PlayerInvestigationController.Instance.currentlySelectedLinkable;
 
         if (selected == null)
         {
             StartCoroutine(IE_PickLinkable("Has seleccionado el vinculable " + displayName));
-            PlayerInteractionController.Instance.currentlySelectedLinkable = this;
+            PlayerInvestigationController.Instance.currentlySelectedLinkable = this;
             return;
         }
 
         if (selected == this)
         {
             StartCoroutine(IE_PickLinkable("No puedes vincular un objeto consigo mismo"));
-            PlayerInteractionController.Instance.currentlySelectedLinkable = null;
+            PlayerInvestigationController.Instance.currentlySelectedLinkable = null;
             return;
         }
 
@@ -35,7 +35,7 @@ public class LinkableInteractable : Interactable
         else
             StartCoroutine(IE_PickLinkable("No hay correlación"));
 
-        PlayerInteractionController.Instance.currentlySelectedLinkable = null;
+        PlayerInvestigationController.Instance.currentlySelectedLinkable = null;
     }
 
     private IEnumerator IE_PickLinkable(string message)

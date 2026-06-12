@@ -475,7 +475,7 @@ GameObject:
   - component: {fileID: 406139047}
   m_Layer: 0
   m_Name: Enemy Boss
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1470,7 +1470,7 @@ GameObject:
   - component: {fileID: 1506666719}
   m_Layer: 0
   m_Name: Eye 2
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1727,21 +1727,18 @@ MonoBehaviour:
   aimLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  cursorIndicatorPrefab: {fileID: 5818880969413910629, guid: c90430e1588efa043acf513e989685bb,
+  reticlePrefab: {fileID: 5818880969413910629, guid: c90430e1588efa043acf513e989685bb,
     type: 3}
   bulletPrefab: {fileID: 1227268554403163030, guid: 4c08a88cb091bf34d9a805a6b71ee047,
     type: 3}
   projectileSpeed: 15
-  projectileLifetime: 5
+  projectileLifetime: 3
   meleeOffset: 1
   meleeBoxHalfExtents: {x: 0.5, y: 0.8, z: 0.8}
   dashSpeed: 25
   dodgeSpeed: 25
   boss: {fileID: 406139042}
-  minRadius: 1.5
-  maxRadius: 15
-  reticlePrefab: {fileID: 5818880969413910629, guid: c90430e1588efa043acf513e989685bb,
-    type: 3}
+  maxDistance: 15
   isLockedOn: 0
   lockOnTarget: {fileID: 406139046}
 --- !u!143 &1867383655
@@ -1910,7 +1907,7 @@ GameObject:
   - component: {fileID: 1903067993}
   m_Layer: 0
   m_Name: Eye 1
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2469,8 +2466,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8ada8394f15bbd548bf358d281941d72, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::IsoCameraFollow
-  target: {fileID: 0}
-  cam: {fileID: 0}
   offset: {x: -10, y: 10, z: -10}
 --- !u!114 &2037068714
 MonoBehaviour:

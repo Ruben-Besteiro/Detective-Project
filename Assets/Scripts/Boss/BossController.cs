@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class BossController : MonoBehaviour
+public class BossController : Enemy
 {
     [Header("Detection")]
     public float detectionRadius = 20f;
