@@ -3,18 +3,21 @@ using UnityEngine;
 
 public class AttackMoveNode : BehaviourNode<BossController>
 {
-    bool _running;
-    bool _succeeded;
+    bool isMoving;
+    bool succeeded;
+    float stopDistance;
+    float cooldown = 3;
 
     public override State Start()
     {
-        _running = true;
+        isMoving = true;
+        stopDistance = Random.Range(0, 2) == 0 ? 10 : 15;        // Corta o media distancia
         ctx.agent.StartCoroutine(Routine());
         return State.IN_PROGRESS;
     }
 
     public override State Update() =>
-        _running ? State.IN_PROGRESS : (_succeeded ? State.SUCCESS : State.FAILURE);
+        isMoving ? State.IN_PROGRESS : (succeeded ? State.SUCCESS : State.FAILURE);
 
     IEnumerator Routine()
     {
@@ -27,23 +30,23 @@ public class AttackMoveNode : BehaviourNode<BossController>
         {
             Debug.Log("El movimiento no es posible");
             boss.currentAttack = -1;
-            _succeeded = false;
-            _running = false;
+            succeeded = false;
+            isMoving = false;
             yield break;
         }
 
-        while (Vector3.Distance(boss.transform.position, player.position) > boss.stopDistance)
+        while (Vector3.Distance(boss.transform.position, player.position) > stopDistance)
         {
             dir = (player.position - boss.transform.position).normalized;
             boss.transform.position = Vector3.MoveTowards(
-                boss.transform.position, player.position, boss.moveSpeed * Time.deltaTime);
+                boss.transform.position, player.position, boss.data.speed * Time.deltaTime);
             boss.transform.forward = dir;
             yield return null;
         }
 
-        yield return new WaitForSeconds(boss.attackCooldown);
+        yield return new WaitForSeconds(cooldown);
         boss.currentAttack = -1;
-        _succeeded = true;
-        _running = false;
+        succeeded = true;
+        isMoving = false;
     }
 }

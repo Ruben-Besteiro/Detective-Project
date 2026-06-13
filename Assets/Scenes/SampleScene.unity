@@ -404,8 +404,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 389e6c999eb123d4a8fa304c342f2753, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerController
-  speed: 5
-  cc: {fileID: 0}
 --- !u!143 &132359165
 CharacterController:
   m_ObjectHideFlags: 0
@@ -443,6 +441,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c4dc466b97359ad4f9deb21e0d58319a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerInteractionController
+  speed: 5
+  cc: {fileID: 0}
   currentlySelectedLinkable: {fileID: 0}
 --- !u!1 &181626051
 GameObject:
@@ -593,6 +593,7 @@ GameObject:
   - component: {fileID: 213519723}
   - component: {fileID: 213519722}
   - component: {fileID: 213519721}
+  - component: {fileID: 213519725}
   m_Layer: 0
   m_Name: Ground
   m_TagString: Untagged
@@ -693,6 +694,18 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &213519725
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 213519720}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 55f4c72afd573594cb40e59ba9f48a88, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SaveTest
 --- !u!1 &330585543
 GameObject:
   m_ObjectHideFlags: 0
@@ -846,8 +859,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8ada8394f15bbd548bf358d281941d72, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::IsoCameraFollow
-  target: {fileID: 0}
-  cam: {fileID: 330585546}
   offset: {x: -10, y: 10, z: -10}
 --- !u!114 &330585549
 MonoBehaviour:

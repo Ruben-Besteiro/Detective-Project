@@ -3,16 +3,18 @@ using UnityEngine;
 
 public class AttackProjectileNode : BehaviourNode<BossController>
 {
-    bool _running;
+    bool isMoving;
+    float cooldown = 2;
 
     public override State Start()
     {
-        _running = true;
+        isMoving = true;
         ctx.agent.StartCoroutine(Routine());
         return State.IN_PROGRESS;
     }
 
-    public override State Update() => _running ? State.IN_PROGRESS : State.SUCCESS;
+    public override State Update()
+        => isMoving ? State.IN_PROGRESS : State.SUCCESS;
 
     IEnumerator Routine()
     {
@@ -25,8 +27,8 @@ public class AttackProjectileNode : BehaviourNode<BossController>
         Vector3 dir = (player.position - spawnPos).normalized;
         sphere.GetComponent<Rigidbody>().AddForce(dir * boss.projectileForce, ForceMode.Impulse);
 
-        yield return new WaitForSeconds(boss.attackCooldown);
+        yield return new WaitForSeconds(cooldown);
         boss.currentAttack = -1;
-        _running = false;
+        isMoving = false;
     }
 }
