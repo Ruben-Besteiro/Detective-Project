@@ -61,7 +61,6 @@ public class BossController : Enemy
     {
         base.TakeDamage(dmg);
         Image lifeBar = bossCanvas.GetComponentsInChildren<Image>()[2];
-        print(lifeBar.name);        
         lifeBar.fillAmount = hp / data.hp;
         if (hp <= 0)
             Die();
@@ -70,6 +69,7 @@ public class BossController : Enemy
     void Die()
     {
         PlayerCombatController.Instance.enabled = false;
+        // Animación de muerte
         Destroy(gameObject);
     }
 }

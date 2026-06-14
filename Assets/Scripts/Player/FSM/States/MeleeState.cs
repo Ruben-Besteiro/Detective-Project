@@ -1,12 +1,13 @@
 using UnityEngine;
+using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
 
 public class MeleeState : State
 {
     float timer;
-    const float cooldown = 1f;
-
+    Vector3 meleeBoxHalfExtents = new Vector3(PlayerCombatController.Instance.currentMeleeData.rangeXY, PlayerCombatController.Instance.currentMeleeData.rangeXY, PlayerCombatController.Instance.currentMeleeData.rangeZ);
     float meleeOffset = 1;
-    Vector3 meleeBoxHalfExtents = new Vector3(0.5f, 0.8f, 0.8f);
 
     public MeleeState(PlayerCombatController controller) : base(controller)
     {
@@ -15,17 +16,10 @@ public class MeleeState : State
 
     public override void Enter()
     {
-        timer = cooldown;
+        timer = controller.currentMeleeData.endLag;
         controller.RotateTowardCursor();
 
-        Vector3 boxCenter = controller.transform.position + controller.transform.forward * meleeOffset + Vector3.up * 0.5f;
-        Collider[] hits = Physics.OverlapBox(boxCenter, meleeBoxHalfExtents, controller.transform.rotation);
-        DebugBoxDrawer.DrawBox(boxCenter, meleeBoxHalfExtents * 2f, controller.transform.rotation, new Color(1f, 0.4f, 0f, 0.6f), 0.5f);
-        foreach (var hit in hits)
-        {
-            if (hit.transform == controller.transform) continue;
-            // TO DO: Hacer daño
-        }
+        controller.StartCoroutine(controller.IE_CheckMeleeHits());
     }
 
     public override void Update()

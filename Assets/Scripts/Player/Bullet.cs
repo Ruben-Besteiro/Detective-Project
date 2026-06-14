@@ -20,8 +20,8 @@ public class Bullet : MonoBehaviour
     void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag(owner.tag)) return;
-        if (other.TryGetComponent<BossController>(out var boss))
-            boss.TakeDamage(1);
+        if (other.TryGetComponent<Enemy>(out var enemy))
+            enemy.TakeDamage(PlayerCombatController.Instance.currentGunData.damage);
         Destroy(gameObject);
     }
 }

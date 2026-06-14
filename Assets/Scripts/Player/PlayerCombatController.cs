@@ -18,8 +18,9 @@ public class PlayerCombatController : PlayerController
     bool cursorHasHit;
     Transform enemyThatTheReticleIsOnTopOf;
 
-    [Header("Pistola")]
-    [SerializeField] public GameObject bulletPrefab;
+    [Header("Armas")]
+    public GunData currentGunData;
+    public MeleeData currentMeleeData;
 
     [Header("Dash")]
     [SerializeField] public float dashSpeed = 25;
@@ -248,6 +249,32 @@ public class PlayerCombatController : PlayerController
         dir.y = 0;
         if (dir.sqrMagnitude > 0.001f)
             transform.forward = dir.normalized;
+    }
+
+    public IEnumerator IE_CheckMeleeHits()
+    {
+        HashSet<Enemy> damagedEnemies = new();
+
+        Vector3 boxCenter = transform.position + transform.forward * (currentMeleeData.hitboxOffset + currentMeleeData.rangeZ / 2) + Vector3.up * 0.5f;
+        Vector3 boxHalfExtents = new Vector3(currentMeleeData.rangeXY, currentMeleeData.rangeXY, currentMeleeData.rangeZ);
+        DebugBoxDrawer.DrawBox(boxCenter, boxHalfExtents * 2f, transform.rotation, new Color(1f, 0.4f, 0f, 0.6f), 0.5f);
+
+        for (int i = 0; i < currentMeleeData.activeFrames; i++)
+        {
+            Collider[] hits = Physics.OverlapBox(boxCenter, boxHalfExtents, transform.rotation);
+            foreach (var hit in hits)
+            {
+                if (hit.transform == transform) continue;
+                if (hit.TryGetComponent<Enemy>(out var enemy))
+                {
+                    if (damagedEnemies.Contains(enemy)) continue;
+                    enemy.TakeDamage(currentMeleeData.damage);
+                    damagedEnemies.Add(enemy);
+                }
+            }
+
+            yield return null;
+        }
     }
 
     public IEnumerator IE_Intangible(float time)

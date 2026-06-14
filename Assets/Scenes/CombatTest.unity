@@ -1747,8 +1747,8 @@ MonoBehaviour:
     m_Bits: 4294967295
   reticlePrefab: {fileID: 5818880969413910629, guid: c90430e1588efa043acf513e989685bb,
     type: 3}
-  bulletPrefab: {fileID: 1227268554403163030, guid: 4c08a88cb091bf34d9a805a6b71ee047,
-    type: 3}
+  currentGunData: {fileID: 11400000, guid: c70491d0c0462a2419f992227f816a8d, type: 2}
+  currentMeleeData: {fileID: 11400000, guid: 8fcc16123cf5ecb499bde7124c3dd9b7, type: 2}
   dashSpeed: 25
   dodgeSpeed: 25
   boss: {fileID: 406139042}
