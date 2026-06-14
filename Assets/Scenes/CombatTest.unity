@@ -942,6 +942,7 @@ GameObject:
   - component: {fileID: 950768547}
   - component: {fileID: 950768546}
   - component: {fileID: 950768550}
+  - component: {fileID: 950768551}
   m_Layer: 3
   m_Name: Ground
   m_TagString: Untagged
@@ -1052,6 +1053,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f422bc853a8afbc4fb70b701dbb7a1b6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SaveTest
+--- !u!114 &950768551
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 950768545}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 55f4c72afd573594cb40e59ba9f48a88, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SaveTest
 --- !u!1 &985191192
@@ -1739,7 +1752,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dd29d2932f12eb442a4b1dfaec418511, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerCombatController
-  speed: 5
+  stats: {fileID: 11400000, guid: a7cffb532fa70e848a74587d84d0e404, type: 2}
   cc: {fileID: 1867383655}
   moveInput: {x: 0, y: 0}
   aimLayers:

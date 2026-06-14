@@ -7,7 +7,9 @@ public abstract class PlayerController : MonoBehaviour
 {
     public static PlayerController Instance;
 
-    [SerializeField] public float speed = 5f;
+    [SerializeField] public PlayerStats stats;
+
+    protected virtual float MoveSpeed => stats.speed;
 
     public CharacterController cc;
     public InputActions input;
@@ -66,12 +68,12 @@ public abstract class PlayerController : MonoBehaviour
 
         // Movimiento isométrico
         Vector3 dir = (MainCamera.isoForward * raw.y + MainCamera.isoRight * raw.x).normalized;
-        cc.SimpleMove(dir * speed);
+        cc.SimpleMove(dir * MoveSpeed);
         transform.forward = dir;
     }
 
     public void MoveInDirection(Vector3 worldDir, float speed)
     {
-        cc.SimpleMove(worldDir * speed);
+        cc.SimpleMove(worldDir * MoveSpeed);
     }
 }

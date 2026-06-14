@@ -13,6 +13,7 @@ public class GameDataManager : MonoBehaviour
     public Hypotheses currentHypothesis = Hypotheses.None;
 
     [SerializeField] private ItemData[] itemDatabase;
+    [SerializeField] private PlayerStats playerStats;
 
     private string savePath;
     private SaveData data;
@@ -115,6 +116,11 @@ public class GameDataManager : MonoBehaviour
     private void SaveDataFromGDM(SaveData data)
     {
         data.currentHypothesis = (int)currentHypothesis;
+
+        // Stats del jugador
+        data.playerMaxHp = playerStats.maxHp;
+
+        // Inventario
         data.inventoryItemNames = new List<string>();
         data.inventoryQuantities = new List<int>();
 
@@ -128,6 +134,7 @@ public class GameDataManager : MonoBehaviour
     private void LoadDataFromGDM(SaveData data)
     {
         currentHypothesis = (Hypotheses)data.currentHypothesis;
+        if (data.playerMaxHp > 0) playerStats.maxHp = data.playerMaxHp;
         inventory = new List<PickupData>();
 
         if (data.inventoryItemNames == null) return;
@@ -148,6 +155,16 @@ public class GameDataManager : MonoBehaviour
                 return item;
         }
         return null;
+    }
+
+    // -------------------------------------------------
+
+    public float PlayerMaxHp => playerStats.maxHp;
+
+    // En la escena de investigación se pueden subir stats, y esos cambios se aplican en la escena de combate
+    public void IncreaseMaxHP(float amount)
+    {
+        playerStats.maxHp += amount;
     }
 }
 

@@ -14,6 +14,7 @@ public class SaveTest : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.F6))
         {
+            Debug.Log($"[Test] MaxHp: {GameDataManager.Instance.PlayerMaxHp}");
             Debug.Log($"[Test] Hipótesis: {GameDataManager.Instance.currentHypothesis}");
             Debug.Log($"[Test] Flag test_flag: {FlagManager.Instance.HasFlag("test_flag")}");
             Debug.Log($"[Test] Items en inventario: {GameDataManager.Instance.inventory.Count}");

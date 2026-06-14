@@ -4,6 +4,7 @@ using System.Collections.Generic;
 public class SaveData
 {
     public int currentHypothesis;
+    public float playerMaxHp;
     public List<string> inventoryItemNames;
     public List<int> inventoryQuantities;
     public List<string> flagKeys;

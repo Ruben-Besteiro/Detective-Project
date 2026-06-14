@@ -6,6 +6,9 @@ using System.Collections.Generic;
 public class PlayerCombatController : PlayerController
 {
     public static PlayerCombatController Instance;
+    private float combatSpeed;
+    protected override float MoveSpeed => combatSpeed;
+    private float currentHp;
 
     public State currentState;
     public Vector2 moveInput;
@@ -49,7 +52,8 @@ public class PlayerCombatController : PlayerController
 
     void Start()
     {
-        speed *= 1.5f;
+        combatSpeed = stats.speed * 1.5f;
+        currentHp = stats.maxHp;
         currentState = new IdleState(this);
         currentState.Enter();
         reticle = Instantiate(reticlePrefab);
@@ -182,9 +186,9 @@ public class PlayerCombatController : PlayerController
     {
         if (!isLockedOn || lockOnTarget == null) return;
 
-        float speed = this.speed;
-        lockOnAngle += moveInput.x * (speed / lockOnRadius) * Mathf.Rad2Deg * Time.deltaTime;
-        lockOnRadius -= moveInput.y * speed * Time.deltaTime;
+        float sp = this.combatSpeed;
+        lockOnAngle += moveInput.x * (sp / lockOnRadius) * Mathf.Rad2Deg * Time.deltaTime;
+        lockOnRadius -= moveInput.y * sp * Time.deltaTime;
         lockOnRadius = Mathf.Clamp(lockOnRadius, 0, maxDistance);
 
         float rad = lockOnAngle * Mathf.Deg2Rad;
