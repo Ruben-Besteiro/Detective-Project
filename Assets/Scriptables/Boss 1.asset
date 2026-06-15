@@ -16,4 +16,4 @@ MonoBehaviour:
   hp: 10
   attack: 1
   speed: 4
-  startleRange: 20
+  startleRange: 100

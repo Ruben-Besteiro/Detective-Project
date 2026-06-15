@@ -34,6 +34,7 @@ public class PlayerCombatController : PlayerController
     [Header("Lock-On")]
     [SerializeField] GameObject boss;       // Solo al jefe
     [SerializeField] float maxDistance = 15;
+    [SerializeField] float minDistance = 2;     // Debe ser suficiente como para pegar con el cuchillo
 
     public bool isLockedOn;
     public Transform lockOnTarget;
@@ -58,6 +59,7 @@ public class PlayerCombatController : PlayerController
         currentState.Enter();
         reticle = Instantiate(reticlePrefab);
         Cursor.visible = false;
+        if (boss != null) minDistance += boss.GetComponent<Collider>().bounds.size.z / 2;
     }
 
     public void ChangeState(State newState)
@@ -151,7 +153,7 @@ public class PlayerCombatController : PlayerController
     private void OnLockOnAction(InputAction.CallbackContext ctx)
     {
         if (PauseController.IsPaused) return;
-        if (boss != null && Vector3.Distance(transform.position, boss.transform.position) < maxDistance)
+        if (boss != null && Vector3.Distance(transform.position, boss.transform.position) < maxDistance && Vector3.Distance(transform.position, boss.transform.position) > minDistance)
             ActivateLockOn(boss.transform);
     }
 
@@ -172,7 +174,7 @@ public class PlayerCombatController : PlayerController
 
         Vector3 toPlayer = transform.position - target.position;
         toPlayer.y = 0f;
-        lockOnRadius = Mathf.Clamp(toPlayer.magnitude, 0, maxDistance);
+        lockOnRadius = Mathf.Clamp(toPlayer.magnitude, minDistance, maxDistance);
         lockOnAngle = Mathf.Atan2(toPlayer.x, toPlayer.z) * Mathf.Rad2Deg;
     }
 
@@ -189,7 +191,7 @@ public class PlayerCombatController : PlayerController
         float sp = this.combatSpeed;
         lockOnAngle += moveInput.x * (sp / lockOnRadius) * Mathf.Rad2Deg * Time.deltaTime;
         lockOnRadius -= moveInput.y * sp * Time.deltaTime;
-        lockOnRadius = Mathf.Clamp(lockOnRadius, 0, maxDistance);
+        lockOnRadius = Mathf.Clamp(lockOnRadius, minDistance, maxDistance);
 
         float rad = lockOnAngle * Mathf.Deg2Rad;
         Vector3 orbitPos = lockOnTarget.position + new Vector3(Mathf.Sin(rad), 0f, Mathf.Cos(rad)) * lockOnRadius;
