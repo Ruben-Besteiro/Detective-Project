@@ -20,6 +20,14 @@ public class PauseController : MonoBehaviour
     [SerializeField] private RectTransform inventoryPanel;
     private Vector2 inventoryPanelOGPos;
 
+    [Header("Hypotesis")]
+    [SerializeField] private HypothesisSet currentSet;
+    [SerializeField] private RectTransform hypothesisPanel;
+                     private Vector2 hypotesisMenuOGPos;
+    [SerializeField] private HypothesisCardUI card1;
+    [SerializeField] private HypothesisCardUI card2;
+    [SerializeField] private HypothesisCardUI card3;
+
     [Header("Animation")]
     [SerializeField] private float animationDuration = 0.3f;
 
@@ -49,6 +57,7 @@ public class PauseController : MonoBehaviour
 
         pauseMenuOGPos = pauseMenu.anchoredPosition;
         inventoryPanelOGPos = inventoryPanel.anchoredPosition;
+        hypotesisMenuOGPos = hypothesisPanel.anchoredPosition;
     }
 
     private void Start()
@@ -56,6 +65,7 @@ public class PauseController : MonoBehaviour
         overlayPanel.SetActive(false);
         pauseMenu.gameObject.SetActive(false);
         inventoryPanel.gameObject.SetActive(false);
+        hypothesisPanel.gameObject.SetActive(false);
     }
 
     public static void Pause()
@@ -84,18 +94,25 @@ public class PauseController : MonoBehaviour
         pauseReason = PauseReason.Menu;
         OnPauseStarted?.Invoke();
 
+        card1.Setup(currentSet.first);
+        card2.Setup(currentSet.second);
+        card3.Setup(currentSet.third);
+
         overlayPanel.SetActive(true);
         pauseMenu.gameObject.SetActive(true);
+        hypothesisPanel.gameObject.SetActive(true);
         inventoryPanel.gameObject.SetActive(true);
 
-        Vector2 startPosition = new Vector2(-pauseMenu.rect.width, pauseMenu.anchoredPosition.y);
+        Vector2 startPosition = new Vector2(-Screen.width, pauseMenu.anchoredPosition.y);
         Vector2 inventoryStartPos = new Vector2(Screen.width, inventoryPanelOGPos.y);
+        Vector2 hypotesisStartPos = new Vector2(Screen.width, inventoryPanelOGPos.y);
 
         pauseMenu.anchoredPosition = startPosition;
         inventoryPanel.anchoredPosition = inventoryStartPos;
 
         pauseMenu.DOAnchorPos(pauseMenuOGPos, animationDuration).SetEase(Ease.OutBack);
         inventoryPanel.DOAnchorPos(inventoryPanelOGPos, animationDuration).SetEase(Ease.OutBack);
+        hypothesisPanel.DOAnchorPos(hypotesisMenuOGPos, animationDuration).SetEase(Ease.OutBack);
     }
 
     private IEnumerator UnpauseRoutine()
@@ -108,6 +125,7 @@ public class PauseController : MonoBehaviour
         overlayPanel.SetActive(false);
         pauseMenu.gameObject.SetActive(false);
         inventoryPanel.gameObject.SetActive(false);
+        hypothesisPanel.gameObject.SetActive(false);
 
         pauseReason = PauseReason.None;
 

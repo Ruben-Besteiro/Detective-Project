@@ -1,0 +1,17 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fc9545fa6d29e964085cda7da594b2cf, type: 3}
+  m_Name: Set0
+  m_EditorClassIdentifier: Assembly-CSharp::HypothesisSet
+  first: {fileID: 11400000, guid: d4e2605a2415ae24f8d302a8d2bcc430, type: 2}
+  second: {fileID: 11400000, guid: 7be79277b891b2f4cae38a2b5c4765ee, type: 2}
+  third: {fileID: 11400000, guid: b86afca2ce6511942ab70da171ebb185, type: 2}
