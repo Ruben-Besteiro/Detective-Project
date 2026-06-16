@@ -74,6 +74,6 @@ public abstract class PlayerController : MonoBehaviour
 
     public void MoveInDirection(Vector3 worldDir, float speed)
     {
-        cc.SimpleMove(worldDir * MoveSpeed);
+        cc.SimpleMove(worldDir * speed);
     }
 }

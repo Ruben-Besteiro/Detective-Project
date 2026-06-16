@@ -5,8 +5,6 @@ public class DashState : State
     readonly Vector3 direction;
     float dashTimer;
     float cooldownTimer;
-    const float duration = 0.33f;
-    const float cooldown = 0.5f;
 
     public DashState(PlayerCombatController controller, Vector3 direction) : base(controller)
     {
@@ -16,8 +14,8 @@ public class DashState : State
 
     public override void Enter()
     {
-        dashTimer = duration;
-        cooldownTimer = cooldown;
+        dashTimer = controller.dashDuration;
+        cooldownTimer = controller.dashCooldown;
     }
 
     public override void Update()

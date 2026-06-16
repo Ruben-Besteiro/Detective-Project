@@ -5,8 +5,6 @@ public class DodgeState : State
     readonly Vector3 direction;
     float dodgeTimer;
     float cooldownTimer;
-    const float duration = 0.15f;
-    const float cooldown = 0.5f;
 
     public DodgeState(PlayerCombatController controller, Vector3 direction) : base(controller)
     {
@@ -16,9 +14,9 @@ public class DodgeState : State
 
     public override void Enter()
     {
-        dodgeTimer = duration;
-        cooldownTimer = cooldown;
-        controller.StartCoroutine(controller.IE_Intangible(duration));
+        dodgeTimer = controller.dodgeDuration;
+        cooldownTimer = controller.dodgeCooldown;
+        controller.StartCoroutine(controller.IE_Intangible(dodgeTimer));
     }
 
     public override void Update()

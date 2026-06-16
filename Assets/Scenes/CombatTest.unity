@@ -13549,8 +13549,8 @@ MonoBehaviour:
     type: 3}
   currentGunData: {fileID: 11400000, guid: c70491d0c0462a2419f992227f816a8d, type: 2}
   currentMeleeData: {fileID: 11400000, guid: 8fcc16123cf5ecb499bde7124c3dd9b7, type: 2}
-  dashSpeed: 25
-  dodgeSpeed: 25
+  dashSpeed: 30
+  dodgeSpeed: 30
   boss: {fileID: 406139042}
   maxDistance: 15
   minDistance: 2

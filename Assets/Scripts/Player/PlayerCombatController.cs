@@ -27,9 +27,13 @@ public class PlayerCombatController : PlayerController
 
     [Header("Dash")]
     [SerializeField] public float dashSpeed = 25;
+    [SerializeField] public float dashDuration = 0.25f;     // Más que el dodge
+    [SerializeField] public float dashCooldown = 0.4f;
 
     [Header("Dodge")]
     [SerializeField] public float dodgeSpeed = 25;
+    [SerializeField] public float dodgeDuration = 0.15f;    // Es intangible durante este tiempo
+    [SerializeField] public float dodgeCooldown = 0.4f;
 
     [Header("Lock-On")]
     [SerializeField] GameObject boss;       // Solo al jefe
@@ -122,7 +126,7 @@ public class PlayerCombatController : PlayerController
 
     private void OnShootAction(InputAction.CallbackContext ctx)
     {
-        if (PauseController.IsPaused || (IsActionActive && currentState is not ShootState)) return;
+        if (PauseController.IsPaused || IsActionActive) return;
         ChangeState(new ShootState(this));
     }
 
@@ -247,10 +251,24 @@ public class PlayerCombatController : PlayerController
         return (MainCamera.isoForward * raw.y + MainCamera.isoRight * raw.x).normalized;
     }
 
+    
+    // Esto se utiliza cuando atacamos sin lock on => miramos hacia la retícula aunque nos movamos
+
+    public bool HasAimPoint => !isLockedOn && cursorHasHit;
+
+    public Vector3 GetAimPoint()
+    {
+        return enemyThatTheReticleIsOnTopOf != null ? enemyThatTheReticleIsOnTopOf.position : cursorWorldPosition;
+    }
+
     public void RotateTowardCursor()
     {
-        if (isLockedOn || !cursorHasHit) return;
-        Vector3 target = enemyThatTheReticleIsOnTopOf != null ? enemyThatTheReticleIsOnTopOf.position : cursorWorldPosition;
+        if (!HasAimPoint) return;
+        FaceReticleWhileAttacking(GetAimPoint());
+    }
+
+    public void FaceReticleWhileAttacking(Vector3 target)
+    {
         Vector3 dir = target - transform.position;
         dir.y = 0;
         if (dir.sqrMagnitude > 0.001f)
@@ -260,13 +278,14 @@ public class PlayerCombatController : PlayerController
     public IEnumerator IE_CheckMeleeHits()
     {
         HashSet<Enemy> damagedEnemies = new();
-
-        Vector3 boxCenter = transform.position + transform.forward * (currentMeleeData.hitboxOffset + currentMeleeData.rangeZ / 2) + Vector3.up * 0.5f;
         Vector3 boxHalfExtents = new Vector3(currentMeleeData.rangeXY, currentMeleeData.rangeXY, currentMeleeData.rangeZ);
-        DebugBoxDrawer.DrawBox(boxCenter, boxHalfExtents * 2f, transform.rotation, new Color(1f, 0.4f, 0f, 0.6f), 0.5f);
 
         for (int i = 0; i < currentMeleeData.activeFrames; i++)
         {
+            // Recalculado cada frame porque el jugador puede moverse durante el ataque
+            Vector3 boxCenter = transform.position + transform.forward * (currentMeleeData.hitboxOffset + currentMeleeData.rangeZ / 2) + Vector3.up * 0.5f;
+            DebugBoxDrawer.DrawBox(boxCenter, boxHalfExtents * 2f, transform.rotation, new Color(1f, 0.4f, 0f, 0.6f), 0.5f);
+
             Collider[] hits = Physics.OverlapBox(boxCenter, boxHalfExtents, transform.rotation);
             foreach (var hit in hits)
             {
