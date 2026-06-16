@@ -361,6 +361,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3647670566312317983}
   - component: {fileID: 7592522661608081289}
+  - component: {fileID: 7894938947851371522}
   m_Layer: 5
   m_Name: HypothesisCard
   m_TagString: Untagged
@@ -404,3 +405,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::HypothesisCardUI
   title: {fileID: 6285090680761532567}
   description: {fileID: 110662894962254830}
+--- !u!114 &7894938947851371522
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5259472249889644768}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 051e30497ce611b4387f0f5c15e03041, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::DeductionCard
+  hypothesis: 2
+  battleScene: CombatTest
+  amplitude: 10
+  speed: 2
+  pulseScale: 1.1
+  pulseDuration: 0.5
