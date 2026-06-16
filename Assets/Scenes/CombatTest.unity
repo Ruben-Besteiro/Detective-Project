@@ -13400,7 +13400,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1713457870
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13408,7 +13408,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1713457869}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 743f8728db3ea8244900801ffc08b780, type: 3}
   m_Name: 
@@ -13416,6 +13416,11 @@ MonoBehaviour:
   overlayPanel: {fileID: 1272979640}
   pauseMenu: {fileID: 372431433}
   inventoryPanel: {fileID: 1713457874}
+  currentSet: {fileID: 0}
+  hypothesisPanel: {fileID: 0}
+  card1: {fileID: 0}
+  card2: {fileID: 0}
+  card3: {fileID: 0}
   animationDuration: 0.3
 --- !u!114 &1713457871
 MonoBehaviour:
@@ -13665,7 +13670,7 @@ Transform:
   m_GameObject: {fileID: 1867383652}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 20, y: 1.518, z: -20}
+  m_LocalPosition: {x: -18.51, y: 1.518, z: -20}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:

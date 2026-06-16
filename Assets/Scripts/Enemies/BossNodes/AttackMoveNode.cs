@@ -28,9 +28,6 @@ public class AttackMoveNode : BehaviourNode<BossController>
         Transform player = PlayerCombatController.Instance.transform;
         Vector3 dir = (player.position - boss.transform.position).normalized;
 
-        Debug.DrawRay(boss.transform.position, dir * (lineOfSight ? hit.distance : 50f),
-                      lineOfSight ? Color.green : Color.red, 3f);
-
         if (Physics.Raycast(boss.transform.position, dir, out RaycastHit hit, Mathf.Infinity) && hit.collider.CompareTag("Player"))
             yield return MoveDirectly(boss, player);
         else
@@ -48,18 +45,19 @@ public class AttackMoveNode : BehaviourNode<BossController>
         while (Vector3.Distance(boss.transform.position, player.position) > stopDistance)
         {
             Vector3 dir = (player.position - boss.transform.position).normalized;
-            Debug.DrawRay(boss.transform.position, dir * (stillVisible ? hit.distance : 50f),
-                          stillVisible ? Color.green : Color.red, 0.1f);
 
-            if (!Physics.Raycast(boss.transform.position, dir, out RaycastHit hit, Mathf.Infinity) && hit.collider.CompareTag("Player"))
+            if (Physics.Raycast(boss.transform.position, dir, out RaycastHit hit, Mathf.Infinity))
             {
-                Debug.Log("Perdimos la línea de visión => Cambiamos a pathfinding");
-                yield return MoveWithPathfinding(boss, player);
-                yield break;
+                if (!hit.collider.CompareTag("Player"))
+                {
+                    Debug.Log("Perdimos la línea de visión => Cambiamos a pathfinding");
+                    yield return MoveWithPathfinding(boss, player);
+                    yield break;
+                }
             }
 
             boss.transform.position = Vector3.MoveTowards(
-                boss.transform.position, player.position, boss.data.speed * Time.deltaTime);
+            boss.transform.position, player.position, boss.data.speed * Time.deltaTime);
             boss.transform.forward = dir;
             yield return null;
         }
@@ -117,14 +115,15 @@ public class AttackMoveNode : BehaviourNode<BossController>
             }
 
             Vector3 dirToPlayer = (player.position - boss.transform.position).normalized;
-            Debug.DrawRay(boss.transform.position, dirToPlayer * (lineOfSight ? hit.distance : 50f),
-                          lineOfSight ? Color.green : Color.red, 0.1f);
 
-            if (Physics.Raycast(boss.transform.position, dirToPlayer, out RaycastHit hit, Mathf.Infinity) && hit.collider.CompareTag("Player"))
+            if (Physics.Raycast(boss.transform.position, dirToPlayer, out RaycastHit hit, Mathf.Infinity))
             {
-                Debug.Log("Recuperamos línea de visión => Cambiamos a movimiento directo");
-                yield return MoveDirectly(boss, player);
-                yield break;
+                if (hit.collider.CompareTag("Player"))
+                {
+                    Debug.Log("Recuperamos línea de visión => Cambiamos a movimiento directo");
+                    yield return MoveDirectly(boss, player);
+                    yield break;
+                }
             }
 
             Vector3 dir = (target - boss.transform.position).normalized;
