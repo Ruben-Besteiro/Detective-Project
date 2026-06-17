@@ -4,7 +4,7 @@ using UnityEngine.InputSystem;
 
 public class PlayerInvestigationController : PlayerController
 {
-    public static PlayerInvestigationController Instance;
+    public static new PlayerInvestigationController Instance;
 
     List<Interactable> interactablesInRange = new();
     Interactable currentInteractableObject;

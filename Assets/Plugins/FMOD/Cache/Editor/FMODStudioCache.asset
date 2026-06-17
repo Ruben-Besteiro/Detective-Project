@@ -15,11 +15,39 @@ MonoBehaviour:
   Path: audio-system_Detective-proyect/Build/Desktop/Master.strings.bank
   Name: Master.strings
   StudioPath: bank:/Master.strings
-  lastModified: 639162860103797556
+  lastModified: 639173103989164655
   FileSizes:
   - Name: Desktop
-    Value: 802
+    Value: 920
   Exists: 1
+--- !u!114 &-2003870125136030387
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/SFX/Player/Footstep
+  m_EditorClassIdentifier: FMODUnityEditor::FMODUnity.EditorEventRef
+  Path: event:/SFX/Player/Footstep
+  Guid:
+    Data1: -1548460047
+    Data2: 1113170910
+    Data3: 138121115
+    Data4: -1002269736
+  Banks:
+  - {fileID: 6719589697093736701}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters:
+  - {fileID: 4957109470884897638}
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -37,41 +65,15 @@ MonoBehaviour:
   - {fileID: 2202780413636417937}
   - {fileID: 6719589697093736701}
   EditorEvents:
-  - {fileID: 346711881113603697}
+  - {fileID: 4216298003305962345}
+  - {fileID: -2003870125136030387}
   EditorParameters: []
   MasterBanks:
   - {fileID: 2202780413636417937}
   StringsBanks:
   - {fileID: -4324091709904890464}
-  cacheTime: 639162860104888839
+  cacheTime: 639173105140808412
   cacheVersion: 131636
---- !u!114 &346711881113603697
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/YesSFX
-  m_EditorClassIdentifier: FMODUnityEditor::FMODUnity.EditorEventRef
-  Path: event:/YesSFX
-  Guid:
-    Data1: 1533602466
-    Data2: 1156579405
-    Data3: -1812657020
-    Data4: -617279240
-  Banks:
-  - {fileID: 6719589697093736701}
-  IsStream: 0
-  Is3D: 1
-  IsOneShot: 1
-  Parameters: []
-  MinDistance: 1
-  MaxDistance: 20
-  Length: 0
 --- !u!114 &2202780413636417937
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -87,10 +89,63 @@ MonoBehaviour:
   Path: audio-system_Detective-proyect/Build/Desktop/Master.bank
   Name: Master
   StudioPath: bank:/Master
-  lastModified: 639162860103754620
+  lastModified: 639173103989144077
   FileSizes:
   - Name: Desktop
     Value: 1036
+  Exists: 1
+--- !u!114 &4216298003305962345
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/SFX/Menu/YesSFX
+  m_EditorClassIdentifier: FMODUnityEditor::FMODUnity.EditorEventRef
+  Path: event:/SFX/Menu/YesSFX
+  Guid:
+    Data1: 1533602466
+    Data2: 1156579405
+    Data3: -1812657020
+    Data4: -617279240
+  Banks:
+  - {fileID: 6719589697093736701}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
+--- !u!114 &4957109470884897638
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Footstep/Footsteps
+  m_EditorClassIdentifier: FMODUnityEditor::FMODUnity.EditorParamRef
+  Name: Footsteps
+  StudioPath: 
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 1047424632
+    data2: 3385804557
+  Type: 2
+  IsGlobal: 0
+  Labels:
+  - Stone
+  - Grass
   Exists: 1
 --- !u!114 &6719589697093736701
 MonoBehaviour:
@@ -107,8 +162,8 @@ MonoBehaviour:
   Path: audio-system_Detective-proyect/Build/Desktop/SFX.bank
   Name: SFX
   StudioPath: bank:/SFX
-  lastModified: 639162860104888839
+  lastModified: 639173105140808412
   FileSizes:
   - Name: Desktop
-    Value: 7680
+    Value: 40544
   Exists: 1

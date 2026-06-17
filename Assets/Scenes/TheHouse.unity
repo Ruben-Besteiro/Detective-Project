@@ -4265,6 +4265,7 @@ GameObject:
   - component: {fileID: 132359160}
   - component: {fileID: 132359165}
   - component: {fileID: 132359166}
+  - component: {fileID: 132359168}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -4408,6 +4409,28 @@ MonoBehaviour:
   stats: {fileID: 11400000, guid: a7cffb532fa70e848a74587d84d0e404, type: 2}
   cc: {fileID: 132359165}
   currentlySelectedLinkable: {fileID: 0}
+--- !u!114 &132359168
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 132359159}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 65d563a44b7471945953351178ca44ef, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerSounds
+  player: {fileID: 132359166}
+  footstepEvent:
+    Guid:
+      Data1: -1548460047
+      Data2: 1113170910
+      Data3: 138121115
+      Data4: -1002269736
+    Path: event:/SFX/Player/Footstep
+  minStepInterval: 0.5
+  maxStepInterval: 0.9
 --- !u!1 &162302705
 GameObject:
   m_ObjectHideFlags: 0
@@ -15333,7 +15356,7 @@ GameObject:
   - component: {fileID: 760093348}
   m_Layer: 0
   m_Name: GardenFloor
-  m_TagString: Untagged
+  m_TagString: Ground_Grass
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -16041,9 +16064,9 @@ GameObject:
   m_Component:
   - component: {fileID: 792570865}
   - component: {fileID: 792570869}
-  - component: {fileID: 792570868}
   - component: {fileID: 792570867}
   - component: {fileID: 792570866}
+  - component: {fileID: 792570870}
   m_Layer: 0
   m_Name: MainCamera
   m_TagString: Untagged
@@ -16142,14 +16165,6 @@ MonoBehaviour:
     m_VarianceClampScale: 0.9
     m_ContrastAdaptiveSharpening: 0
   m_Version: 2
---- !u!81 &792570868
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 792570864}
-  m_Enabled: 1
 --- !u!20 &792570869
 Camera:
   m_ObjectHideFlags: 0
@@ -16201,6 +16216,20 @@ Camera:
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
   m_StereoSeparation: 0.022
+--- !u!114 &792570870
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 792570864}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 86c6556701af9e04380698b89f691b6e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: FMODUnity::FMODUnity.StudioListener
+  nonRigidbodyVelocity: 0
+  attenuationObject: {fileID: 132359159}
 --- !u!1 &796291765
 GameObject:
   m_ObjectHideFlags: 0
@@ -27223,7 +27252,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a1a802244f3ca0e4f8e445144bb8b941, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DeductionConfirmationUI
-  title: {fileID: 1403754393}
 --- !u!114 &1352694037
 MonoBehaviour:
   m_ObjectHideFlags: 0

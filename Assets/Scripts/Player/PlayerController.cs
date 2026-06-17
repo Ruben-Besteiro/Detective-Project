@@ -14,6 +14,9 @@ public abstract class PlayerController : MonoBehaviour
     public CharacterController cc;
     public InputActions input;
 
+    private float _movement;
+    public float movement { get => _movement;}
+
     private void Awake()
     {
         if (Instance == null)
@@ -64,12 +67,18 @@ public abstract class PlayerController : MonoBehaviour
     protected void Update()
     {
         Vector2 raw = input.Player.Move.ReadValue<Vector2>();
-        if (raw.sqrMagnitude < 0.01f) return;
+        if (raw.sqrMagnitude < 0.01f)
+        {
+            _movement = 0;
+            return; 
+        }
 
         // Movimiento isométrico
         Vector3 dir = (MainCamera.isoForward * raw.y + MainCamera.isoRight * raw.x).normalized;
         cc.SimpleMove(dir * MoveSpeed);
         transform.forward = dir;
+
+        _movement = dir.magnitude;
     }
 
     public void MoveInDirection(Vector3 worldDir, float speed)
