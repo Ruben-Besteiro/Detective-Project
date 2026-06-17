@@ -11,10 +11,7 @@ public class MeleeState : State
     Vector3 aimPoint;
     bool hasAimPoint;
 
-    public MeleeState(PlayerCombatController controller) : base(controller)
-    {
-        Debug.Log("Has entrado en estado MELEE");
-    }
+    public MeleeState(PlayerCombatController controller) : base(controller) {}
 
     public override void Enter()
     {

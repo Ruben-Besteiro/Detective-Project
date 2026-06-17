@@ -6,10 +6,7 @@ public class ShootState : State
     Vector3 aimPoint;
     bool hasAimPoint;
 
-    public ShootState(PlayerCombatController controller) : base(controller)
-    {
-        Debug.Log("Has entrado en estado SHOOT");
-    }
+    public ShootState(PlayerCombatController controller) : base(controller) {}
 
     public override void Enter()
     {

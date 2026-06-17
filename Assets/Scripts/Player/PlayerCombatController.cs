@@ -2,6 +2,8 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.UI;
+using TMPro;
 
 public class PlayerCombatController : PlayerController
 {
@@ -9,9 +11,12 @@ public class PlayerCombatController : PlayerController
     private float combatSpeed;
     protected override float MoveSpeed => combatSpeed;
     private float currentHp;
+    public bool isIntangible = false;
 
     public State currentState;
     public Vector2 moveInput;
+    [SerializeField] public TextMeshProUGUI playerNameText;
+    [SerializeField] Image lifeBar;
 
     [Header("Cursor de Apuntado")]
     [SerializeField] LayerMask aimLayers;
@@ -302,12 +307,52 @@ public class PlayerCombatController : PlayerController
         }
     }
 
+    // --- DAÑO ---
+
+    public void OnTriggerEnter(Collider other) {
+        if (other.CompareTag("Enemy"))
+        {
+            if (other.gameObject.name.StartsWith("Arm")) return;    // Se hace en el ArmHitbox
+
+            TakeDamage(1, (transform.position - other.transform.position).normalized, 0.5f);
+        }
+    }
+
+    public void TakeDamage(float dmg, Vector3 dir, float duration)
+    {
+        if (isIntangible) return;
+
+        currentHp -= dmg;
+        lifeBar.fillAmount = currentHp / stats.maxHp;
+        StartCoroutine(IE_Knockback(dir, duration));
+        if (currentHp <= 0)
+            Destroy(gameObject);
+    }
+
+    public IEnumerator IE_Knockback(Vector3 dir, float duration)
+    {
+        if (isIntangible) yield break;
+
+        float knockbackSpeed = 25f;
+        float elapsed = 0f;
+        StartCoroutine(IE_Intangible(duration));
+        while (elapsed < duration)
+        {
+            yield return null;
+            elapsed += Time.deltaTime;
+            float t = 1f - (elapsed / duration);   // de 1 a 0
+            cc.Move(dir * Time.deltaTime * knockbackSpeed * t);
+        }
+    }
+
     public IEnumerator IE_Intangible(float time)
     {
-        // TO DO: Programar la intangibilidad de verdad
-        GetComponent<Renderer>().material.color = Color.blue;
+        isIntangible = true;
+        var renderers = GetComponentsInChildren<Renderer>();
+        foreach (var r in renderers) r.material.color = Color.blue;
         yield return new WaitForSeconds(time);
-        GetComponent<Renderer>().material.color = Color.gray;
+        foreach (var r in renderers) r.material.color = Color.gray;
+        isIntangible = false;
     }
 
     bool IsActionActive =>

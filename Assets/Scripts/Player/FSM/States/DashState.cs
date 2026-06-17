@@ -9,7 +9,6 @@ public class DashState : State
     public DashState(PlayerCombatController controller, Vector3 direction) : base(controller)
     {
         this.direction = direction;
-        Debug.Log("Has entrado en estado DASH");
     }
 
     public override void Enter()

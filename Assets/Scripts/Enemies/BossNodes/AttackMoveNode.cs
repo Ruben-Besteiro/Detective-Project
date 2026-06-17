@@ -7,14 +7,24 @@ public class AttackMoveNode : BehaviourNode<BossController>
 {
     bool isMoving;
     bool succeeded;
+    bool mediumRange;
     float stopDistance;
+    GameObject selectedArm;
     float cooldown = 3;
     BossController boss;
 
     public override State Start()
     {
         isMoving = true;
-        stopDistance = Random.Range(0, 2) == 0 ? 10 : 15;
+        mediumRange = Random.Range(0, 2) == 0;
+
+        if (mediumRange) stopDistance = 15;
+        else stopDistance = 10;
+
+        if (Random.Range(0, 2) == 0)
+            selectedArm = GameObject.Find("Arm L");
+        else
+            selectedArm = GameObject.Find("Arm R");
         ctx.agent.StartCoroutine(Routine());
         return State.IN_PROGRESS;
     }
@@ -33,10 +43,53 @@ public class AttackMoveNode : BehaviourNode<BossController>
         else
             yield return MoveWithPathfinding(boss, player);
 
+        yield return SweepAttack(boss, player);
         yield return new WaitForSeconds(cooldown);
         boss.currentAttack = -1;
         succeeded = true;
         isMoving = false;
+    }
+
+    IEnumerator SweepAttack(BossController boss, Transform player)
+    {
+        Transform arm = selectedArm.transform;
+        bool isLeft = selectedArm.name == "Arm L";
+
+        Vector3 originalScale = arm.localScale;
+        Vector3 originalPosition = arm.localPosition;
+        Quaternion originalRot = arm.localRotation;
+
+        // Apuntar el brazo totalmente a la izquierda o derecha
+        // La cápsula tiene su eje de altura en Y local; rotando Z±90° lo alineamos con X
+        arm.localRotation = Quaternion.Euler(0, isLeft ? 180 : 0, isLeft ? 90 : -90);
+
+        // Escalar para cubrir la stopping distance (altura de cápsula = 2 * scaleY)
+        if (mediumRange) arm.localScale = new Vector3(originalScale.x, originalScale.y * 4.5f, originalScale.z);
+        else arm.localScale = new Vector3(originalScale.x, originalScale.y * 3, originalScale.z);
+
+        // Centrar el brazo en la dirección correcta
+        arm.localPosition = new Vector3(isLeft ? -1 : 1, originalPosition.y, 0);
+
+        // Mirar al jugador antes de barrer
+        boss.LookAtPlayer();
+
+        // Girar 180° gradualmente
+        float sweepDuration = 1;
+        float elapsed = 0;
+        float startAngle = boss.transform.eulerAngles.y;
+
+        while (elapsed < sweepDuration)
+        {
+            elapsed += Time.deltaTime;
+            float t = Mathf.Clamp01(elapsed / sweepDuration);
+            boss.transform.rotation = Quaternion.Euler(0, startAngle + (isLeft ? 180 : -180) * t, 0);
+            yield return null;
+        }
+
+        // Restaurar brazo
+        arm.localScale = originalScale;
+        arm.localPosition = originalPosition;
+        arm.localRotation = originalRot;
     }
 
     IEnumerator MoveDirectly(BossController boss, Transform player)
@@ -44,6 +97,7 @@ public class AttackMoveNode : BehaviourNode<BossController>
         Debug.Log("Raycast dio verdadero => Nos movemos directamente hacia el jugador");
         while (Vector3.Distance(boss.transform.position, player.position) > stopDistance)
         {
+            boss.LookAtPlayer();
             Vector3 dir = (player.position - boss.transform.position).normalized;
 
             if (Physics.Raycast(boss.transform.position, dir, out RaycastHit hit, Mathf.Infinity))

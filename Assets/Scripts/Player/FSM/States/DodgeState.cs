@@ -9,7 +9,6 @@ public class DodgeState : State
     public DodgeState(PlayerCombatController controller, Vector3 direction) : base(controller)
     {
         this.direction = direction;
-        Debug.Log("Has entrado en estado DODGE");
     }
 
     public override void Enter()
@@ -28,6 +27,7 @@ public class DodgeState : State
         }
         else
         {
+            controller.isIntangible = false;
             cooldownTimer -= Time.deltaTime;
             if (cooldownTimer <= 0f)
                 controller.ChangeState(controller.moveInput.sqrMagnitude > 0.01f

@@ -19,6 +19,8 @@ public class AttackProjectileNode : BehaviourNode<BossController>
     IEnumerator Routine()
     {
         BossController boss = ctx.agent;
+        boss.LookAtPlayer();
+
         Vector3 spawnPos = boss.transform.position + boss.transform.forward;
 
         GameObject sphere = boss.SpawnProjectile(spawnPos);

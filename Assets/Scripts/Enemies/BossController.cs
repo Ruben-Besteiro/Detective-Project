@@ -14,7 +14,9 @@ public class BossController : Enemy
     [HideInInspector] public int currentAttack = -1;
     
     [Header("Stuff")]
-    [SerializeField] GameObject bossCanvas;
+    [SerializeField] GameObject hud;
+    [SerializeField] TextMeshProUGUI nameText;
+    [SerializeField] Image lifeBar;
 
     BossBehaviourTree tree;
 
@@ -25,6 +27,8 @@ public class BossController : Enemy
 
     void Update()
     {
+        if (PauseController.IsPaused) return;
+
         if (startled)
         {
             transform.LookAt(new Vector3(PlayerCombatController.Instance.transform.position.x, transform.position.y, PlayerCombatController.Instance.transform.position.z));
@@ -37,12 +41,18 @@ public class BossController : Enemy
             if (hit.CompareTag("Player"))
             {
                 startled = true;
-                bossCanvas.SetActive(true);
-                bossCanvas.GetComponentInChildren<TextMeshProUGUI>().text = data.name;
+                hud.SetActive(true);
+                nameText.text = data.name;
+                PlayerCombatController.Instance.playerNameText.text = data.name;
                 tree.Start(this, this);
                 break;
             }
         }
+    }
+
+    public void LookAtPlayer()
+    {
+        transform.LookAt(new Vector3(PlayerCombatController.Instance.transform.position.x, transform.position.y, PlayerCombatController.Instance.transform.position.z));
     }
 
     // Se llama desde AttackProjectileNode y AttackCircleNode
@@ -60,7 +70,6 @@ public class BossController : Enemy
     public override void TakeDamage(float dmg)
     {
         base.TakeDamage(dmg);
-        Image lifeBar = bossCanvas.GetComponentsInChildren<Image>()[2];
         lifeBar.fillAmount = hp / data.hp;
         if (hp <= 0)
             Die();

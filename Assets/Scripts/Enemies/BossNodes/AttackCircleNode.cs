@@ -19,6 +19,7 @@ public class AttackCircleNode : BehaviourNode<BossController>
     IEnumerator Routine()
     {
         BossController boss = ctx.agent;
+        boss.LookAtPlayer();
 
         for (int i = 0; i < boss.circleCount; i++)
         {

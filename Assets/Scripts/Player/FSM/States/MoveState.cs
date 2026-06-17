@@ -3,10 +3,7 @@ using UnityEngine.InputSystem;
 
 public class MoveState : State
 {
-    public MoveState(PlayerCombatController controller) : base(controller)
-    {
-        Debug.Log("Has entrado en estado MOVE");
-    }
+    public MoveState(PlayerCombatController controller) : base(controller) {}
 
     public override void HandleInput()
     {

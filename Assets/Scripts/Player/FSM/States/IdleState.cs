@@ -3,10 +3,7 @@ using UnityEngine.InputSystem;
 
 public class IdleState : State
 {
-    public IdleState(PlayerCombatController controller) : base(controller)
-    {
-        Debug.Log("Has entrado en estado IDLE");
-    }
+    public IdleState(PlayerCombatController controller) : base(controller) {}
 
     public override void Update()
     {
