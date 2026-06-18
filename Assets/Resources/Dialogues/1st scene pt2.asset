@@ -16,132 +16,6 @@ MonoBehaviour:
   - nodeType: 0
     dialogueLine:
       speakerName: ???
-      text: Yo...
-      leftPortrait: {fileID: 0}
-      rightPortrait: {fileID: 0}
-    condition:
-      flagName: 
-      expectedValue: 0
-      trueContinueCurrent: 0
-      trueNextDialogue: {fileID: 0}
-      falseContinueCurrent: 0
-      falseNextDialogue: {fileID: 0}
-    choice:
-      options: []
-    flagAction:
-      flagName: 
-      newValue: 0
-  - nodeType: 0
-    dialogueLine:
-      speakerName: ???
-      text: "\xBFYo soy?"
-      leftPortrait: {fileID: 0}
-      rightPortrait: {fileID: 0}
-    condition:
-      flagName: 
-      expectedValue: 0
-      trueContinueCurrent: 0
-      trueNextDialogue: {fileID: 0}
-      falseContinueCurrent: 0
-      falseNextDialogue: {fileID: 0}
-    choice:
-      options: []
-    flagAction:
-      flagName: 
-      newValue: 0
-  - nodeType: 0
-    dialogueLine:
-      speakerName: ???
-      text: "\xBFQui\xE9n soy?"
-      leftPortrait: {fileID: 0}
-      rightPortrait: {fileID: 0}
-    condition:
-      flagName: 
-      expectedValue: 0
-      trueContinueCurrent: 0
-      trueNextDialogue: {fileID: 0}
-      falseContinueCurrent: 0
-      falseNextDialogue: {fileID: 0}
-    choice:
-      options: []
-    flagAction:
-      flagName: 
-      newValue: 0
-  - nodeType: 0
-    dialogueLine:
-      speakerName: ???
-      text: No veo nada
-      leftPortrait: {fileID: 0}
-      rightPortrait: {fileID: 0}
-    condition:
-      flagName: 
-      expectedValue: 0
-      trueContinueCurrent: 0
-      trueNextDialogue: {fileID: 0}
-      falseContinueCurrent: 0
-      falseNextDialogue: {fileID: 0}
-    choice:
-      options: []
-    flagAction:
-      flagName: 
-      newValue: 0
-  - nodeType: 0
-    dialogueLine:
-      speakerName: ???
-      text: "Siento... \xBFDolor?"
-      leftPortrait: {fileID: 0}
-      rightPortrait: {fileID: 0}
-    condition:
-      flagName: 
-      expectedValue: 0
-      trueContinueCurrent: 0
-      trueNextDialogue: {fileID: 0}
-      falseContinueCurrent: 0
-      falseNextDialogue: {fileID: 0}
-    choice:
-      options: []
-    flagAction:
-      flagName: 
-      newValue: 0
-  - nodeType: 0
-    dialogueLine:
-      speakerName: ???
-      text: "\xBFEso es dolor?"
-      leftPortrait: {fileID: 0}
-      rightPortrait: {fileID: 0}
-    condition:
-      flagName: 
-      expectedValue: 0
-      trueContinueCurrent: 0
-      trueNextDialogue: {fileID: 0}
-      falseContinueCurrent: 0
-      falseNextDialogue: {fileID: 0}
-    choice:
-      options: []
-    flagAction:
-      flagName: 
-      newValue: 0
-  - nodeType: 0
-    dialogueLine:
-      speakerName: ???
-      text: Yo soy...
-      leftPortrait: {fileID: 0}
-      rightPortrait: {fileID: 0}
-    condition:
-      flagName: 
-      expectedValue: 0
-      trueContinueCurrent: 0
-      trueNextDialogue: {fileID: 0}
-      falseContinueCurrent: 0
-      falseNextDialogue: {fileID: 0}
-    choice:
-      options: []
-    flagAction:
-      flagName: 
-      newValue: 0
-  - nodeType: 0
-    dialogueLine:
-      speakerName: ???
       text: "\xA1BENNY!"
       leftPortrait: {fileID: 0}
       rightPortrait: {fileID: 21300000, guid: ab26f63d67279e24a9c25b6ec796f7ef, type: 3}
@@ -162,7 +36,7 @@ MonoBehaviour:
       speakerName: Benny
       text: ...!
       leftPortrait: {fileID: 21300000, guid: 677541715f37e49458209212f538fa8b, type: 3}
-      rightPortrait: {fileID: 0}
+      rightPortrait: {fileID: 21300000, guid: ab26f63d67279e24a9c25b6ec796f7ef, type: 3}
     condition:
       flagName: 
       expectedValue: 0
@@ -179,7 +53,7 @@ MonoBehaviour:
     dialogueLine:
       speakerName: ???
       text: "\xA1Ni siquiera me est\xE1s escuchando!"
-      leftPortrait: {fileID: 0}
+      leftPortrait: {fileID: 21300000, guid: 677541715f37e49458209212f538fa8b, type: 3}
       rightPortrait: {fileID: 21300000, guid: ab26f63d67279e24a9c25b6ec796f7ef, type: 3}
     condition:
       flagName: 
@@ -196,9 +70,9 @@ MonoBehaviour:
   - nodeType: 0
     dialogueLine:
       speakerName: Benny
-      text: "\xA1Si te estaba escuchando, Aurora! "
+      text: "\xA1Si te estaba escuchando, Aurora!"
       leftPortrait: {fileID: 21300000, guid: 677541715f37e49458209212f538fa8b, type: 3}
-      rightPortrait: {fileID: 0}
+      rightPortrait: {fileID: 21300000, guid: ab26f63d67279e24a9c25b6ec796f7ef, type: 3}
     condition:
       flagName: 
       expectedValue: 0
@@ -214,7 +88,7 @@ MonoBehaviour:
   - nodeType: 0
     dialogueLine:
       speakerName: Aurora
-      text: "\xBFA si? \xBFQue fue lo que acabo de decir?"
+      text: "\xBFA s\xED? \xBFDe qu\xE9 estaba hablando?"
       leftPortrait: {fileID: 21300000, guid: 677541715f37e49458209212f538fa8b, type: 3}
       rightPortrait: {fileID: 21300000, guid: ab26f63d67279e24a9c25b6ec796f7ef, type: 3}
     condition:
@@ -249,10 +123,411 @@ MonoBehaviour:
       newValue: 0
   - nodeType: 0
     dialogueLine:
-      speakerName: ???
-      text: JAJAJAJA, Pilladooooooo
+      speakerName: ????
+      text: JAJAJAJAJA, Te pillaroooooonnnn.
       leftPortrait: {fileID: 21300000, guid: 677541715f37e49458209212f538fa8b, type: 3}
       rightPortrait: {fileID: 21300000, guid: ab26f63d67279e24a9c25b6ec796f7ef, type: 3}
+    condition:
+      flagName: 
+      expectedValue: 0
+      trueContinueCurrent: 0
+      trueNextDialogue: {fileID: 0}
+      falseContinueCurrent: 0
+      falseNextDialogue: {fileID: 0}
+    choice:
+      options: []
+    flagAction:
+      flagName: 
+      newValue: 0
+  - nodeType: 0
+    dialogueLine:
+      speakerName: Benny
+      text: "Vale, puede que me haya despistado. \xBFPuedes repetirlo porfavor?"
+      leftPortrait: {fileID: 21300000, guid: 677541715f37e49458209212f538fa8b, type: 3}
+      rightPortrait: {fileID: 21300000, guid: ab26f63d67279e24a9c25b6ec796f7ef, type: 3}
+    condition:
+      flagName: 
+      expectedValue: 0
+      trueContinueCurrent: 0
+      trueNextDialogue: {fileID: 0}
+      falseContinueCurrent: 0
+      falseNextDialogue: {fileID: 0}
+    choice:
+      options: []
+    flagAction:
+      flagName: 
+      newValue: 0
+  - nodeType: 0
+    dialogueLine:
+      speakerName: Aurora
+      text: "Vale, pero solo lo hare una vez m\xE1s. Y m\xE1s te vale prestarme atenci\xF3n."
+      leftPortrait: {fileID: 21300000, guid: 677541715f37e49458209212f538fa8b, type: 3}
+      rightPortrait: {fileID: 21300000, guid: ab26f63d67279e24a9c25b6ec796f7ef, type: 3}
+    condition:
+      flagName: 
+      expectedValue: 0
+      trueContinueCurrent: 0
+      trueNextDialogue: {fileID: 0}
+      falseContinueCurrent: 0
+      falseNextDialogue: {fileID: 0}
+    choice:
+      options: []
+    flagAction:
+      flagName: 
+      newValue: 0
+  - nodeType: 0
+    dialogueLine:
+      speakerName: Benny
+      text: '*SIGH*...'
+      leftPortrait: {fileID: 21300000, guid: 677541715f37e49458209212f538fa8b, type: 3}
+      rightPortrait: {fileID: 21300000, guid: ab26f63d67279e24a9c25b6ec796f7ef, type: 3}
+    condition:
+      flagName: 
+      expectedValue: 0
+      trueContinueCurrent: 0
+      trueNextDialogue: {fileID: 0}
+      falseContinueCurrent: 0
+      falseNextDialogue: {fileID: 0}
+    choice:
+      options: []
+    flagAction:
+      flagName: 
+      newValue: 0
+  - nodeType: 0
+    dialogueLine:
+      speakerName: ???
+      text: "Pobre Ben, te ves fatal... \xBFProblemas al dormir?"
+      leftPortrait: {fileID: 21300000, guid: 677541715f37e49458209212f538fa8b, type: 3}
+      rightPortrait: {fileID: 0}
+    condition:
+      flagName: 
+      expectedValue: 0
+      trueContinueCurrent: 0
+      trueNextDialogue: {fileID: 0}
+      falseContinueCurrent: 0
+      falseNextDialogue: {fileID: 0}
+    choice:
+      options: []
+    flagAction:
+      flagName: 
+      newValue: 0
+  - nodeType: 0
+    dialogueLine:
+      speakerName: Benny
+      text: '[baja la voz, Burlone, que me cansas con solo respirar]'
+      leftPortrait: {fileID: 21300000, guid: 677541715f37e49458209212f538fa8b, type: 3}
+      rightPortrait: {fileID: 0}
+    condition:
+      flagName: 
+      expectedValue: 0
+      trueContinueCurrent: 0
+      trueNextDialogue: {fileID: 0}
+      falseContinueCurrent: 0
+      falseNextDialogue: {fileID: 0}
+    choice:
+      options: []
+    flagAction:
+      flagName: 
+      newValue: 0
+  - nodeType: 0
+    dialogueLine:
+      speakerName: Burlone
+      text: "Hay, pero que llorica... \xBFY que pasar\xE1 si no me quedo quieto?"
+      leftPortrait: {fileID: 21300000, guid: 677541715f37e49458209212f538fa8b, type: 3}
+      rightPortrait: {fileID: 0}
+    condition:
+      flagName: 
+      expectedValue: 0
+      trueContinueCurrent: 0
+      trueNextDialogue: {fileID: 0}
+      falseContinueCurrent: 0
+      falseNextDialogue: {fileID: 0}
+    choice:
+      options: []
+    flagAction:
+      flagName: 
+      newValue: 0
+  - nodeType: 0
+    dialogueLine:
+      speakerName: Burlone
+      text: "\xBFHar\xE1s algo malo Ben? \xBFQu\xE9 har\xE1s?..."
+      leftPortrait: {fileID: 21300000, guid: 677541715f37e49458209212f538fa8b, type: 3}
+      rightPortrait: {fileID: 0}
+    condition:
+      flagName: 
+      expectedValue: 0
+      trueContinueCurrent: 0
+      trueNextDialogue: {fileID: 0}
+      falseContinueCurrent: 0
+      falseNextDialogue: {fileID: 0}
+    choice:
+      options: []
+    flagAction:
+      flagName: 
+      newValue: 0
+  - nodeType: 0
+    dialogueLine:
+      speakerName: Burlone
+      text: "\xBFQu\xE9... Har\xE1s?"
+      leftPortrait: {fileID: 21300000, guid: 677541715f37e49458209212f538fa8b, type: 3}
+      rightPortrait: {fileID: 0}
+    condition:
+      flagName: 
+      expectedValue: 0
+      trueContinueCurrent: 0
+      trueNextDialogue: {fileID: 0}
+      falseContinueCurrent: 0
+      falseNextDialogue: {fileID: 0}
+    choice:
+      options: []
+    flagAction:
+      flagName: 
+      newValue: 0
+  - nodeType: 0
+    dialogueLine:
+      speakerName: Benny
+      text: CALLATE
+      leftPortrait: {fileID: 21300000, guid: 677541715f37e49458209212f538fa8b, type: 3}
+      rightPortrait: {fileID: 21300000, guid: ab26f63d67279e24a9c25b6ec796f7ef, type: 3}
+    condition:
+      flagName: 
+      expectedValue: 0
+      trueContinueCurrent: 0
+      trueNextDialogue: {fileID: 0}
+      falseContinueCurrent: 0
+      falseNextDialogue: {fileID: 0}
+    choice:
+      options: []
+    flagAction:
+      flagName: 
+      newValue: 0
+  - nodeType: 0
+    dialogueLine:
+      speakerName: Aurora
+      text: ... Perdona, jefe.
+      leftPortrait: {fileID: 21300000, guid: 677541715f37e49458209212f538fa8b, type: 3}
+      rightPortrait: {fileID: 21300000, guid: ab26f63d67279e24a9c25b6ec796f7ef, type: 3}
+    condition:
+      flagName: 
+      expectedValue: 0
+      trueContinueCurrent: 0
+      trueNextDialogue: {fileID: 0}
+      falseContinueCurrent: 0
+      falseNextDialogue: {fileID: 0}
+    choice:
+      options: []
+    flagAction:
+      flagName: 
+      newValue: 0
+  - nodeType: 0
+    dialogueLine:
+      speakerName: Benny
+      text: Ah... No, perdoname tu a mi.
+      leftPortrait: {fileID: 21300000, guid: 677541715f37e49458209212f538fa8b, type: 3}
+      rightPortrait: {fileID: 21300000, guid: ab26f63d67279e24a9c25b6ec796f7ef, type: 3}
+    condition:
+      flagName: 
+      expectedValue: 0
+      trueContinueCurrent: 0
+      trueNextDialogue: {fileID: 0}
+      falseContinueCurrent: 0
+      falseNextDialogue: {fileID: 0}
+    choice:
+      options: []
+    flagAction:
+      flagName: 
+      newValue: 0
+  - nodeType: 0
+    dialogueLine:
+      speakerName: Benny
+      text: "He estado muy cansado, y el hecho de no dormir ya esta pasando factura.
+        \xBFPodr\xEDas repetirlo una \xFAltima vez?"
+      leftPortrait: {fileID: 21300000, guid: 677541715f37e49458209212f538fa8b, type: 3}
+      rightPortrait: {fileID: 21300000, guid: ab26f63d67279e24a9c25b6ec796f7ef, type: 3}
+    condition:
+      flagName: 
+      expectedValue: 0
+      trueContinueCurrent: 0
+      trueNextDialogue: {fileID: 0}
+      falseContinueCurrent: 0
+      falseNextDialogue: {fileID: 0}
+    choice:
+      options: []
+    flagAction:
+      flagName: 
+      newValue: 0
+  - nodeType: 0
+    dialogueLine:
+      speakerName: Aurora
+      text: "Ok... Las facturas del local ya hay que pagarlas, y con como hemos ido
+        este m\xE9s..."
+      leftPortrait: {fileID: 21300000, guid: 677541715f37e49458209212f538fa8b, type: 3}
+      rightPortrait: {fileID: 21300000, guid: ab26f63d67279e24a9c25b6ec796f7ef, type: 3}
+    condition:
+      flagName: 
+      expectedValue: 0
+      trueContinueCurrent: 0
+      trueNextDialogue: {fileID: 0}
+      falseContinueCurrent: 0
+      falseNextDialogue: {fileID: 0}
+    choice:
+      options: []
+    flagAction:
+      flagName: 
+      newValue: 0
+  - nodeType: 0
+    dialogueLine:
+      speakerName: Aurora
+      text: Quiza sea hora de aceptar cualquier tipo de caso, aunque resulten minimos
+        o molestos.
+      leftPortrait: {fileID: 21300000, guid: 677541715f37e49458209212f538fa8b, type: 3}
+      rightPortrait: {fileID: 21300000, guid: ab26f63d67279e24a9c25b6ec796f7ef, type: 3}
+    condition:
+      flagName: 
+      expectedValue: 0
+      trueContinueCurrent: 0
+      trueNextDialogue: {fileID: 0}
+      falseContinueCurrent: 0
+      falseNextDialogue: {fileID: 0}
+    choice:
+      options: []
+    flagAction:
+      flagName: 
+      newValue: 0
+  - nodeType: 0
+    dialogueLine:
+      speakerName: Benny
+      text: Entiendo
+      leftPortrait: {fileID: 21300000, guid: 677541715f37e49458209212f538fa8b, type: 3}
+      rightPortrait: {fileID: 21300000, guid: ab26f63d67279e24a9c25b6ec796f7ef, type: 3}
+    condition:
+      flagName: 
+      expectedValue: 0
+      trueContinueCurrent: 0
+      trueNextDialogue: {fileID: 0}
+      falseContinueCurrent: 0
+      falseNextDialogue: {fileID: 0}
+    choice:
+      options: []
+    flagAction:
+      flagName: 
+      newValue: 0
+  - nodeType: 0
+    dialogueLine:
+      speakerName: 
+      text: '*RING RING RING*'
+      leftPortrait: {fileID: 21300000, guid: 677541715f37e49458209212f538fa8b, type: 3}
+      rightPortrait: {fileID: 0}
+    condition:
+      flagName: 
+      expectedValue: 0
+      trueContinueCurrent: 0
+      trueNextDialogue: {fileID: 0}
+      falseContinueCurrent: 0
+      falseNextDialogue: {fileID: 0}
+    choice:
+      options: []
+    flagAction:
+      flagName: 
+      newValue: 0
+  - nodeType: 0
+    dialogueLine:
+      speakerName: Burlone
+      text: Ya escuchaste a tu jefa, Ben. A trabajar JAJAJAJA.
+      leftPortrait: {fileID: 21300000, guid: 677541715f37e49458209212f538fa8b, type: 3}
+      rightPortrait: {fileID: 0}
+    condition:
+      flagName: 
+      expectedValue: 0
+      trueContinueCurrent: 0
+      trueNextDialogue: {fileID: 0}
+      falseContinueCurrent: 0
+      falseNextDialogue: {fileID: 0}
+    choice:
+      options: []
+    flagAction:
+      flagName: 
+      newValue: 0
+  - nodeType: 0
+    dialogueLine:
+      speakerName: Benny
+      text: ... S.p.A, Al suo servizio.
+      leftPortrait: {fileID: 21300000, guid: 677541715f37e49458209212f538fa8b, type: 3}
+      rightPortrait: {fileID: 21300000, guid: f61f76d3f2b38b44da105fbd374b3fe2, type: 3}
+    condition:
+      flagName: 
+      expectedValue: 0
+      trueContinueCurrent: 0
+      trueNextDialogue: {fileID: 0}
+      falseContinueCurrent: 0
+      falseNextDialogue: {fileID: 0}
+    choice:
+      options: []
+    flagAction:
+      flagName: 
+      newValue: 0
+  - nodeType: 0
+    dialogueLine:
+      speakerName: "\xBF?"
+      text: "*Sollozo* Un Monstruo, del tama\xF1o de un coj\xEDn entr\xF3 en mi casa...
+        Y se comio a mi perro..."
+      leftPortrait: {fileID: 21300000, guid: 677541715f37e49458209212f538fa8b, type: 3}
+      rightPortrait: {fileID: 21300000, guid: f61f76d3f2b38b44da105fbd374b3fe2, type: 3}
+    condition:
+      flagName: 
+      expectedValue: 0
+      trueContinueCurrent: 0
+      trueNextDialogue: {fileID: 0}
+      falseContinueCurrent: 0
+      falseNextDialogue: {fileID: 0}
+    choice:
+      options: []
+    flagAction:
+      flagName: 
+      newValue: 0
+  - nodeType: 0
+    dialogueLine:
+      speakerName: Benny
+      text: "Vale. \xBFSabe a qu\xE9 direcci\xF3n se fue?"
+      leftPortrait: {fileID: 21300000, guid: 677541715f37e49458209212f538fa8b, type: 3}
+      rightPortrait: {fileID: 21300000, guid: f61f76d3f2b38b44da105fbd374b3fe2, type: 3}
+    condition:
+      flagName: 
+      expectedValue: 0
+      trueContinueCurrent: 0
+      trueNextDialogue: {fileID: 0}
+      falseContinueCurrent: 0
+      falseNextDialogue: {fileID: 0}
+    choice:
+      options: []
+    flagAction:
+      flagName: 
+      newValue: 0
+  - nodeType: 0
+    dialogueLine:
+      speakerName: "\xBF?"
+      text: '*SNIFF* No...'
+      leftPortrait: {fileID: 21300000, guid: 677541715f37e49458209212f538fa8b, type: 3}
+      rightPortrait: {fileID: 21300000, guid: f61f76d3f2b38b44da105fbd374b3fe2, type: 3}
+    condition:
+      flagName: 
+      expectedValue: 0
+      trueContinueCurrent: 0
+      trueNextDialogue: {fileID: 0}
+      falseContinueCurrent: 0
+      falseNextDialogue: {fileID: 0}
+    choice:
+      options: []
+    flagAction:
+      flagName: 
+      newValue: 0
+  - nodeType: 0
+    dialogueLine:
+      speakerName: Benny
+      text: "Est\xE1 bien, si usted ser\xEDa tan amable. \xBFMe podr\xEDa dar la
+        direcci\xF3n en la que se encuentra?"
+      leftPortrait: {fileID: 21300000, guid: 677541715f37e49458209212f538fa8b, type: 3}
+      rightPortrait: {fileID: 21300000, guid: f61f76d3f2b38b44da105fbd374b3fe2, type: 3}
     condition:
       flagName: 
       expectedValue: 0

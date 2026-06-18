@@ -702,7 +702,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aef57a553c7938944a0c0b62c8042f07, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::QuickCinematic
-  dialogue: {fileID: 11400000, guid: 44ed3deab7a37cc4caaa7d3b37411f6d, type: 2}
+  dialogue: {fileID: 11400000, guid: f27b5d1f60892dc46b2b64d7ea534c44, type: 2}
   startDelay: 0.2
   endDelay: 0.6
   nextScene: TheHouse
