@@ -1,0 +1,267 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 50b1869994199a640a1a9467adae8432, type: 3}
+  m_Name: 1st scene pt2
+  m_EditorClassIdentifier: Assembly-CSharp::DialogueData
+  nodes:
+  - nodeType: 0
+    dialogueLine:
+      speakerName: ???
+      text: Yo...
+      leftPortrait: {fileID: 0}
+      rightPortrait: {fileID: 0}
+    condition:
+      flagName: 
+      expectedValue: 0
+      trueContinueCurrent: 0
+      trueNextDialogue: {fileID: 0}
+      falseContinueCurrent: 0
+      falseNextDialogue: {fileID: 0}
+    choice:
+      options: []
+    flagAction:
+      flagName: 
+      newValue: 0
+  - nodeType: 0
+    dialogueLine:
+      speakerName: ???
+      text: "\xBFYo soy?"
+      leftPortrait: {fileID: 0}
+      rightPortrait: {fileID: 0}
+    condition:
+      flagName: 
+      expectedValue: 0
+      trueContinueCurrent: 0
+      trueNextDialogue: {fileID: 0}
+      falseContinueCurrent: 0
+      falseNextDialogue: {fileID: 0}
+    choice:
+      options: []
+    flagAction:
+      flagName: 
+      newValue: 0
+  - nodeType: 0
+    dialogueLine:
+      speakerName: ???
+      text: "\xBFQui\xE9n soy?"
+      leftPortrait: {fileID: 0}
+      rightPortrait: {fileID: 0}
+    condition:
+      flagName: 
+      expectedValue: 0
+      trueContinueCurrent: 0
+      trueNextDialogue: {fileID: 0}
+      falseContinueCurrent: 0
+      falseNextDialogue: {fileID: 0}
+    choice:
+      options: []
+    flagAction:
+      flagName: 
+      newValue: 0
+  - nodeType: 0
+    dialogueLine:
+      speakerName: ???
+      text: No veo nada
+      leftPortrait: {fileID: 0}
+      rightPortrait: {fileID: 0}
+    condition:
+      flagName: 
+      expectedValue: 0
+      trueContinueCurrent: 0
+      trueNextDialogue: {fileID: 0}
+      falseContinueCurrent: 0
+      falseNextDialogue: {fileID: 0}
+    choice:
+      options: []
+    flagAction:
+      flagName: 
+      newValue: 0
+  - nodeType: 0
+    dialogueLine:
+      speakerName: ???
+      text: "Siento... \xBFDolor?"
+      leftPortrait: {fileID: 0}
+      rightPortrait: {fileID: 0}
+    condition:
+      flagName: 
+      expectedValue: 0
+      trueContinueCurrent: 0
+      trueNextDialogue: {fileID: 0}
+      falseContinueCurrent: 0
+      falseNextDialogue: {fileID: 0}
+    choice:
+      options: []
+    flagAction:
+      flagName: 
+      newValue: 0
+  - nodeType: 0
+    dialogueLine:
+      speakerName: ???
+      text: "\xBFEso es dolor?"
+      leftPortrait: {fileID: 0}
+      rightPortrait: {fileID: 0}
+    condition:
+      flagName: 
+      expectedValue: 0
+      trueContinueCurrent: 0
+      trueNextDialogue: {fileID: 0}
+      falseContinueCurrent: 0
+      falseNextDialogue: {fileID: 0}
+    choice:
+      options: []
+    flagAction:
+      flagName: 
+      newValue: 0
+  - nodeType: 0
+    dialogueLine:
+      speakerName: ???
+      text: Yo soy...
+      leftPortrait: {fileID: 0}
+      rightPortrait: {fileID: 0}
+    condition:
+      flagName: 
+      expectedValue: 0
+      trueContinueCurrent: 0
+      trueNextDialogue: {fileID: 0}
+      falseContinueCurrent: 0
+      falseNextDialogue: {fileID: 0}
+    choice:
+      options: []
+    flagAction:
+      flagName: 
+      newValue: 0
+  - nodeType: 0
+    dialogueLine:
+      speakerName: ???
+      text: "\xA1BENNY!"
+      leftPortrait: {fileID: 0}
+      rightPortrait: {fileID: 21300000, guid: ab26f63d67279e24a9c25b6ec796f7ef, type: 3}
+    condition:
+      flagName: 
+      expectedValue: 0
+      trueContinueCurrent: 0
+      trueNextDialogue: {fileID: 0}
+      falseContinueCurrent: 0
+      falseNextDialogue: {fileID: 0}
+    choice:
+      options: []
+    flagAction:
+      flagName: 
+      newValue: 0
+  - nodeType: 0
+    dialogueLine:
+      speakerName: Benny
+      text: ...!
+      leftPortrait: {fileID: 21300000, guid: 677541715f37e49458209212f538fa8b, type: 3}
+      rightPortrait: {fileID: 0}
+    condition:
+      flagName: 
+      expectedValue: 0
+      trueContinueCurrent: 0
+      trueNextDialogue: {fileID: 0}
+      falseContinueCurrent: 0
+      falseNextDialogue: {fileID: 0}
+    choice:
+      options: []
+    flagAction:
+      flagName: 
+      newValue: 0
+  - nodeType: 0
+    dialogueLine:
+      speakerName: ???
+      text: "\xA1Ni siquiera me est\xE1s escuchando!"
+      leftPortrait: {fileID: 0}
+      rightPortrait: {fileID: 21300000, guid: ab26f63d67279e24a9c25b6ec796f7ef, type: 3}
+    condition:
+      flagName: 
+      expectedValue: 0
+      trueContinueCurrent: 0
+      trueNextDialogue: {fileID: 0}
+      falseContinueCurrent: 0
+      falseNextDialogue: {fileID: 0}
+    choice:
+      options: []
+    flagAction:
+      flagName: 
+      newValue: 0
+  - nodeType: 0
+    dialogueLine:
+      speakerName: Benny
+      text: "\xA1Si te estaba escuchando, Aurora! "
+      leftPortrait: {fileID: 21300000, guid: 677541715f37e49458209212f538fa8b, type: 3}
+      rightPortrait: {fileID: 0}
+    condition:
+      flagName: 
+      expectedValue: 0
+      trueContinueCurrent: 0
+      trueNextDialogue: {fileID: 0}
+      falseContinueCurrent: 0
+      falseNextDialogue: {fileID: 0}
+    choice:
+      options: []
+    flagAction:
+      flagName: 
+      newValue: 0
+  - nodeType: 0
+    dialogueLine:
+      speakerName: Aurora
+      text: "\xBFA si? \xBFQue fue lo que acabo de decir?"
+      leftPortrait: {fileID: 21300000, guid: 677541715f37e49458209212f538fa8b, type: 3}
+      rightPortrait: {fileID: 21300000, guid: ab26f63d67279e24a9c25b6ec796f7ef, type: 3}
+    condition:
+      flagName: 
+      expectedValue: 0
+      trueContinueCurrent: 0
+      trueNextDialogue: {fileID: 0}
+      falseContinueCurrent: 0
+      falseNextDialogue: {fileID: 0}
+    choice:
+      options: []
+    flagAction:
+      flagName: 
+      newValue: 0
+  - nodeType: 0
+    dialogueLine:
+      speakerName: Benny
+      text: ...
+      leftPortrait: {fileID: 21300000, guid: 677541715f37e49458209212f538fa8b, type: 3}
+      rightPortrait: {fileID: 21300000, guid: ab26f63d67279e24a9c25b6ec796f7ef, type: 3}
+    condition:
+      flagName: 
+      expectedValue: 0
+      trueContinueCurrent: 0
+      trueNextDialogue: {fileID: 0}
+      falseContinueCurrent: 0
+      falseNextDialogue: {fileID: 0}
+    choice:
+      options: []
+    flagAction:
+      flagName: 
+      newValue: 0
+  - nodeType: 0
+    dialogueLine:
+      speakerName: ???
+      text: JAJAJAJA, Pilladooooooo
+      leftPortrait: {fileID: 21300000, guid: 677541715f37e49458209212f538fa8b, type: 3}
+      rightPortrait: {fileID: 21300000, guid: ab26f63d67279e24a9c25b6ec796f7ef, type: 3}
+    condition:
+      flagName: 
+      expectedValue: 0
+      trueContinueCurrent: 0
+      trueNextDialogue: {fileID: 0}
+      falseContinueCurrent: 0
+      falseNextDialogue: {fileID: 0}
+    choice:
+      options: []
+    flagAction:
+      flagName: 
+      newValue: 0
