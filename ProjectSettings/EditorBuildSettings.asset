@@ -9,6 +9,9 @@ EditorBuildSettings:
     path: Assets/Scenes/MainMenu.unity
     guid: f3d87b10beccd7d4081f229119b291b2
   - enabled: 1
+    path: Assets/Scenes/StartCinematic.unity
+    guid: 30a9727c138da934c97ab543e6958572
+  - enabled: 1
     path: Assets/Scenes/TheHouse.unity
     guid: 719326a9deeab124a9b3237a5254c029
   - enabled: 1
