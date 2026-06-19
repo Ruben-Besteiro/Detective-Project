@@ -2,26 +2,37 @@ using UnityEngine;
 
 public class Bullet : MonoBehaviour
 {
-    float speed;
+    GunData data;
     GameObject owner;
 
-    public void Initialize(GameObject owner, float speed, float lifetime)
+    public void Initialize(GameObject owner, GunData data)
     {
         this.owner = owner;
-        this.speed = speed;
-        Destroy(gameObject, lifetime);
+        this.data = data;
+        Destroy(gameObject, data.bulletLifetime);
     }
 
     void Update()
     {
-        transform.position += transform.forward * speed * Time.deltaTime;
+        transform.position += transform.forward * data.bulletSpeed * Time.deltaTime;
     }
 
     void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag(owner.tag)) return;
+        if (other.CompareTag(owner.tag) || other.TryGetComponent<Bullet>(out _))
+            return;
+
+        // Si la bala es del jugador
         if (other.TryGetComponent<Enemy>(out var enemy))
-            enemy.TakeDamage(PlayerCombatController.Instance.currentGunData.damage);
+            enemy.TakeDamage(data.damage);
+
+        // Si la bala es del jefe
+        else if (other.TryGetComponent<PlayerCombatController>(out var player))
+        {
+            BossGunData bossData = (BossGunData)data;
+            player.TakeDamage(bossData.damage, (player.transform.position - transform.position).normalized, bossData.knockbackDuration, bossData.intangibilityDuration, bossData.knockbackSpeed);
+        }
+
         Destroy(gameObject);
     }
 }

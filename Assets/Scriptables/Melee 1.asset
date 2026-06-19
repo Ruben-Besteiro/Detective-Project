@@ -17,5 +17,5 @@ MonoBehaviour:
   rangeXY: 1
   rangeZ: 1.5
   hitboxOffset: 0.5
-  activeFrames: 3
+  activeDuration: 0.05
   endLag: 1

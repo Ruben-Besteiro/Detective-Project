@@ -5,9 +5,9 @@ using UnityEngine.UI;
 public class BossController : Enemy
 {
     [Header("Attacks")]
+    [SerializeField] public BossGunData bossGunData1;       // Datos del ataque con balas
+    [SerializeField] public BossMeleeData bossMeleeData1;   // Datos del ataque con el brazo
     public GameObject bulletPrefab;
-    public float projectileForce = 12f;
-    public int circleCount = 8;
     public float circleRadius = 3f;
 
     [HideInInspector] public bool startled = false;
@@ -43,7 +43,7 @@ public class BossController : Enemy
                 startled = true;
                 hud.SetActive(true);
                 nameText.text = data.name;
-                PlayerCombatController.Instance.playerNameText.text = data.name;
+                PlayerCombatController.Instance.playerNameText.text = PlayerCombatController.Instance.stats.playerName;
                 tree.Start(this, this);
                 break;
             }
@@ -61,9 +61,10 @@ public class BossController : Enemy
         if (bulletPrefab != null)
         {
             GameObject go = Instantiate(bulletPrefab, position, Quaternion.identity);
-            go.GetComponent<Bullet>().Initialize(gameObject, 10, 5);
+            go.GetComponent<Bullet>().Initialize(gameObject, bossGunData1);
             return go;
         }
+        print("bulletPrefab is null");
         return null;
     }
 

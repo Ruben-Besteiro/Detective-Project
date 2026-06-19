@@ -6,16 +6,23 @@ using System.Linq;
 public class MeleeState : State
 {
     float timer;
-    Vector3 meleeBoxHalfExtents = new Vector3(PlayerCombatController.Instance.currentMeleeData.rangeXY, PlayerCombatController.Instance.currentMeleeData.rangeXY, PlayerCombatController.Instance.currentMeleeData.rangeZ);
+    Vector3 meleeBoxHalfExtents;
     float meleeOffset = 1;
     Vector3 aimPoint;
     bool hasAimPoint;
 
-    public MeleeState(PlayerCombatController controller) : base(controller) {}
+    public MeleeState(PlayerCombatController controller) : base(controller)
+    {
+        meleeBoxHalfExtents = new Vector3(
+            controller.currentMeleeData.rangeX, 
+            controller.currentMeleeData.rangeY, 
+            controller.currentMeleeData.rangeZ
+            );
+    }
 
     public override void Enter()
     {
-        timer = controller.currentMeleeData.endLag;
+        timer = controller.currentMeleeData.cooldown;
         hasAimPoint = controller.HasAimPoint;
         if (hasAimPoint) aimPoint = controller.GetAimPoint();
         controller.RotateTowardCursor();

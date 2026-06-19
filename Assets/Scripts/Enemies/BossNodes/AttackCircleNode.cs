@@ -5,9 +5,11 @@ public class AttackCircleNode : BehaviourNode<BossController>
 {
     bool isMoving;
     float cooldown = 2;
+    int circleCount = 8;
 
     public override State Start()
     {
+        Debug.Log("AttackCircleNode");
         isMoving = true;
         ctx.agent.StartCoroutine(Routine());
         return State.IN_PROGRESS;
@@ -21,13 +23,15 @@ public class AttackCircleNode : BehaviourNode<BossController>
         BossController boss = ctx.agent;
         boss.LookAtPlayer();
 
-        for (int i = 0; i < boss.circleCount; i++)
+        for (int i = 0; i < circleCount; i++)
         {
-            float angle = i * Mathf.PI * 2f / boss.circleCount;
+            float angle = i * Mathf.PI * 2f / circleCount;
             Vector3 offset = new Vector3(Mathf.Cos(angle), 0f, Mathf.Sin(angle)) * boss.circleRadius;
 
             GameObject sphere = boss.SpawnProjectile(boss.transform.position + offset);
-            sphere.GetComponent<Rigidbody>().AddForce(offset.normalized * boss.projectileForce, ForceMode.Impulse);
+            // La fuerza debe ser hacia el jugador.
+            Vector3 dir = (PlayerCombatController.Instance.transform.position - sphere.transform.position).normalized;
+            sphere.GetComponent<Rigidbody>().AddForce(dir * 20, ForceMode.Impulse);
         }
 
         yield return new WaitForSeconds(cooldown);

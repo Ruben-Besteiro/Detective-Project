@@ -10,7 +10,7 @@ public class PlayerCombatController : PlayerController
     public static PlayerCombatController Instance;
     private float combatSpeed;
     protected override float MoveSpeed => combatSpeed;
-    private float currentHp;
+    public float currentHp;
     public bool isIntangible = false;
 
     public State currentState;
@@ -27,8 +27,8 @@ public class PlayerCombatController : PlayerController
     Transform enemyThatTheReticleIsOnTopOf;
 
     [Header("Armas")]
-    public GunData currentGunData;
-    public MeleeData currentMeleeData;
+    [SerializeField] public GunData currentGunData;
+    [SerializeField] public MeleeData currentMeleeData;
 
     [Header("Dash")]
     [SerializeField] public float dashSpeed = 25;
@@ -283,9 +283,10 @@ public class PlayerCombatController : PlayerController
     public IEnumerator IE_CheckMeleeHits()
     {
         HashSet<Enemy> damagedEnemies = new();
-        Vector3 boxHalfExtents = new Vector3(currentMeleeData.rangeXY, currentMeleeData.rangeXY, currentMeleeData.rangeZ);
+        Vector3 boxHalfExtents = new Vector3(currentMeleeData.rangeX, currentMeleeData.rangeY, currentMeleeData.rangeZ);
 
-        for (int i = 0; i < currentMeleeData.activeFrames; i++)
+        int activeFrames = Mathf.RoundToInt(currentMeleeData.activeDuration / Time.deltaTime);
+        for (int i = 0; i < activeFrames; i++)
         {
             // Recalculado cada frame porque el jugador puede moverse durante el ataque
             Vector3 boxCenter = transform.position + transform.forward * (currentMeleeData.hitboxOffset + currentMeleeData.rangeZ / 2) + Vector3.up * 0.5f;
@@ -309,48 +310,54 @@ public class PlayerCombatController : PlayerController
 
     // --- DAÑO ---
 
+    // Daño por contacto de los enemigos
     public void OnTriggerEnter(Collider other) {
         if (other.CompareTag("Enemy"))
         {
             if (other.gameObject.name.StartsWith("Arm")) return;    // Se hace en el ArmHitbox
 
-            TakeDamage(1, (transform.position - other.transform.position).normalized, 0.5f);
+            TakeDamage(1, (transform.position - other.transform.position).normalized, 0.5f, 0.5f);
         }
     }
 
-    public void TakeDamage(float dmg, Vector3 dir, float duration)
+    public void TakeDamage(float dmg, Vector3 dir, float knockbackDuration, float intangibilityDuration, float knockbackSpeed = 25f)
     {
         if (isIntangible) return;
 
+        StartCoroutine(IE_Knockback(dir, knockbackDuration, knockbackSpeed));
+        StartCoroutine(IE_Intangible(intangibilityDuration));
+
         currentHp -= dmg;
-        lifeBar.fillAmount = currentHp / stats.maxHp;
-        StartCoroutine(IE_Knockback(dir, duration));
         if (currentHp <= 0)
             Destroy(gameObject);
+        else
+        {
+            lifeBar.fillAmount = currentHp / stats.maxHp;
+            ChangeState(new HurtState(this, knockbackDuration));        // Desactivar input
+        }
     }
 
-    public IEnumerator IE_Knockback(Vector3 dir, float duration)
+    private IEnumerator IE_Knockback(Vector3 dir, float knockbackDuration, float knockbackSpeed)
     {
         if (isIntangible) yield break;
 
-        float knockbackSpeed = 25f;
         float elapsed = 0f;
-        StartCoroutine(IE_Intangible(duration));
-        while (elapsed < duration)
+
+        while (elapsed < knockbackDuration)
         {
             yield return null;
             elapsed += Time.deltaTime;
-            float t = 1f - (elapsed / duration);   // de 1 a 0
+            float t = knockbackDuration - elapsed;
             cc.Move(dir * Time.deltaTime * knockbackSpeed * t);
         }
     }
 
-    public IEnumerator IE_Intangible(float time)
+    public IEnumerator IE_Intangible(float intangibilityDuration)
     {
         isIntangible = true;
         var renderers = GetComponentsInChildren<Renderer>();
         foreach (var r in renderers) r.material.color = Color.blue;
-        yield return new WaitForSeconds(time);
+        yield return new WaitForSeconds(intangibilityDuration);
         foreach (var r in renderers) r.material.color = Color.gray;
         isIntangible = false;
     }

@@ -172,7 +172,7 @@ CapsuleCollider:
   m_LayerOverridePriority: 0
   m_IsTrigger: 1
   m_ProvidesContacts: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Radius: 0.5000001
   m_Height: 2
@@ -274,6 +274,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 255eabf98500c4343b5f4154fa29b2bc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ArmHitbox
+  boss: {fileID: 406139047}
 --- !u!1 &23654243
 GameObject:
   m_ObjectHideFlags: 0
@@ -1039,7 +1040,7 @@ CapsuleCollider:
   m_LayerOverridePriority: 0
   m_IsTrigger: 1
   m_ProvidesContacts: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Radius: 0.5000001
   m_Height: 2
@@ -1141,6 +1142,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 255eabf98500c4343b5f4154fa29b2bc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ArmHitbox
+  boss: {fileID: 406139047}
 --- !u!1001 &227952692
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1531,8 +1533,8 @@ Transform:
   m_Children:
   - {fileID: 1903067992}
   - {fileID: 1506666718}
-  - {fileID: 77404824}
   - {fileID: 520157}
+  - {fileID: 77404824}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
 --- !u!114 &406139047
@@ -1549,10 +1551,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::BossController
   data: {fileID: 11400000, guid: a236920900c71f0438bc77fb7df3d190, type: 2}
   hp: 0
-  bulletPrefab: {fileID: 1227268554403163030, guid: 4c08a88cb091bf34d9a805a6b71ee047,
+  bossGunData1: {fileID: 11400000, guid: 68dbeac1ead248a42a49987193ab511b, type: 2}
+  bossMeleeData1: {fileID: 11400000, guid: 36205a87be51daa4ca0680e8eef92158, type: 2}
+  bulletPrefab: {fileID: 1227268554403163030, guid: 4ab5c746706ea924f9a05e73e6b8d460,
     type: 3}
-  projectileForce: 12
-  circleCount: 8
   circleRadius: 3
   startled: 0
   currentAttack: -1
@@ -15765,6 +15767,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PlayerCombatController
   stats: {fileID: 11400000, guid: a7cffb532fa70e848a74587d84d0e404, type: 2}
   cc: {fileID: 1867383655}
+  currentHp: 0
   isIntangible: 0
   moveInput: {x: 0, y: 0}
   playerNameText: {fileID: 850656166}

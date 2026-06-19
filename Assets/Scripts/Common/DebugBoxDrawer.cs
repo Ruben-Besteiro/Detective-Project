@@ -40,8 +40,16 @@ public class DebugBoxDrawer : MonoBehaviour
         startScale = transform.localScale;
 
         meshRenderer = GetComponent<MeshRenderer>();
-        meshRenderer.material = new Material(Shader.Find("Universal Render Pipeline/Unlit"));
-        meshRenderer.material.color = color;
+        var mat = new Material(Shader.Find("Universal Render Pipeline/Unlit"));
+        mat.SetFloat("_Surface", 1f);
+        mat.SetFloat("_Blend", 0f);
+        mat.SetFloat("_SrcBlend", (float)UnityEngine.Rendering.BlendMode.SrcAlpha);
+        mat.SetFloat("_DstBlend", (float)UnityEngine.Rendering.BlendMode.OneMinusSrcAlpha);
+        mat.SetFloat("_ZWrite", 0f);
+        mat.EnableKeyword("_SURFACE_TYPE_TRANSPARENT");
+        mat.renderQueue = (int)UnityEngine.Rendering.RenderQueue.Transparent;
+        mat.color = color;
+        meshRenderer.material = mat;
     }
 
     private void Update()
