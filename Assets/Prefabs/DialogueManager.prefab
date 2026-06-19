@@ -662,8 +662,22 @@ MonoBehaviour:
   dialogueText: {fileID: 2720004352439154097}
   leftPortrait: {fileID: 3773970759528368225}
   rightPortrait: {fileID: 6401167626600472502}
-  textSpeed: 0.02
+  textSpeed: 0.06
   portraitAnimDuration: 0.35
+  letterSound:
+    Guid:
+      Data1: -1222279823
+      Data2: 1112140891
+      Data3: 1642185860
+      Data4: -453672958
+    Path: event:/SFX/Dialogue/Typewriter
+  lineFinishedSound:
+    Guid:
+      Data1: -1222279823
+      Data2: 1112140891
+      Data3: 1642185860
+      Data4: -453672958
+    Path: event:/SFX/Dialogue/Typewriter
 --- !u!1 &7416483978736180982
 GameObject:
   m_ObjectHideFlags: 0

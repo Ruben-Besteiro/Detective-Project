@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.02.00">
+	<object class="EncodableAsset" id="{43caf29c-9cd1-4382-9175-a44636595101}">
+		<property name="assetPath">
+			<value>Typewriter/</value>
+		</property>
+		<relationship name="masterAssetFolder">
+			<destination>{f9537655-2bce-43c1-a47b-c5e49c200575}</destination>
+		</relationship>
+	</object>
+</objects>

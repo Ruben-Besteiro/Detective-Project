@@ -5,6 +5,7 @@ using TMPro;
 using UnityEngine.UI;
 using System;
 using UnityEngine.InputSystem;
+using FMODUnity;
 
 public class DialogueManager : MonoBehaviour
 {
@@ -18,6 +19,10 @@ public class DialogueManager : MonoBehaviour
 
     [SerializeField] private float textSpeed = 0.02f;
     [SerializeField] private float portraitAnimDuration = 0.35f;
+
+    [Header("Audio")]
+    [SerializeField] private EventReference letterSound;
+    [SerializeField] private EventReference lineFinishedSound;
 
     public static DialogueManager Instance { get; private set; }
 
@@ -48,18 +53,19 @@ public class DialogueManager : MonoBehaviour
         advanceDialogueAction.AddBinding("<Mouse>/leftButton");
         advanceDialogueAction.AddBinding("<Keyboard>/space");
     }
+
+    private void PlayLetterSound()
+    { SoundManager.Instance.PlayOneShot(letterSound); }
+
+    private void PlayLineFinishedSound()
+    { SoundManager.Instance.PlayOneShot(lineFinishedSound); }
+
     private void OnEnable()
-    {
-        advanceDialogueAction?.Enable();
-    }
+    { advanceDialogueAction?.Enable(); }
     private void OnDisable()
-    {
-        advanceDialogueAction?.Disable();
-    }
+    { advanceDialogueAction?.Disable(); }
     private bool AdvancePressed()
-    {
-        return advanceDialogueAction.WasPressedThisFrame();
-    }
+    { return advanceDialogueAction.WasPressedThisFrame(); }
 
     private void Update()
     {
@@ -109,7 +115,6 @@ public class DialogueManager : MonoBehaviour
     {
         OnDialogueStarted?.Invoke();
         GetComponent<Canvas>().enabled = true;
-        Debug.Log($"[Dialogue] START: {currentDialogue.name}");
 
         currentNodeIndex = 0;
 
@@ -133,7 +138,6 @@ public class DialogueManager : MonoBehaviour
         }
 
         GetComponent<Canvas>().enabled = false;
-        Debug.Log($"[Dialogue] END: {currentDialogue.name}");
         dialoguePanel.SetActive(false);
         OnDialogueFinished?.Invoke();
         runningDialogue = null;
@@ -180,56 +184,40 @@ public class DialogueManager : MonoBehaviour
 
         yield return WaitForClick();
     }
-    private IEnumerator HandlePortrait(Image img, Sprite newSprite, bool isLeft)
-    {
-        // CASO 1: no hay sprite -> ocultar si estaba activo
-        if (newSprite == null)
+    private IEnumerator HandlePortrait(Image img, Sprite newSprite, bool isLeft) 
+    { 
+        if (newSprite == null) 
         {
             if (img.gameObject.activeSelf)
-            {
-                yield return img.transform
-                    .DOScale(0f, portraitAnimDuration)
-                    .SetEase(Ease.InBack)
-                    .WaitForCompletion();
-
-                img.gameObject.SetActive(false);
-            }
-
-            yield break;
+            { 
+                yield return img.transform.DOScale(0f, portraitAnimDuration).SetEase(Ease.InBack).WaitForCompletion();
+                img.gameObject.SetActive(false); 
+            } 
+            yield break; 
         }
 
-        // CASO 2: aparece por primera vez
-        if (!img.gameObject.activeSelf)
-        {
-            img.sprite = newSprite;
-            img.transform.localScale = Vector3.zero;
+        img.gameObject.SetActive(true);
 
-            img.gameObject.SetActive(true);
-
-            yield return img.transform
-                .DOScale(1f, portraitAnimDuration)
-                .SetEase(Ease.OutBack)
-                .WaitForCompletion();
-
-            yield break;
+        if (img.sprite == null) 
+        { 
+            img.sprite = newSprite; 
+            img.transform.localScale = Vector3.zero; 
+            yield return img.transform.DOScale(1f, portraitAnimDuration).SetEase(Ease.OutBack).WaitForCompletion(); 
+            yield break; 
         }
 
-        // CASO 3: mismo sprite -> no hacer nada
-        if (img.sprite == newSprite)
-            yield break;
-
-        // CASO 4: cambio de sprite -> pulso rápido
-        yield return img.transform
-            .DOPunchScale(Vector3.one * 0.15f, 0.2f)
-            .WaitForCompletion();
-
-        img.sprite = newSprite;
+        if (img.sprite != newSprite)
+        { yield return img.transform.DOPunchScale(Vector3.one * 0.15f, 0.2f).WaitForCompletion(); }
+            
+        img.sprite = newSprite; 
     }
+
     private IEnumerator UpdateSpeakerName(string name)
     {
         speakerNameText.text = name;
         yield return null;
     }
+
     private IEnumerator TypeText(string text)
     {
         dialogueText.text = "";
@@ -240,13 +228,23 @@ public class DialogueManager : MonoBehaviour
             if (isSkippingText)
             {
                 dialogueText.text = text;
+
+                PlayLineFinishedSound();
+
                 yield break;
             }
 
             dialogueText.text += text[i];
+
+            if (!char.IsWhiteSpace(text[i]))
+            { PlayLetterSound(); }
+
             yield return new WaitForSeconds(textSpeed);
         }
+
+        PlayLineFinishedSound();
     }
+
     private IEnumerator WaitForClick()
     {
         isWaitingForInput = true;
@@ -318,3 +316,4 @@ public class DialogueManager : MonoBehaviour
         yield return null;
     }
 }
+
