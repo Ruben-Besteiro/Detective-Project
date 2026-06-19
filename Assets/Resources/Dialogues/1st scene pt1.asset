@@ -34,7 +34,79 @@ MonoBehaviour:
   - nodeType: 0
     dialogueLine:
       speakerName: ???
-      text: "\xBFYo soy?"
+      text: ...
+      leftPortrait: {fileID: 0}
+      rightPortrait: {fileID: 0}
+    condition:
+      flagName: 
+      expectedValue: 0
+      trueContinueCurrent: 0
+      trueNextDialogue: {fileID: 0}
+      falseContinueCurrent: 0
+      falseNextDialogue: {fileID: 0}
+    choice:
+      options: []
+    flagAction:
+      flagName: 
+      newValue: 0
+  - nodeType: 0
+    dialogueLine:
+      speakerName: ???
+      text: Mi...
+      leftPortrait: {fileID: 0}
+      rightPortrait: {fileID: 0}
+    condition:
+      flagName: 
+      expectedValue: 0
+      trueContinueCurrent: 0
+      trueNextDialogue: {fileID: 0}
+      falseContinueCurrent: 0
+      falseNextDialogue: {fileID: 0}
+    choice:
+      options: []
+    flagAction:
+      flagName: 
+      newValue: 0
+  - nodeType: 0
+    dialogueLine:
+      speakerName: ???
+      text: Estoy...
+      leftPortrait: {fileID: 0}
+      rightPortrait: {fileID: 0}
+    condition:
+      flagName: 
+      expectedValue: 0
+      trueContinueCurrent: 0
+      trueNextDialogue: {fileID: 0}
+      falseContinueCurrent: 0
+      falseNextDialogue: {fileID: 0}
+    choice:
+      options: []
+    flagAction:
+      flagName: 
+      newValue: 0
+  - nodeType: 0
+    dialogueLine:
+      speakerName: ???
+      text: Soy...
+      leftPortrait: {fileID: 0}
+      rightPortrait: {fileID: 0}
+    condition:
+      flagName: 
+      expectedValue: 0
+      trueContinueCurrent: 0
+      trueNextDialogue: {fileID: 0}
+      falseContinueCurrent: 0
+      falseNextDialogue: {fileID: 0}
+    choice:
+      options: []
+    flagAction:
+      flagName: 
+      newValue: 0
+  - nodeType: 0
+    dialogueLine:
+      speakerName: ???
+      text: "\xBFYo soy...?"
       leftPortrait: {fileID: 0}
       rightPortrait: {fileID: 0}
     condition:
@@ -70,7 +142,7 @@ MonoBehaviour:
   - nodeType: 0
     dialogueLine:
       speakerName: ???
-      text: No veo nada
+      text: "\xBFD\xF3nde estoy?"
       leftPortrait: {fileID: 0}
       rightPortrait: {fileID: 0}
     condition:
@@ -88,7 +160,7 @@ MonoBehaviour:
   - nodeType: 0
     dialogueLine:
       speakerName: ???
-      text: "Siento... \xBFDolor?"
+      text: veo...
       leftPortrait: {fileID: 0}
       rightPortrait: {fileID: 0}
     condition:
@@ -106,7 +178,7 @@ MonoBehaviour:
   - nodeType: 0
     dialogueLine:
       speakerName: ???
-      text: "\xBFEso es dolor?"
+      text: "\xBFAlgo...?"
       leftPortrait: {fileID: 0}
       rightPortrait: {fileID: 0}
     condition:
@@ -124,7 +196,133 @@ MonoBehaviour:
   - nodeType: 0
     dialogueLine:
       speakerName: ???
-      text: Yo soy...
+      text: Siento...
+      leftPortrait: {fileID: 0}
+      rightPortrait: {fileID: 0}
+    condition:
+      flagName: 
+      expectedValue: 0
+      trueContinueCurrent: 0
+      trueNextDialogue: {fileID: 0}
+      falseContinueCurrent: 0
+      falseNextDialogue: {fileID: 0}
+    choice:
+      options: []
+    flagAction:
+      flagName: 
+      newValue: 0
+  - nodeType: 0
+    dialogueLine:
+      speakerName: ???
+      text: "\xBFDolor?"
+      leftPortrait: {fileID: 0}
+      rightPortrait: {fileID: 0}
+    condition:
+      flagName: 
+      expectedValue: 0
+      trueContinueCurrent: 0
+      trueNextDialogue: {fileID: 0}
+      falseContinueCurrent: 0
+      falseNextDialogue: {fileID: 0}
+    choice:
+      options: []
+    flagAction:
+      flagName: 
+      newValue: 0
+  - nodeType: 0
+    dialogueLine:
+      speakerName: ???
+      text: "\xBFEsto..."
+      leftPortrait: {fileID: 0}
+      rightPortrait: {fileID: 0}
+    condition:
+      flagName: 
+      expectedValue: 0
+      trueContinueCurrent: 0
+      trueNextDialogue: {fileID: 0}
+      falseContinueCurrent: 0
+      falseNextDialogue: {fileID: 0}
+    choice:
+      options: []
+    flagAction:
+      flagName: 
+      newValue: 0
+  - nodeType: 0
+    dialogueLine:
+      speakerName: ???
+      text: ...Es dolor?
+      leftPortrait: {fileID: 0}
+      rightPortrait: {fileID: 0}
+    condition:
+      flagName: 
+      expectedValue: 0
+      trueContinueCurrent: 0
+      trueNextDialogue: {fileID: 0}
+      falseContinueCurrent: 0
+      falseNextDialogue: {fileID: 0}
+    choice:
+      options: []
+    flagAction:
+      flagName: 
+      newValue: 0
+  - nodeType: 0
+    dialogueLine:
+      speakerName: ???
+      text: Eso...
+      leftPortrait: {fileID: 0}
+      rightPortrait: {fileID: 0}
+    condition:
+      flagName: 
+      expectedValue: 0
+      trueContinueCurrent: 0
+      trueNextDialogue: {fileID: 0}
+      falseContinueCurrent: 0
+      falseNextDialogue: {fileID: 0}
+    choice:
+      options: []
+    flagAction:
+      flagName: 
+      newValue: 0
+  - nodeType: 0
+    dialogueLine:
+      speakerName: ???
+      text: ...
+      leftPortrait: {fileID: 0}
+      rightPortrait: {fileID: 0}
+    condition:
+      flagName: 
+      expectedValue: 0
+      trueContinueCurrent: 0
+      trueNextDialogue: {fileID: 0}
+      falseContinueCurrent: 0
+      falseNextDialogue: {fileID: 0}
+    choice:
+      options: []
+    flagAction:
+      flagName: 
+      newValue: 0
+  - nodeType: 0
+    dialogueLine:
+      speakerName: ???
+      text: Yo
+      leftPortrait: {fileID: 0}
+      rightPortrait: {fileID: 0}
+    condition:
+      flagName: 
+      expectedValue: 0
+      trueContinueCurrent: 0
+      trueNextDialogue: {fileID: 0}
+      falseContinueCurrent: 0
+      falseNextDialogue: {fileID: 0}
+    choice:
+      options: []
+    flagAction:
+      flagName: 
+      newValue: 0
+  - nodeType: 0
+    dialogueLine:
+      speakerName: ???
+      text: Soy...
       leftPortrait: {fileID: 0}
       rightPortrait: {fileID: 0}
     condition:
