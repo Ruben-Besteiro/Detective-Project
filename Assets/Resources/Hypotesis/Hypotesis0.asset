@@ -13,6 +13,20 @@ MonoBehaviour:
   m_Name: Hypotesis0
   m_EditorClassIdentifier: Assembly-CSharp::HypothesisData
   versions:
-  - title: Primera
-    description: Primera Hipotesis
+  - VersionName: Variante sin pitas
+    title: "Es el ni\xF1o"
+    description: "En la casa muri\xF3 el ni\xF1o, puede que sea suyo."
     requiredFlags: []
+  - VersionName: "Estaci\xF3n de juguete"
+    title: "Es el ni\xF1o"
+    description: "Puede que esta estaci\xF3n de juguete tenga algo que ver con el
+      ni\xF1o."
+    requiredFlags:
+    - 
+  - VersionName: "Estaci\xF3n de juguete y dibujo quemado"
+    title: "Es el ni\xF1o"
+    description: "Una estaci\xF3n de juguete y ahora un dibujo quemado, cada vez
+      hay m\xE1s pistas relacionadas con el ni\xF1o. "
+    requiredFlags:
+    - TOYSTATION
+    - TOYSTATION
