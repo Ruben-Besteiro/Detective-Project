@@ -9,16 +9,18 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3167d3fa7051ca440ab9a562c6ca46ce, type: 3}
-  m_Name: Boss 1 Gun
-  m_EditorClassIdentifier: Assembly-CSharp::BossGunData
+  m_Script: {fileID: 11500000, guid: 2c466cb73893a4d46abed2b669753705, type: 3}
+  m_Name: Boss 1 Arm Attack Data
+  m_EditorClassIdentifier: Assembly-CSharp::BossMeleeData
   weaponName: '-'
-  damage: 1.5
-  bulletPrefab: {fileID: 1227268554403163030, guid: 4ab5c746706ea924f9a05e73e6b8d460,
-    type: 3}
-  bulletSpeed: 15
-  bulletLifetime: 3
+  damage: 3
+  rangeX: 1
+  rangeY: 2
+  rangeZ: 1
+  hitboxOffset: 0
+  stopDistance: 10
+  activeDuration: 1
   cooldown: 3
   knockbackDuration: 1
   knockbackSpeed: 20
-  intangibilityDuration: 0.5
+  intangibilityDuration: 1

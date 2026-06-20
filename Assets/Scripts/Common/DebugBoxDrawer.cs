@@ -30,7 +30,29 @@ public class DebugBoxDrawer : MonoBehaviour
 
     public static void DrawBox(Collider col, Color color, float duration = 1f)
     {
-        DrawBox(col.bounds, color, duration);
+        Bounds local = GetLocalBounds(col);
+        Vector3 worldCenter = col.transform.TransformPoint(local.center);
+        Vector3 worldSize = Vector3.Scale(local.size, col.transform.lossyScale);
+        worldSize = new Vector3(Mathf.Abs(worldSize.x), Mathf.Abs(worldSize.y), Mathf.Abs(worldSize.z));
+        DrawBox(worldCenter, worldSize, col.transform.rotation, color, duration);
+    }
+
+    private static Bounds GetLocalBounds(Collider col)
+    {
+        if (col is BoxCollider box)
+            return new Bounds(box.center, box.size);
+        if (col is SphereCollider sphere)
+            return new Bounds(sphere.center, Vector3.one * sphere.radius * 2f);
+        if (col is CapsuleCollider capsule)
+        {
+            float r = capsule.radius * 2f;
+            float h = Mathf.Max(capsule.height, r);
+            Vector3 size = capsule.direction == 0 ? new Vector3(h, r, r)
+                         : capsule.direction == 2 ? new Vector3(r, r, h)
+                         : new Vector3(r, h, r);
+            return new Bounds(capsule.center, size);
+        }
+        return new Bounds(Vector3.zero, Vector3.one);
     }
 
     private void Initialize(Color color, float duration)

@@ -1,12 +1,13 @@
 using UnityEngine;
 
-public class PickAttackNode : BehaviourNode<BossController>
+public class PickAttackNode : BehaviourNode<Enemy>
 {
     public override State Start()
     {
-        //ctx.agent.currentAttack = Random.Range(0, 3);
-        ctx.agent.currentAttack = 0;
-        Debug.Log("El jefe ha escogido el ataque número: " + ctx.agent.currentAttack);
+        if (ctx.agent.gameObject.name.StartsWith("Boss"))
+            ctx.agent.currentAttack = Random.Range(0, 3);
+        else
+            ctx.agent.currentAttack = 0;
         return State.SUCCESS;
     }
 

@@ -1,7 +1,7 @@
 using System.Collections;
 using UnityEngine;
 
-public class AttackProjectileNode : BehaviourNode<BossController>
+public class AttackProjectileNode : BehaviourNode<Enemy>
 {
     bool isMoving;
     float cooldown;
@@ -9,7 +9,7 @@ public class AttackProjectileNode : BehaviourNode<BossController>
     public override State Start()
     {
         Debug.Log("AttackProjectileNode");
-        cooldown = ctx.agent.bossGunData1.cooldown;
+        cooldown = ((BossController)ctx.agent).boss3BulletsAttackData.cooldown;
         isMoving = true;
         ctx.agent.StartCoroutine(Routine());
         return State.IN_PROGRESS;
@@ -20,25 +20,25 @@ public class AttackProjectileNode : BehaviourNode<BossController>
 
     IEnumerator Routine()
     {
-        BossController boss = ctx.agent;
-        boss.LookAtPlayer();
+        BossController enemy = (BossController)ctx.agent;
+        enemy.LookAtPlayer();
 
-        Vector3 spawnPos = boss.transform.position + boss.transform.forward * (boss.GetComponent<Collider>().bounds.extents.z + 1);
+        Vector3 spawnPos = enemy.transform.position + enemy.transform.forward * (enemy.GetComponent<Collider>().bounds.extents.z + 1);
         spawnPos.y = 3;
-        Vector3 baseDir = boss.transform.forward;
+        Vector3 baseDir = enemy.transform.forward;
 
-        FireProjectile(boss, spawnPos, baseDir);
-        FireProjectile(boss, spawnPos, Quaternion.AngleAxis(-15f, Vector3.up) * baseDir);
-        FireProjectile(boss, spawnPos, Quaternion.AngleAxis(15f, Vector3.up) * baseDir);
+        FireProjectile(enemy, spawnPos, baseDir);
+        FireProjectile(enemy, spawnPos, Quaternion.AngleAxis(-15f, Vector3.up) * baseDir);
+        FireProjectile(enemy, spawnPos, Quaternion.AngleAxis(15f, Vector3.up) * baseDir);
 
         yield return new WaitForSeconds(cooldown);
-        boss.currentAttack = -1;
+        enemy.currentAttack = -1;
         isMoving = false;
     }
 
-    void FireProjectile(BossController boss, Vector3 spawnPos, Vector3 dir)
+    void FireProjectile(BossController enemy, Vector3 spawnPos, Vector3 dir)
     {
-        GameObject sphere = boss.SpawnProjectile(spawnPos);
+        GameObject sphere = enemy.SpawnProjectile(spawnPos);
         sphere.transform.rotation = Quaternion.LookRotation(dir);
     }
 }

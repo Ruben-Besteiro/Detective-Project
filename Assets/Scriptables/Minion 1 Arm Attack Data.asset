@@ -10,16 +10,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2c466cb73893a4d46abed2b669753705, type: 3}
-  m_Name: Boss 1 Melee
+  m_Name: Minion 1 Arm Attack Data
   m_EditorClassIdentifier: Assembly-CSharp::BossMeleeData
   weaponName: '-'
-  damage: 3
+  damage: 1
   rangeX: 1
   rangeY: 2
   rangeZ: 1
   hitboxOffset: 0
+  stopDistance: 2
   activeDuration: 1
   cooldown: 3
-  knockbackDuration: 1
-  knockbackSpeed: 40
-  intangibilityDuration: 1
+  knockbackDuration: 0.5
+  knockbackSpeed: 15
+  intangibilityDuration: 0.5

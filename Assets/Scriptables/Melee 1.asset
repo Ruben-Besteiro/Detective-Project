@@ -14,8 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::MeleeData
   weaponName: Cuchillo
   damage: 0.3
-  rangeXY: 1
+  rangeX: 1
+  rangeY: 1
   rangeZ: 1.5
   hitboxOffset: 0.5
   activeDuration: 0.05
-  endLag: 1
+  cooldown: 1

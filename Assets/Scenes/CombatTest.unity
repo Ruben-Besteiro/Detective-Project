@@ -130,9 +130,9 @@ GameObject:
   - component: {fileID: 520157}
   - component: {fileID: 520160}
   - component: {fileID: 520159}
-  - component: {fileID: 520158}
   - component: {fileID: 520161}
   - component: {fileID: 520162}
+  - component: {fileID: 520163}
   m_Layer: 0
   m_Name: Arm L
   m_TagString: Enemy
@@ -155,29 +155,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 406139046}
   m_LocalEulerAnglesHint: {x: 0, y: 180, z: 45}
---- !u!136 &520158
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 520156}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 0
-  serializedVersion: 2
-  m_Radius: 0.5000001
-  m_Height: 2
-  m_Direction: 1
-  m_Center: {x: 0.000000059604645, y: 0, z: -0.00000008940697}
 --- !u!23 &520159
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -274,7 +251,30 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 255eabf98500c4343b5f4154fa29b2bc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ArmHitbox
-  boss: {fileID: 406139047}
+  enemy: {fileID: 406139047}
+--- !u!136 &520163
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 520156}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 0
+  serializedVersion: 2
+  m_Radius: 0.5000004
+  m_Height: 2
+  m_Direction: 1
+  m_Center: {x: 0.000001013279, y: 0.00000047683716, z: -0.00000008940701}
 --- !u!1 &23654243
 GameObject:
   m_ObjectHideFlags: 0
@@ -998,9 +998,9 @@ GameObject:
   - component: {fileID: 77404824}
   - component: {fileID: 77404827}
   - component: {fileID: 77404826}
-  - component: {fileID: 77404825}
   - component: {fileID: 77404828}
   - component: {fileID: 77404829}
+  - component: {fileID: 77404830}
   m_Layer: 0
   m_Name: Arm R
   m_TagString: Enemy
@@ -1023,29 +1023,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 406139046}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: -45}
---- !u!136 &77404825
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 77404823}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 0
-  serializedVersion: 2
-  m_Radius: 0.5000001
-  m_Height: 2
-  m_Direction: 1
-  m_Center: {x: 0.000000059604645, y: 0, z: -0.00000008940697}
 --- !u!23 &77404826
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -1142,7 +1119,30 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 255eabf98500c4343b5f4154fa29b2bc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ArmHitbox
-  boss: {fileID: 406139047}
+  enemy: {fileID: 406139047}
+--- !u!136 &77404830
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 77404823}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 0
+  serializedVersion: 2
+  m_Radius: 0.5000004
+  m_Height: 2
+  m_Direction: 1
+  m_Center: {x: 0.0000019669533, y: 0.00000047683716, z: -0.00000008940701}
 --- !u!1001 &227952692
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1434,7 +1434,7 @@ GameObject:
   - component: {fileID: 406139047}
   - component: {fileID: 406139048}
   m_Layer: 0
-  m_Name: Enemy Boss
+  m_Name: Boss
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1550,14 +1550,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BossController
   data: {fileID: 11400000, guid: a236920900c71f0438bc77fb7df3d190, type: 2}
-  hp: 0
-  bossGunData1: {fileID: 11400000, guid: 68dbeac1ead248a42a49987193ab511b, type: 2}
-  bossMeleeData1: {fileID: 11400000, guid: 36205a87be51daa4ca0680e8eef92158, type: 2}
+  currentHp: 0
+  startled: 0
+  currentAttack: -1
+  boss3BulletsAttackData: {fileID: 11400000, guid: 68dbeac1ead248a42a49987193ab511b,
+    type: 2}
+  bossArmAttackData: {fileID: 11400000, guid: 36205a87be51daa4ca0680e8eef92158, type: 2}
   bulletPrefab: {fileID: 1227268554403163030, guid: 4ab5c746706ea924f9a05e73e6b8d460,
     type: 3}
   circleRadius: 3
-  startled: 0
-  currentAttack: -1
   hud: {fileID: 1472340714}
   nameText: {fileID: 1323298930}
   lifeBar: {fileID: 591411593}
@@ -15439,6 +15440,95 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1659032955}
   m_CullTransparentMesh: 1
+--- !u!1001 &1719610383
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 1317102490131506407, guid: f37c5bf430c65ef438651a30abb667cf,
+        type: 3}
+      propertyPath: boss
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 1317102490131506407, guid: f37c5bf430c65ef438651a30abb667cf,
+        type: 3}
+      propertyPath: enemy
+      value: 
+      objectReference: {fileID: 1938229001}
+    - target: {fileID: 3705299543241699073, guid: f37c5bf430c65ef438651a30abb667cf,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -33.189465
+      objectReference: {fileID: 0}
+    - target: {fileID: 3705299543241699073, guid: f37c5bf430c65ef438651a30abb667cf,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.98
+      objectReference: {fileID: 0}
+    - target: {fileID: 3705299543241699073, guid: f37c5bf430c65ef438651a30abb667cf,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 21.681889
+      objectReference: {fileID: 0}
+    - target: {fileID: 3705299543241699073, guid: f37c5bf430c65ef438651a30abb667cf,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3705299543241699073, guid: f37c5bf430c65ef438651a30abb667cf,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3705299543241699073, guid: f37c5bf430c65ef438651a30abb667cf,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3705299543241699073, guid: f37c5bf430c65ef438651a30abb667cf,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3705299543241699073, guid: f37c5bf430c65ef438651a30abb667cf,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3705299543241699073, guid: f37c5bf430c65ef438651a30abb667cf,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 180
+      objectReference: {fileID: 0}
+    - target: {fileID: 3705299543241699073, guid: f37c5bf430c65ef438651a30abb667cf,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3895603725222230002, guid: f37c5bf430c65ef438651a30abb667cf,
+        type: 3}
+      propertyPath: boss
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 4627321039082742399, guid: f37c5bf430c65ef438651a30abb667cf,
+        type: 3}
+      propertyPath: m_Name
+      value: Minion 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4627321039082742399, guid: f37c5bf430c65ef438651a30abb667cf,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 4989281080252611509, guid: f37c5bf430c65ef438651a30abb667cf, type: 3}
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: f37c5bf430c65ef438651a30abb667cf, type: 3}
 --- !u!114 &1739609087 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 7592522661608081289, guid: cc861a693d23e04489d46f61e74c3bff,
@@ -15873,7 +15963,7 @@ Transform:
   m_GameObject: {fileID: 1867383652}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -18.51, y: 1.518, z: -20}
+  m_LocalPosition: {x: -32.69, y: 1.518, z: 12.26}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -16107,6 +16197,18 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1903067991}
   m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &1938229001 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4025695631005721652, guid: f37c5bf430c65ef438651a30abb667cf,
+    type: 3}
+  m_PrefabInstance: {fileID: 1719610383}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 89ca8fa162faee344937d4c40cd9ddf2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::MinionController
 --- !u!1 &2010058007
 GameObject:
   m_ObjectHideFlags: 0
@@ -17296,3 +17398,4 @@ SceneRoots:
   - {fileID: 47883106}
   - {fileID: 452392996}
   - {fileID: 1267431718}
+  - {fileID: 1719610383}

@@ -1,26 +1,25 @@
 using UnityEngine;
-using System.Collections;
 
 // Me habría gustado usar OnControllerColliderHit, pero no funcionaba
 public class ArmHitbox : MonoBehaviour
 {
-    [SerializeField] BossController boss;
+    [SerializeField] Enemy enemy;
     Collider col;
 
     void Awake()
     {
         col = GetComponent<Collider>();
-        if (col is CapsuleCollider capsule)
+        if (col is CapsuleCollider capsule && enemy.MeleeData != null && enemy.MeleeData.rangeX > 0)
         {
-            BossMeleeData data = boss.bossMeleeData1;
-            capsule.height = data.rangeY;
-            capsule.radius = data.rangeX / 2f;
+            capsule.height = enemy.MeleeData.rangeY;
+            capsule.radius = enemy.MeleeData.rangeX / 2f;
         }
     }
 
     void Update()
     {
-        DebugBoxDrawer.DrawBox(col, new Color(1f, 0f, 0f, 0.5f), Time.deltaTime * 2f);
+        if (col.enabled)
+            DebugBoxDrawer.DrawBox(col, new Color(1f, 0f, 0f, 0.5f), Time.deltaTime * 2f);
     }
 
     void OnTriggerEnter(Collider other)
@@ -31,11 +30,14 @@ public class ArmHitbox : MonoBehaviour
         Debug.Log("Arm hitbox");
         Vector3 perpendicular = Vector3.Cross(transform.up, Vector3.up).normalized;
 
-        // Elegir la dirección perpendicular que aleje al jugador del brazo
-        Vector3 toPlayer = (other.transform.position - transform.position);
+        Vector3 toPlayer = other.transform.position - transform.position;
         if (Vector3.Dot(perpendicular, toPlayer) < 0)
             perpendicular = -perpendicular;
 
-        PlayerCombatController.Instance.TakeDamage(boss.bossMeleeData1.damage, perpendicular, boss.bossMeleeData1.knockbackDuration, boss.bossMeleeData1.intangibilityDuration, boss.bossMeleeData1.knockbackSpeed);
+        // Hacemos el daño según qué scriptable tenga el enemigo
+        if (enemy is BossController boss)
+            PlayerCombatController.Instance.TakeDamage(boss.bossArmAttackData.damage, perpendicular, boss.bossArmAttackData.knockbackDuration, boss.bossArmAttackData.intangibilityDuration, boss.bossArmAttackData.knockbackSpeed);
+        else if (enemy is MinionController minion)
+            PlayerCombatController.Instance.TakeDamage(minion.minionArmAttackData.damage, perpendicular, minion.minionArmAttackData.knockbackDuration, minion.minionArmAttackData.intangibilityDuration, minion.minionArmAttackData.knockbackSpeed);
     }
 }

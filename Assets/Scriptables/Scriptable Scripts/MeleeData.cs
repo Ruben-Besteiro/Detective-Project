@@ -7,6 +7,7 @@ public class MeleeData : WeaponData
     public float rangeY;
     public float rangeZ;
     public float hitboxOffset;
+    public float stopDistance;
     public float activeDuration;    // Duración de la hitbox
     public float cooldown;
 }

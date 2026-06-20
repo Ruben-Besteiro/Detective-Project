@@ -152,7 +152,7 @@ public class PlayerCombatController : PlayerController
     private void OnDodgeAction(InputAction.CallbackContext ctx)
     {
         if (PauseController.IsPaused || IsActionActive) return;
-        Vector3 dir = GetMovementDirection();
+        Vector3 dir = isLockedOn && lockOnTarget != null ? GetLockOnDodgeDirection() : GetMovementDirection();
         if (dir == Vector3.zero) return;
         ChangeState(new DodgeState(this, dir));
     }
@@ -197,8 +197,23 @@ public class PlayerCombatController : PlayerController
     {
         if (!isLockedOn || lockOnTarget == null) return;
 
+        // Re-derivar ángulo y radio desde la posición actual del jugador cada frame.
+        // Así el movimiento del enemigo no empuja al jugador para mantener el radio.
+        Vector3 toPlayer = transform.position - lockOnTarget.position;
+        toPlayer.y = 0f;
+        float actualDistance = toPlayer.magnitude;
+
+        if (actualDistance > maxDistance)
+        {
+            DeactivateLockOn();
+            return;
+        }
+
+        lockOnRadius = actualDistance;
+        lockOnAngle = Mathf.Atan2(toPlayer.x, toPlayer.z) * Mathf.Rad2Deg;
+
         float sp = this.combatSpeed;
-        lockOnAngle += moveInput.x * (sp / lockOnRadius) * Mathf.Rad2Deg * Time.deltaTime;
+        lockOnAngle -= moveInput.x * (sp / Mathf.Max(lockOnRadius, 0.1f)) * Mathf.Rad2Deg * Time.deltaTime;
         lockOnRadius -= moveInput.y * sp * Time.deltaTime;
         lockOnRadius = Mathf.Clamp(lockOnRadius, minDistance, maxDistance);
 
@@ -210,12 +225,20 @@ public class PlayerCombatController : PlayerController
 
         cc.SimpleMove(moveInput.sqrMagnitude > 0.01f ? toOrbit / Time.deltaTime : Vector3.zero);
 
-        // Rotar para mirar al enemigo
-        if (lockOnTarget == null) return;
         Vector3 look = lockOnTarget.position - transform.position;
         look.y = 0f;
         if (look.sqrMagnitude > 0.001f)
             transform.forward = look.normalized;
+    }
+
+    private Vector3 GetLockOnDodgeDirection()
+    {
+        if (moveInput.sqrMagnitude < 0.01f) return Vector3.zero;
+        Vector3 toEnemy = lockOnTarget.position - transform.position;
+        toEnemy.y = 0f;
+        toEnemy.Normalize();
+        Vector3 right = Vector3.Cross(Vector3.up, toEnemy);
+        return (toEnemy * moveInput.y + right * moveInput.x).normalized;
     }
 
     // --- UTILIDADES ---
