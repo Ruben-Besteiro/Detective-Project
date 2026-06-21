@@ -13,20 +13,51 @@ MonoBehaviour:
   m_Name: Hypotesis0
   m_EditorClassIdentifier: Assembly-CSharp::HypothesisData
   versions:
-  - VersionName: Variante sin pitas
+  - VersionName: Variante sin pistas
     title: "Es el ni\xF1o"
     description: "En la casa muri\xF3 el ni\xF1o, puede que sea suyo."
     requiredFlags: []
   - VersionName: "Estaci\xF3n de juguete"
     title: "Es el ni\xF1o"
-    description: "Puede que esta estaci\xF3n de juguete tenga algo que ver con el
-      ni\xF1o."
+    description: "Lo m\xE1s seguro es que esta estaci\xF3n de bomberos fuera del
+      ni\xF1o. A saber cu\xE1ntas horas se pas\xF3 jugando con ella. "
     requiredFlags:
-    - 
+    - TOYSTATION
+  - VersionName: Dibujo quemado
+    title: "Es el ni\xF1o"
+    description: "El dibujo est\xE1 un un poco quemado, pero parece que hay un bombero
+      pintado. "
+    requiredFlags:
+    - BURNDRAW
+  - VersionName: Casco de bombero
+    title: "Es el ni\xF1o"
+    description: "Un caso de bombero. Parece un poco peque\xF1o para ser de un adulto. "
+    requiredFlags:
+    - FIREHELMET
   - VersionName: "Estaci\xF3n de juguete y dibujo quemado"
     title: "Es el ni\xF1o"
-    description: "Una estaci\xF3n de juguete y ahora un dibujo quemado, cada vez
-      hay m\xE1s pistas relacionadas con el ni\xF1o. "
+    description: "S\xED que le gustaban los bomberos al ni\xF1o, no solo los dibujaba
+      sino que tambi\xE9n jugaba a ser uno. "
     requiredFlags:
     - TOYSTATION
+    - BURNDRAW
+  - VersionName: "Estaci\xF3n de juguete y casco de bombero"
+    title: "Es el ni\xF1o"
+    description: 'Probablemente jugaba a los bomberos mientras llevaba el casco puesto. '
+    requiredFlags:
     - TOYSTATION
+    - FIREHELMET
+  - VersionName: Dibujo quemado y casco de bombero
+    title: "Es el ni\xF1o"
+    description: 'Parece el mismo casco que llevaba el bombero del dibujo. '
+    requiredFlags:
+    - BURNDRAW
+    - FIREHELMET
+  - VersionName: "Estaci\xF3n de juguete, dibujo quemado y casco de bombero "
+    title: "Es el ni\xF1o"
+    description: "Pobrecillo, jugaba, pintaba y se vest\xEDa como un bombero. Es
+      una pena que acabara de esa manera. "
+    requiredFlags:
+    - TOYSTATION
+    - BURNDRAW
+    - FIREHELMET
