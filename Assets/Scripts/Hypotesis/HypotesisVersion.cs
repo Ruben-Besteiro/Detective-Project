@@ -4,6 +4,8 @@ using UnityEngine;
 [System.Serializable]
 public class HypothesisVersion
 {
+    [SerializeField] string VersionName;
+
     public string title;
 
     [TextArea(3, 10)]
