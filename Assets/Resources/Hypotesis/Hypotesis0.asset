@@ -15,7 +15,8 @@ MonoBehaviour:
   versions:
   - VersionName: Variante sin pistas
     title: "Es el ni\xF1o"
-    description: "En la casa muri\xF3 el ni\xF1o, puede que sea suyo."
+    description: "El ni\xF1o muri\xF3 junto a sus padres, que no pudieron rescatarle
+      del incendio."
     requiredFlags: []
   - VersionName: "Estaci\xF3n de juguete"
     title: "Es el ni\xF1o"
@@ -31,7 +32,7 @@ MonoBehaviour:
     - BURNDRAW
   - VersionName: Casco de bombero
     title: "Es el ni\xF1o"
-    description: "Un caso de bombero. Parece un poco peque\xF1o para ser de un adulto. "
+    description: "Un casco de bombero. Parece un poco peque\xF1o para ser de un adulto. "
     requiredFlags:
     - FIREHELMET
   - VersionName: "Estaci\xF3n de juguete y dibujo quemado"
