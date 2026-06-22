@@ -13,6 +13,12 @@ MonoBehaviour:
   m_Name: Hypotesis2
   m_EditorClassIdentifier: Assembly-CSharp::HypothesisData
   versions:
-  - title: Tercera
-    description: Tercera Hipotesis
+  - VersionName: Variante sin pistas
+    title: Es la madre
+    description: "La madre no pudo salvar al ni\xF1o, puede que la penumbra sea suya."
     requiredFlags: []
+  - VersionName: Collar de perlas
+    title: Es la madre
+    description: 'Collar de perlas chamuscado, seguramente de la madre. '
+    requiredFlags:
+    - PEARLCOLLAR
