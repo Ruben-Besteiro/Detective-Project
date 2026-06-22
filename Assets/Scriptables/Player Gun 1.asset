@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 546cfb9333e32a943a7a1b58173ed5ec, type: 3}
-  m_Name: Gun 1
+  m_Name: Player Gun 1
   m_EditorClassIdentifier: Assembly-CSharp::GunData
   weaponName: Pistola
   damage: 0.08

@@ -31,14 +31,20 @@ public class AttackProjectileNode : BehaviourNode<Enemy>
         FireProjectile(enemy, spawnPos, Quaternion.AngleAxis(-15f, Vector3.up) * baseDir);
         FireProjectile(enemy, spawnPos, Quaternion.AngleAxis(15f, Vector3.up) * baseDir);
 
-        yield return new WaitForSeconds(cooldown);
+        float t = 0f;
+        while (t < cooldown)
+        {
+            yield return null;
+            yield return enemy.WaitWhilePaused();
+            t += Time.deltaTime;
+        }
         enemy.currentAttack = -1;
         isMoving = false;
     }
 
     void FireProjectile(BossController enemy, Vector3 spawnPos, Vector3 dir)
     {
-        GameObject sphere = enemy.SpawnProjectile(spawnPos);
+        GameObject sphere = enemy.Spawn(enemy.bulletPrefab, spawnPos);
         sphere.transform.rotation = Quaternion.LookRotation(dir);
     }
 }

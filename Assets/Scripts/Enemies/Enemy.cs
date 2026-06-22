@@ -1,14 +1,16 @@
 using UnityEngine;
+using System.Collections;
 
 public abstract class Enemy : MonoBehaviour
 {
    [SerializeField] public EnemyData data;
    
-   [HideInInspector] public float currentHp;
+   public float currentHp;
    [HideInInspector] public bool startled = false;
 
    protected BossBehaviourTree tree;
    [HideInInspector] public int currentAttack = -1;
+   [HideInInspector] public bool lockRotation = false;
 
    public virtual BossMeleeData MeleeData => null;
 
@@ -37,12 +39,18 @@ public abstract class Enemy : MonoBehaviour
 
       if (startled)
       {
-         LookAtPlayer();
+         if (!lockRotation) LookAtPlayer();
          tree.Start(this, this);
       }
    }
 
    protected virtual void OnStartled() { }
+
+   // Llamamos a esto en los nodos del BT para retrasar los ataques hasta que despausemos
+   public IEnumerator WaitWhilePaused()
+   {
+      while (PauseController.IsPaused) yield return null;
+   }
 
    public void LookAtPlayer()
    {
@@ -52,5 +60,7 @@ public abstract class Enemy : MonoBehaviour
    public virtual void TakeDamage(float dmg)
    {
       currentHp -= dmg;
+      if (currentHp <= 0)
+         Destroy(gameObject);
    }
 }

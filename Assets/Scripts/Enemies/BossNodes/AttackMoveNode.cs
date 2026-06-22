@@ -25,10 +25,6 @@ public class AttackMoveNode : BehaviourNode<Enemy>
             data = boss.bossArmAttackData;
         else if (enemy is MinionController minion)
             data = minion.minionArmAttackData;
-        else {
-            Debug.LogError("Enemy type not supported");
-            data = null;
-        }
 
         cooldown = data.cooldown;
         stopDistance = data.stopDistance;
@@ -58,7 +54,13 @@ public class AttackMoveNode : BehaviourNode<Enemy>
         if (selectedArm != null)
             yield return SweepAttack(enemy, player);
 
-        yield return new WaitForSeconds(cooldown);
+        float t = 0f;
+        while (t < cooldown)
+        {
+            yield return null;
+            yield return enemy.WaitWhilePaused();
+            t += Time.deltaTime; 
+        }
         enemy.currentAttack = -1;
         succeeded = true;
         isMoving = false;
@@ -66,7 +68,6 @@ public class AttackMoveNode : BehaviourNode<Enemy>
 
     IEnumerator MoveDirectly(Enemy enemy, Transform player)
     {
-        Debug.Log("Raycast dio verdadero => Nos movemos directamente hacia el jugador");
         while (Vector3.Distance(enemy.transform.position, player.position) > stopDistance)
         {
             enemy.LookAtPlayer();
@@ -77,7 +78,6 @@ public class AttackMoveNode : BehaviourNode<Enemy>
             {
                 if (!hit.collider.CompareTag("Player"))
                 {
-                    Debug.Log("Perdimos la línea de visión => Cambiamos a pathfinding");
                     yield return MoveWithPathfinding(enemy, player);
                     yield break;
                 }
@@ -87,12 +87,12 @@ public class AttackMoveNode : BehaviourNode<Enemy>
                 enemy.transform.position, flatTarget, enemy.data.speed * Time.deltaTime);
             enemy.transform.forward = dir;
             yield return null;
+            yield return enemy.WaitWhilePaused();
         }
     }
 
     IEnumerator MoveWithPathfinding(Enemy enemy, Transform player)
     {
-        Debug.Log("Raycast dio falso => Buscamos ruta con pathfinding");
         Seeker seeker = enemy.GetComponent<Seeker>();
         List<Vector3> pathNodes = null;
         bool pathReady = false;
@@ -147,17 +147,16 @@ public class AttackMoveNode : BehaviourNode<Enemy>
             {
                 if (hit.collider.CompareTag("Player"))
                 {
-                    Debug.Log("Recuperamos línea de visión => Cambiamos a movimiento directo");
                     yield return MoveDirectly(enemy, player);
                     yield break;
                 }
             }
 
             Vector3 dir = (target - enemy.transform.position).normalized;
-            enemy.transform.position = Vector3.MoveTowards(
-                enemy.transform.position, target, enemy.data.speed * Time.deltaTime);
+            enemy.transform.position = Vector3.MoveTowards(enemy.transform.position, target, enemy.data.speed * Time.deltaTime);
             enemy.transform.forward = dir;
             yield return null;
+            yield return enemy.WaitWhilePaused();
         }
     }
 
@@ -171,37 +170,70 @@ public class AttackMoveNode : BehaviourNode<Enemy>
         Vector3 originalPosition = arm.localPosition;
         Quaternion originalRot = arm.localRotation;
 
-        // Apuntar el brazo totalmente a la izquierda o derecha
-        // La cápsula tiene su eje de altura en Y local; rotando Z±90° lo alineamos con X
-        arm.localRotation = Quaternion.Euler(0, isLeft ? 180 : 0, isLeft ? 90 : -90);
+        float sweepDuration;
+        float elapsed = 0f;
 
-        // Escalar para cubrir la stopping distance (altura de cápsula = 2 * scaleY)
-        if (mediumRange) arm.localScale = new Vector3(originalScale.x, originalScale.y * 4.5f, originalScale.z);
-        else arm.localScale = new Vector3(originalScale.x, originalScale.y * 3, originalScale.z);
-
-        // Centrar el brazo en la dirección correcta
-        arm.localPosition = new Vector3(isLeft ? -1 : 1, originalPosition.y, 0);
-
-        // Mirar al jugador antes de barrer
-        enemy.LookAtPlayer();
-
-        // Girar 180° gradualmente
-        float sweepDuration = 1;        // Duración total del ataque excepto el cooldown
-        float elapsed = 0;
-        float startAngle = enemy.transform.eulerAngles.y;
-
-        selectedArm.GetComponent<Collider>().enabled = true;
-
-        while (elapsed < sweepDuration)
+        if (enemy is MinionController)
         {
-            elapsed += Time.deltaTime;
-            float t = Mathf.Clamp01(elapsed / sweepDuration);
-            enemy.transform.rotation = Quaternion.Euler(0, startAngle + (isLeft ? 180 : -180) * t, 0);
+            sweepDuration = 0.5f;
+            // Golpe de arriba a abajo pivotando desde el hombro
+            enemy.LookAtPlayer();
+            enemy.lockRotation = true;
+            arm.localScale = new Vector3(originalScale.x, originalScale.y * (mediumRange ? 4f : 3f), originalScale.z);
 
-            if (elapsed > data.activeDuration)
-                selectedArm.GetComponent<Collider>().enabled = false;
-            yield return null;
+            // Semilongitud del brazo escalado en espacio local del enemigo
+            float halfLen = data.rangeY / 2f * arm.localScale.y;
+            // Hombro: extremo fijo en espacio local del enemigo
+            Vector3 shoulderLocal = originalPosition;
+
+            Quaternion startRot = Quaternion.Euler(-45f, 0f, 0f);
+            Quaternion endRot   = Quaternion.Euler( 90f, 0f, 0f);
+            arm.localRotation = startRot;
+            // El centro del transform se coloca a halfLen desde el hombro en la dirección del brazo
+            arm.localPosition = shoulderLocal + startRot * Vector3.up * halfLen;
+
+            selectedArm.GetComponent<Collider>().enabled = true;
+            while (elapsed < sweepDuration)
+            {
+                elapsed += Time.deltaTime;
+                float t = Mathf.Clamp01(elapsed / sweepDuration);
+                arm.localRotation = Quaternion.Slerp(startRot, endRot, t);
+                // Mantener el hombro fijo actualizando la posición del centro
+                arm.localPosition = shoulderLocal + arm.localRotation * Vector3.up * halfLen;
+                if (elapsed > data.activeDuration)
+                    selectedArm.GetComponent<Collider>().enabled = false;
+                yield return null;
+                yield return enemy.WaitWhilePaused();
+            }
         }
+        else
+        {
+            sweepDuration = 1;
+            // El jefe barre en un semicírculo
+            arm.localRotation = Quaternion.Euler(0, isLeft ? 180 : 0, isLeft ? 90 : -90);
+
+            if (mediumRange) arm.localScale = new Vector3(originalScale.x, originalScale.y * 4.5f, originalScale.z);
+            else arm.localScale = new Vector3(originalScale.x, originalScale.y * 3, originalScale.z);
+
+            arm.localPosition = new Vector3(isLeft ? -1 : 1, originalPosition.y, 0);
+            enemy.LookAtPlayer();
+            enemy.lockRotation = true;
+
+            float startAngle = enemy.transform.eulerAngles.y;
+            selectedArm.GetComponent<Collider>().enabled = true;
+            while (elapsed < sweepDuration)
+            {
+                elapsed += Time.deltaTime;
+                float t = Mathf.Clamp01(elapsed / sweepDuration);
+                enemy.transform.rotation = Quaternion.Euler(0, startAngle + (isLeft ? 180 : -180) * t, 0);
+                if (elapsed > data.activeDuration)
+                    selectedArm.GetComponent<Collider>().enabled = false;
+                yield return null;
+                yield return enemy.WaitWhilePaused();
+            }
+        }
+
+        enemy.lockRotation = false;
 
         // Restaurar brazo
         arm.localScale = originalScale;

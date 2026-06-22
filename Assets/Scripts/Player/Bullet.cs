@@ -14,6 +14,7 @@ public class Bullet : MonoBehaviour
 
     void Update()
     {
+        if (PauseController.IsPaused) return;
         transform.position += transform.forward * data.bulletSpeed * Time.deltaTime;
     }
 

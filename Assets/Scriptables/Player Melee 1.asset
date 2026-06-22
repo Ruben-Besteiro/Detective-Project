@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 180a7f2c602919e49a4d16f13a6796c1, type: 3}
-  m_Name: Melee 1
+  m_Name: Player Melee 1
   m_EditorClassIdentifier: Assembly-CSharp::MeleeData
   weaponName: Cuchillo
   damage: 0.3

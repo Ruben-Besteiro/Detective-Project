@@ -4,8 +4,8 @@ using UnityEngine;
 public class AttackCircleNode : BehaviourNode<Enemy>
 {
     bool isMoving;
-    float cooldown = 2;
-    int circleCount = 8;
+    int minionCount = 3;
+    float cooldown = 4;
 
     public override State Start()
     {
@@ -23,18 +23,25 @@ public class AttackCircleNode : BehaviourNode<Enemy>
         BossController enemy = (BossController)ctx.agent;
         enemy.LookAtPlayer();
 
-        for (int i = 0; i < circleCount; i++)
+        for (int i = 0; i < minionCount; i++)
         {
-            float angle = i * Mathf.PI * 2f / circleCount;
-            Vector3 offset = new Vector3(Mathf.Cos(angle), 0f, Mathf.Sin(angle)) * enemy.circleRadius;
-
-            GameObject sphere = enemy.SpawnProjectile(enemy.transform.position + offset);
-            // La fuerza debe ser hacia el jugador.
-            Vector3 dir = (PlayerCombatController.Instance.transform.position - sphere.transform.position).normalized;
-            sphere.GetComponent<Rigidbody>().AddForce(dir * 20, ForceMode.Impulse);
+            float angle = i * Mathf.PI * 2f / minionCount;
+            Vector3 offset = new Vector3(Mathf.Cos(angle), 0f, Mathf.Sin(angle)) * enemy.minionSpawnRadius;
+            float floorY = enemy.transform.position.y - enemy.GetComponent<Collider>().bounds.extents.y;
+            Vector3 spawnPos = new Vector3(enemy.transform.position.x + offset.x, floorY, enemy.transform.position.z + offset.z);
+            GameObject minion = enemy.Spawn(enemy.minionPrefab, spawnPos);
+            float minionHalfHeight = minion.GetComponent<Collider>().bounds.extents.y;
+            minion.transform.position = new Vector3(spawnPos.x, floorY + minionHalfHeight, spawnPos.z);
+            minion.GetComponent<Enemy>().startled = true;
         }
 
-        yield return new WaitForSeconds(cooldown);
+        float t = 0f;
+        while (t < cooldown)
+        {
+            yield return null;
+            yield return enemy.WaitWhilePaused();
+            t += Time.deltaTime;
+        }
         enemy.currentAttack = -1;
         isMoving = false;
     }

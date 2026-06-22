@@ -19,8 +19,8 @@ MonoBehaviour:
   rangeZ: 1
   hitboxOffset: 0
   stopDistance: 2
-  activeDuration: 1
-  cooldown: 3
+  activeDuration: 0.5
+  cooldown: 2
   knockbackDuration: 0.5
   knockbackSpeed: 15
   intangibilityDuration: 0.5

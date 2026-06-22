@@ -6,17 +6,16 @@ using UnityEngine.UI;
 public class BossController : Enemy
 {
     [Header("Attacks")]
-    [SerializeField] public BossGunData boss3BulletsAttackData;
-    [SerializeField] public BossMeleeData bossArmAttackData;
+    public BossGunData boss3BulletsAttackData;
+    public BossMeleeData bossArmAttackData;
     public GameObject bulletPrefab;
-    public float circleRadius = 3f;
+    public GameObject minionPrefab;
+    public float minionSpawnRadius;
 
     [Header("Stuff")]
-    [SerializeField] GameObject hud;
-    [SerializeField] TextMeshProUGUI nameText;
-    [SerializeField] Image lifeBar;
-
-    public override BossMeleeData MeleeData => bossArmAttackData;
+    [SerializeField] private GameObject hud;
+    [SerializeField] private TextMeshProUGUI nameText;
+    [SerializeField] private Image lifeBar;
 
     protected override void Start()
     {
@@ -33,29 +32,31 @@ public class BossController : Enemy
     }
 
     // Se llama desde AttackProjectileNode y AttackCircleNode
-    public GameObject SpawnProjectile(Vector3 position)
+    public GameObject Spawn(GameObject prefab, Vector3 position)
     {
-        if (bulletPrefab != null)
+        if (prefab != null)
         {
-            GameObject go = Instantiate(bulletPrefab, position, Quaternion.identity);
-            go.GetComponent<Bullet>().Initialize(gameObject, boss3BulletsAttackData);
+            GameObject go = Instantiate(prefab, position, Quaternion.identity);
+            if (go.TryGetComponent<Bullet>(out Bullet b))
+                b.Initialize(gameObject, boss3BulletsAttackData);
             return go;
         }
-        print("bulletPrefab is null");
         return null;
     }
 
     public override void TakeDamage(float dmg)
     {
-        base.TakeDamage(dmg);
+        currentHp -= dmg;
         lifeBar.fillAmount = currentHp / data.hp;
         if (currentHp <= 0)
             Die();
     }
 
-    void Die()
+    private void Die()
     {
         PlayerCombatController.Instance.enabled = false;
+        foreach (var minion in FindObjectsOfType<MinionController>())
+            minion.TakeDamage(minion.currentHp);
         Destroy(gameObject);
     }
 }

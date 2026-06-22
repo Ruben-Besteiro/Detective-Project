@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Minion 1
   m_EditorClassIdentifier: Assembly-CSharp::EnemyData
   name: 
-  hp: 2
+  hp: 0.5
   attack: 0.2
   speed: 10
   startleRange: 15

@@ -29,6 +29,7 @@ public class PlayerCombatController : PlayerController
     [Header("Armas")]
     [SerializeField] public GunData currentGunData;
     [SerializeField] public MeleeData currentMeleeData;
+    [SerializeField] public GameObject bulletPrefab;
 
     [Header("Dash")]
     [SerializeField] public float dashSpeed = 25;

@@ -16,7 +16,7 @@ public class ShootState : State
         controller.RotateTowardCursor();
 
         Vector3 spawnPos = controller.transform.position + controller.transform.forward + Vector3.up * 0.5f;
-        GameObject bullet = Object.Instantiate(controller.currentGunData.bulletPrefab, spawnPos, controller.transform.rotation);
+        GameObject bullet = Object.Instantiate(controller.bulletPrefab, spawnPos, controller.transform.rotation);
         bullet.GetComponent<Bullet>().Initialize(controller.gameObject, controller.currentGunData);
     }
 

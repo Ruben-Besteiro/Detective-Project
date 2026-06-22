@@ -237,7 +237,7 @@ GameObject:
   - component: {fileID: 3033882461863308077}
   - component: {fileID: 1938439918698583975}
   - component: {fileID: 3895603725222230002}
-  - component: {fileID: 6984222307359881671}
+  - component: {fileID: 7215141073203247181}
   m_Layer: 0
   m_Name: Arm R
   m_TagString: Enemy
@@ -357,8 +357,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ArmHitbox
   enemy: {fileID: 4025695631005721652}
---- !u!136 &6984222307359881671
-CapsuleCollider:
+--- !u!65 &7215141073203247181
+BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -374,12 +374,10 @@ CapsuleCollider:
   m_LayerOverridePriority: 0
   m_IsTrigger: 1
   m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.5000001
-  m_Height: 2
-  m_Direction: 1
-  m_Center: {x: 0.000000059604645, y: 0, z: -0.00000008940697}
+  m_Enabled: 0
+  serializedVersion: 3
+  m_Size: {x: 4, y: 2, z: 1.0000002}
+  m_Center: {x: -1.5, y: 0, z: -0.00000008940697}
 --- !u!1 &4627321039082742399
 GameObject:
   m_ObjectHideFlags: 0
@@ -394,6 +392,7 @@ GameObject:
   - component: {fileID: 666567693499389846}
   - component: {fileID: 4629519043136901244}
   - component: {fileID: 4025695631005721652}
+  - component: {fileID: 5080434617677024590}
   m_Layer: 0
   m_Name: Minion 1
   m_TagString: Enemy
@@ -542,8 +541,36 @@ MonoBehaviour:
   currentHp: 0
   startled: 0
   currentAttack: -1
+  lockRotation: 0
   minionArmAttackData: {fileID: 11400000, guid: 8c7914df85ca4054981b59fd0561a1bf,
     type: 2}
+--- !u!54 &5080434617677024590
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4627321039082742399}
+  serializedVersion: 5
+  m_Mass: 1
+  m_LinearDamping: 0
+  m_AngularDamping: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 126
+  m_CollisionDetection: 0
 --- !u!1 &5724249402174406000
 GameObject:
   m_ObjectHideFlags: 0
@@ -557,7 +584,7 @@ GameObject:
   - component: {fileID: 562234174265993663}
   - component: {fileID: 7947218986703422888}
   - component: {fileID: 1317102490131506407}
-  - component: {fileID: 2219154554834231786}
+  - component: {fileID: 3103467338231497757}
   m_Layer: 0
   m_Name: Arm L
   m_TagString: Enemy
@@ -677,8 +704,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ArmHitbox
   enemy: {fileID: 4025695631005721652}
---- !u!136 &2219154554834231786
-CapsuleCollider:
+--- !u!65 &3103467338231497757
+BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -694,9 +721,7 @@ CapsuleCollider:
   m_LayerOverridePriority: 0
   m_IsTrigger: 1
   m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.5000001
-  m_Height: 2
-  m_Direction: 1
-  m_Center: {x: 0.000000059604645, y: 0, z: -0.00000008940697}
+  m_Enabled: 0
+  serializedVersion: 3
+  m_Size: {x: 4, y: 2, z: 1.0000002}
+  m_Center: {x: 1.5, y: 0, z: -0.00000005960466}
