@@ -172,6 +172,8 @@ public class AttackMoveNode : BehaviourNode<Enemy>
 
         float sweepDuration;
         float elapsed = 0f;
+        arm.localScale = new Vector3(originalScale.x, originalScale.y * (mediumRange ? 3 : 2), originalScale.z);
+        Debug.Log("Medium range: " + mediumRange + "Arm scale: " + arm.localScale);
 
         if (enemy is MinionController)
         {
@@ -179,10 +181,9 @@ public class AttackMoveNode : BehaviourNode<Enemy>
             // Golpe de arriba a abajo pivotando desde el hombro
             enemy.LookAtPlayer();
             enemy.lockRotation = true;
-            arm.localScale = new Vector3(originalScale.x, originalScale.y * (mediumRange ? 4f : 3f), originalScale.z);
 
             // Semilongitud del brazo escalado en espacio local del enemigo
-            float halfLen = data.rangeY / 2f * arm.localScale.y;
+            float halfLen = arm.localScale.y;
             // Hombro: extremo fijo en espacio local del enemigo
             Vector3 shoulderLocal = originalPosition;
 
@@ -212,10 +213,10 @@ public class AttackMoveNode : BehaviourNode<Enemy>
             // El jefe barre en un semicírculo
             arm.localRotation = Quaternion.Euler(0, isLeft ? 180 : 0, isLeft ? 90 : -90);
 
-            if (mediumRange) arm.localScale = new Vector3(originalScale.x, originalScale.y * 4.5f, originalScale.z);
-            else arm.localScale = new Vector3(originalScale.x, originalScale.y * 3, originalScale.z);
-
-            arm.localPosition = new Vector3(isLeft ? -1 : 1, originalPosition.y, 0);
+            // Hombro fijo en originalPosition; el centro del brazo se desplaza según la longitud escalada
+            float halfLen = arm.localScale.y;
+            Vector3 outward = isLeft ? Vector3.left : Vector3.right;
+            arm.localPosition = originalPosition + outward * halfLen;
             enemy.LookAtPlayer();
             enemy.lockRotation = true;
 

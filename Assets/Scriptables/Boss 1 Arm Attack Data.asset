@@ -15,10 +15,10 @@ MonoBehaviour:
   weaponName: '-'
   damage: 3
   rangeX: 1
-  rangeY: 2
+  rangeY: 1
   rangeZ: 1
   hitboxOffset: 0
-  stopDistance: 10
+  stopDistance: 8
   activeDuration: 1
   cooldown: 3
   knockbackDuration: 1

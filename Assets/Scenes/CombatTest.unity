@@ -150,7 +150,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0.38268343, y: 0.92387956, z: 0, w: 0}
   m_LocalPosition: {x: -0.5, y: -0.2, z: 0}
-  m_LocalScale: {x: 0.124999985, y: 0.25, z: 0.12499997}
+  m_LocalScale: {x: 0.124999985, y: 0.15, z: 0.12499997}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 406139046}
@@ -1016,7 +1016,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0.38268343, y: -0.92387956, z: -0, w: 0}
   m_LocalPosition: {x: 0.5, y: -0.2, z: 0}
-  m_LocalScale: {x: 0.124999985, y: 0.25, z: 0.12499997}
+  m_LocalScale: {x: 0.124999985, y: 0.15, z: 0.12499997}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 406139046}
@@ -1553,8 +1553,6 @@ MonoBehaviour:
   boss3BulletsAttackData: {fileID: 11400000, guid: 68dbeac1ead248a42a49987193ab511b,
     type: 2}
   bossArmAttackData: {fileID: 11400000, guid: 36205a87be51daa4ca0680e8eef92158, type: 2}
-  bossMinionSpawnAttackData: {fileID: 11400000, guid: 403c40ba261065d4c9848d7a26565ce0,
-    type: 2}
   bulletPrefab: {fileID: 1227268554403163030, guid: 4ab5c746706ea924f9a05e73e6b8d460,
     type: 3}
   minionPrefab: {fileID: 4627321039082742399, guid: f37c5bf430c65ef438651a30abb667cf,
