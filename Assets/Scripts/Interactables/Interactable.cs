@@ -10,10 +10,17 @@ public abstract class Interactable : MonoBehaviour
     [SerializeField] protected string displayName;
     [SerializeField] protected GameObject interactCanvas;
     protected TMP_Text promptText;
+    private string savedPrompt;
 
     protected virtual void Start()
     {
         promptText = interactCanvas.GetComponentInChildren<TMP_Text>();
+    }
+
+    protected void SetPrompt(string text)
+    {
+        savedPrompt = text;
+        promptText.text = text;
     }
 
     public virtual void OnInteract() { }
@@ -21,7 +28,7 @@ public abstract class Interactable : MonoBehaviour
     public void SetPromptActive(bool active)
     {
         if (interactCanvas != null)
-            promptText.text = active ? promptText.text : "";
+            promptText.text = active ? savedPrompt : "";
     }
 
     protected virtual void OnTriggerEnter(Collider other)

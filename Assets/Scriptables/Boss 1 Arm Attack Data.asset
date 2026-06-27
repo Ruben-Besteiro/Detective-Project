@@ -18,7 +18,7 @@ MonoBehaviour:
   rangeY: 1
   rangeZ: 1
   hitboxOffset: 0
-  stopDistance: 8
+  stopDistance: 6
   activeDuration: 1
   cooldown: 3
   knockbackDuration: 1

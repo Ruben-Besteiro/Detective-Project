@@ -1,9 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 using Pathfinding;
 
-public class AttackMoveNode : BehaviourNode<Enemy>
+public class ArmAttackNode : BehaviourNode<Enemy>
 {
     bool isMoving;
     bool succeeded;
@@ -43,6 +44,7 @@ public class AttackMoveNode : BehaviourNode<Enemy>
     IEnumerator Routine()
     {
         enemy = ctx.agent;
+        if (PlayerCombatController.Instance == null) { isMoving = false; yield break; }
         Transform player = PlayerCombatController.Instance.transform;
         Vector3 dir = (player.position - enemy.transform.position).normalized;
 
@@ -68,27 +70,32 @@ public class AttackMoveNode : BehaviourNode<Enemy>
 
     IEnumerator MoveDirectly(Enemy enemy, Transform player)
     {
+        NavMeshAgent agent = enemy.GetComponent<NavMeshAgent>();
+        agent.speed = enemy.data.speed;
+        agent.stoppingDistance = stopDistance;
+        agent.updateRotation = false;
+        agent.enabled = true;
+        agent.Warp(enemy.transform.position);
+
         while (Vector3.Distance(enemy.transform.position, player.position) > stopDistance)
         {
+            if (agent.isOnNavMesh)
+                agent.SetDestination(player.position);
             enemy.LookAtPlayer();
-            Vector3 flatTarget = new Vector3(player.position.x, enemy.transform.position.y, player.position.z);
-            Vector3 dir = (flatTarget - enemy.transform.position).normalized;
 
-            if (Physics.Raycast(enemy.transform.position, dir, out RaycastHit hit, Mathf.Infinity))
+            Vector3 dir = (new Vector3(player.position.x, enemy.transform.position.y, player.position.z) - enemy.transform.position).normalized;
+            if (Physics.Raycast(enemy.transform.position, dir, out RaycastHit hit, Mathf.Infinity) && !hit.collider.CompareTag("Player"))
             {
-                if (!hit.collider.CompareTag("Player"))
-                {
-                    yield return MoveWithPathfinding(enemy, player);
-                    yield break;
-                }
+                agent.enabled = false;
+                yield return MoveWithPathfinding(enemy, player);
+                yield break;
             }
 
-            enemy.transform.position = Vector3.MoveTowards(
-                enemy.transform.position, flatTarget, enemy.data.speed * Time.deltaTime);
-            enemy.transform.forward = dir;
             yield return null;
             yield return enemy.WaitWhilePaused();
         }
+
+        agent.enabled = false;
     }
 
     IEnumerator MoveWithPathfinding(Enemy enemy, Transform player)
@@ -173,7 +180,6 @@ public class AttackMoveNode : BehaviourNode<Enemy>
         float sweepDuration;
         float elapsed = 0f;
         arm.localScale = new Vector3(originalScale.x, originalScale.y * (mediumRange ? 3 : 2), originalScale.z);
-        Debug.Log("Medium range: " + mediumRange + "Arm scale: " + arm.localScale);
 
         if (enemy is MinionController)
         {

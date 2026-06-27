@@ -5,8 +5,6 @@ using System.Collections.Generic;
 [RequireComponent(typeof(CharacterController))]
 public abstract class PlayerController : MonoBehaviour
 {
-    public static PlayerController Instance;
-
     [SerializeField] public PlayerStats stats;
 
     protected virtual float MoveSpeed => stats.speed;
@@ -17,23 +15,12 @@ public abstract class PlayerController : MonoBehaviour
     private float _movement;
     public float movement { get => _movement;}
 
-    private void Awake()
-    {
-        if (Instance == null)
-            Instance = this;
-        else
-            Destroy(gameObject);
-
-        Initialize();
-    }
-
-    public void Initialize()
+    protected virtual void Awake()
     {
         if (input != null) return;
         input = new InputActions();
         cc = GetComponent<CharacterController>();
     }
-
 
     protected virtual void OnEnable()
     {
@@ -64,7 +51,7 @@ public abstract class PlayerController : MonoBehaviour
         else PauseController.Pause();
     }
 
-    protected void Update()
+    protected virtual void Update()
     {
         Vector2 raw = input.Player.Move.ReadValue<Vector2>();
         if (raw.sqrMagnitude < 0.01f)

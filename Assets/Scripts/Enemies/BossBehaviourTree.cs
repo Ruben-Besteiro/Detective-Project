@@ -5,9 +5,9 @@ public class BossBehaviourTree : BehaviourTree<Enemy>
         return new SequenceNode<Enemy>(
             new PickAttackNode(),
             new SelectorNode<Enemy>(
-                new Selection<Enemy>(ctx => ctx.agent.currentAttack == 0, new AttackMoveNode()),
-                new Selection<Enemy>(ctx => ctx.agent.currentAttack == 1, new AttackProjectileNode()),
-                new Selection<Enemy>(ctx => ctx.agent.currentAttack == 2, new AttackCircleNode())
+                new Selection<Enemy>(ctx => ctx.agent.currentAttack == 0, new ArmAttackNode()),
+                new Selection<Enemy>(ctx => ctx.agent.currentAttack == 1, new RangedAttackNode()),
+                new Selection<Enemy>(ctx => ctx.agent.currentAttack == 2, new SpawnMinionsNode())
             )
         );
     }

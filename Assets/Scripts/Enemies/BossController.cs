@@ -2,6 +2,7 @@ using UnityEngine;
 using UnityEngine.Serialization;
 using TMPro;
 using UnityEngine.UI;
+using System.Collections.Generic;
 
 public class BossController : Enemy
 {
@@ -10,6 +11,7 @@ public class BossController : Enemy
     public BossMeleeData bossArmAttackData;
     public GameObject bulletPrefab;
     public GameObject minionPrefab;
+    [HideInInspector] public List<GameObject> minionList;
     public float minionSpawnRadius;
 
     [Header("Stuff")]
@@ -27,11 +29,12 @@ public class BossController : Enemy
     protected override void OnStartled()
     {
         hud.SetActive(true);
-        nameText.text = data.name;
-        PlayerCombatController.Instance.playerNameText.text = PlayerCombatController.Instance.stats.playerName;
+        nameText.text = data.enemyName;
+        if (PlayerCombatController.Instance != null)
+            PlayerCombatController.Instance.playerNameText.text = PlayerCombatController.Instance.stats.playerName;
     }
 
-    // Se llama desde AttackProjectileNode y AttackCircleNode
+    // Se llama desde RangedAttackNode y SpawnMinionsNode
     public GameObject Spawn(GameObject prefab, Vector3 position)
     {
         if (prefab != null)
@@ -54,9 +57,14 @@ public class BossController : Enemy
 
     private void Die()
     {
-        PlayerCombatController.Instance.enabled = false;
-        foreach (var minion in FindObjectsOfType<MinionController>())
+        if (PlayerCombatController.Instance != null)
+            PlayerCombatController.Instance.enabled = false;
+        foreach (GameObject m in minionList)
+        {
+            if (m == null) continue;
+            MinionController minion = m.GetComponent<MinionController>();
             minion.TakeDamage(minion.currentHp);
+        }
         Destroy(gameObject);
     }
 }

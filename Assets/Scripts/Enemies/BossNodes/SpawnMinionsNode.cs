@@ -1,7 +1,7 @@
 using System.Collections;
 using UnityEngine;
 
-public class AttackCircleNode : BehaviourNode<Enemy>
+public class SpawnMinionsNode : BehaviourNode<Enemy>
 {
     bool isMoving;
     int minionCount = 3;
@@ -9,7 +9,7 @@ public class AttackCircleNode : BehaviourNode<Enemy>
 
     public override State Start()
     {
-        Debug.Log("AttackCircleNode");
+        Debug.Log("SpawnMinionsNode");
         isMoving = true;
         ctx.agent.StartCoroutine(Routine());
         return State.IN_PROGRESS;
@@ -21,6 +21,7 @@ public class AttackCircleNode : BehaviourNode<Enemy>
     IEnumerator Routine()
     {
         BossController enemy = (BossController)ctx.agent;
+        if (PlayerCombatController.Instance == null) { isMoving = false; yield break; }
         enemy.LookAtPlayer();
 
         for (int i = 0; i < minionCount; i++)
@@ -33,6 +34,7 @@ public class AttackCircleNode : BehaviourNode<Enemy>
             float minionHalfHeight = minion.GetComponent<Collider>().bounds.extents.y;
             minion.transform.position = new Vector3(spawnPos.x, floorY + minionHalfHeight, spawnPos.z);
             minion.GetComponent<Enemy>().startled = true;
+            enemy.minionList.Add(minion);
         }
 
         float t = 0f;

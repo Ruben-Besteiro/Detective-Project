@@ -4,7 +4,7 @@ public class PickAttackNode : BehaviourNode<Enemy>
 {
     public override State Start()
     {
-        if (ctx.agent.gameObject.name.StartsWith("Boss"))
+        if (ctx.agent.TryGetComponent<BossController>(out _))
             ctx.agent.currentAttack = Random.Range(0, 3);
         else
             ctx.agent.currentAttack = 0;

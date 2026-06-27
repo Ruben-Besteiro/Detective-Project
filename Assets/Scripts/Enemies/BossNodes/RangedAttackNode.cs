@@ -1,14 +1,14 @@
 using System.Collections;
 using UnityEngine;
 
-public class AttackProjectileNode : BehaviourNode<Enemy>
+public class RangedAttackNode : BehaviourNode<Enemy>
 {
     bool isMoving;
     float cooldown;
 
     public override State Start()
     {
-        Debug.Log("AttackProjectileNode");
+        Debug.Log("RangedAttackNode");
         cooldown = ((BossController)ctx.agent).boss3BulletsAttackData.cooldown;
         isMoving = true;
         ctx.agent.StartCoroutine(Routine());
@@ -21,6 +21,7 @@ public class AttackProjectileNode : BehaviourNode<Enemy>
     IEnumerator Routine()
     {
         BossController enemy = (BossController)ctx.agent;
+        if (PlayerCombatController.Instance == null) { isMoving = false; yield break; }
         enemy.LookAtPlayer();
 
         Vector3 spawnPos = enemy.transform.position + enemy.transform.forward * (enemy.GetComponent<Collider>().bounds.extents.z + 1);

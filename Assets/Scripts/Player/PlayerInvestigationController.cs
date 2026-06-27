@@ -4,20 +4,20 @@ using UnityEngine.InputSystem;
 
 public class PlayerInvestigationController : PlayerController
 {
-    public static new PlayerInvestigationController Instance;
+    public static PlayerInvestigationController Instance;
 
     List<Interactable> interactablesInRange = new();
     Interactable currentInteractableObject;
     public LinkableInteractable currentlySelectedLinkable;
 
-    void Awake()
+    protected override void Awake()
     {
         if (Instance == null)
             Instance = this;
         else
             Destroy(gameObject);
 
-        Initialize();
+        base.Awake();
     }
 
     protected override void OnEnable()
@@ -46,13 +46,13 @@ public class PlayerInvestigationController : PlayerController
         base.OnDisable();
     }
 
-    void DisableInteract() => input.Player.Interact.Disable();
-    void EnableInteract()  => input.Player.Interact.Enable();
+    private void DisableInteract() => input.Player.Interact.Disable();
+    private void EnableInteract()  => input.Player.Interact.Enable();
 
-    void OnEnterRange(Interactable interactable)
+    private void OnEnterRange(Interactable interactable)
         => interactablesInRange.Add(interactable);
 
-    void OnExitRange(Interactable interactable)
+    private void OnExitRange(Interactable interactable)
     {
         interactablesInRange.Remove(interactable);
         interactable.SetPromptActive(false);
@@ -60,16 +60,16 @@ public class PlayerInvestigationController : PlayerController
             currentInteractableObject = null;
     }
 
-    void OnInteract(InputAction.CallbackContext ctx)
+    private void OnInteract(InputAction.CallbackContext ctx)
         => currentInteractableObject?.OnInteract();
 
-    void Update()
+    protected override void Update()
     {
         base.Update();
         UpdateCurrentInteractable();
     }
 
-    void UpdateCurrentInteractable()
+    private void UpdateCurrentInteractable()
     {
         interactablesInRange.RemoveAll(i => i == null);     // Borramos objetos destruidos
 

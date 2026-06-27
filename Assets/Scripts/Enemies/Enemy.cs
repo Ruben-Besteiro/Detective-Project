@@ -27,6 +27,7 @@ public abstract class Enemy : MonoBehaviour
    protected virtual void Update()
    {
       if (PauseController.IsPaused) return;
+      if (PlayerCombatController.Instance == null) return;
 
       if (!startled)
       {

@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 38258190efd3ea946a5f573c1041a4ed, type: 3}
   m_Name: Boss 1
   m_EditorClassIdentifier: Assembly-CSharp::EnemyData
-  name: Paco
-  hp: 10
+  enemyName: Paco
+  hp: 5
   speed: 4
   startleRange: 30

@@ -15,11 +15,10 @@ public class PlayerCombatController : PlayerController
 
     public State currentState;
     public Vector2 moveInput;
-    [SerializeField] public TextMeshProUGUI playerNameText;
+    public TextMeshProUGUI playerNameText;
     [SerializeField] Image lifeBar;
 
     [Header("Cursor de Apuntado")]
-    [SerializeField] LayerMask aimLayers;
     [SerializeField] GameObject reticlePrefab;
     GameObject reticle;
     Vector3 cursorWorldPosition;
@@ -27,24 +26,24 @@ public class PlayerCombatController : PlayerController
     Transform enemyThatTheReticleIsOnTopOf;
 
     [Header("Armas")]
-    [SerializeField] public GunData currentGunData;
-    [SerializeField] public MeleeData currentMeleeData;
-    [SerializeField] public GameObject bulletPrefab;
+    public GunData currentGunData;
+    public MeleeData currentMeleeData;
+    public GameObject bulletPrefab;
 
     [Header("Dash")]
-    [SerializeField] public float dashSpeed = 25;
-    [SerializeField] public float dashDuration = 0.25f;     // Más que el dodge
-    [SerializeField] public float dashCooldown = 0.4f;
+    public float dashSpeed = 25;
+    public float dashDuration = 0.25f;     // Más que el dodge
+    public float dashCooldown = 0.4f;
 
     [Header("Dodge")]
-    [SerializeField] public float dodgeSpeed = 25;
-    [SerializeField] public float dodgeDuration = 0.15f;    // Es intangible durante este tiempo
-    [SerializeField] public float dodgeCooldown = 0.4f;
+    public float dodgeSpeed = 25;
+    public float dodgeDuration = 0.15f;    // Es intangible durante este tiempo
+    public float dodgeCooldown = 0.4f;
 
     [Header("Lock-On")]
-    [SerializeField] GameObject boss;       // Solo al jefe
-    [SerializeField] float maxDistance = 15;
-    [SerializeField] float minDistance = 2;     // Debe ser suficiente como para pegar con el cuchillo
+    [SerializeField] private GameObject boss;       // Solo al jefe
+    [SerializeField] private float maxDistance = 15;
+    [SerializeField] private float minDistance = 2;     // Debe ser suficiente como para pegar con el cuchillo
 
     public bool isLockedOn;
     public Transform lockOnTarget;
@@ -52,16 +51,17 @@ public class PlayerCombatController : PlayerController
     float lockOnAngle;
     float lockOnRadius;
 
-    void Awake()
+    protected override void Awake()
     {
         if (Instance == null)
             Instance = this;
         else
             Destroy(gameObject);
-        Initialize();
+
+        base.Awake();
     }
 
-    void Start()
+    private void Start()
     {
         combatSpeed = stats.speed * 1.5f;
         currentHp = stats.maxHp;
@@ -112,7 +112,7 @@ public class PlayerCombatController : PlayerController
         reticle.SetActive(false);
     }
 
-    private void Update()
+    protected override void Update()
     {
         moveInput = input.Player.Move.ReadValue<Vector2>();
         if (!PauseController.IsPaused)
@@ -255,7 +255,7 @@ public class PlayerCombatController : PlayerController
         }
 
         Ray ray = Camera.main.ScreenPointToRay(Mouse.current.position.ReadValue());
-        if (Physics.Raycast(ray, out RaycastHit hit, 200f, aimLayers))
+        if (Physics.Raycast(ray, out RaycastHit hit, Mathf.Infinity))
         {
             cursorHasHit = true;
             cursorWorldPosition = hit.point;
@@ -352,13 +352,13 @@ public class PlayerCombatController : PlayerController
         StartCoroutine(IE_Intangible(intangibilityDuration));
 
         currentHp -= dmg;
-        if (currentHp <= 0)
-            Destroy(gameObject);
-        else
+        if (currentHp > 0)
         {
             lifeBar.fillAmount = currentHp / stats.maxHp;
             ChangeState(new HurtState(this, knockbackDuration));        // Desactivar input
         }
+        else
+            Destroy(gameObject);
     }
 
     private IEnumerator IE_Knockback(Vector3 dir, float knockbackDuration, float knockbackSpeed)

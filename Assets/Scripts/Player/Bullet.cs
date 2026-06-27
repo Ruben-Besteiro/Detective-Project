@@ -18,7 +18,7 @@ public class Bullet : MonoBehaviour
         transform.position += transform.forward * data.bulletSpeed * Time.deltaTime;
     }
 
-    void OnTriggerStay(Collider other)
+    void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag(owner.tag) || other.TryGetComponent<Bullet>(out _))
             return;
@@ -31,8 +31,8 @@ public class Bullet : MonoBehaviour
         else if (other.TryGetComponent<PlayerCombatController>(out var player))
         {
             BossGunData bossData = (BossGunData)data;
-            player.TakeDamage(bossData.damage, (player.transform.position - transform.position).normalized, bossData.knockbackDuration, bossData.intangibilityDuration, bossData.knockbackSpeed);
             if (player.isIntangible) return;
+            player.TakeDamage(bossData.damage, (player.transform.position - transform.position).normalized, bossData.knockbackDuration, bossData.intangibilityDuration, bossData.knockbackSpeed);
         }
 
         Destroy(gameObject);

@@ -9,7 +9,7 @@ public class ConsumeInteractable : Interactable
     protected override void OnTriggerEnter(Collider other)
     {
         base.OnTriggerEnter(other);
-        promptText.text = "Pulsa E para usar " + displayName;
+        SetPrompt("Pulsa E para usar " + displayName);
     }
 
     public override void OnInteract()

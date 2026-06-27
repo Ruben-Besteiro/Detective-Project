@@ -9,7 +9,7 @@ public class PickupInteractable : Interactable
     protected override void OnTriggerEnter(Collider other)
     {
         base.OnTriggerEnter(other);
-        promptText.text = "Pulsa E para obtener " + itemData.itemName;
+        SetPrompt("Pulsa E para obtener " + itemData.itemName);
     }
 
     public override void OnInteract()

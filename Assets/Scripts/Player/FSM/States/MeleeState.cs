@@ -7,7 +7,6 @@ public class MeleeState : State
 {
     float timer;
     Vector3 meleeBoxHalfExtents;
-    float meleeOffset = 1;
     Vector3 aimPoint;
     bool hasAimPoint;
 

@@ -9,7 +9,7 @@ public class LinkableInteractable : Interactable
     protected override void OnTriggerEnter(Collider other)
     {
         base.OnTriggerEnter(other);
-        promptText.text = "Pulsa E para vincular " + displayName;
+        SetPrompt("Pulsa E para vincular " + displayName);
     }
 
     public override void OnInteract()

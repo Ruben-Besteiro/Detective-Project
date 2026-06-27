@@ -7,7 +7,7 @@ public class NpcInteractable : Interactable
     protected override void OnTriggerEnter(Collider other)
     {
         base.OnTriggerEnter(other);
-        promptText.text = "Pulsa E para hablar con " + displayName;
+        SetPrompt("Pulsa E para hablar con " + displayName);
     }
 
     public override void OnInteract()
