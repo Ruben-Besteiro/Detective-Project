@@ -41,7 +41,7 @@ public class BossController : Enemy
         {
             GameObject go = Instantiate(prefab, position, Quaternion.identity);
             if (go.TryGetComponent<Bullet>(out Bullet b))
-                b.Initialize(gameObject, boss3BulletsAttackData);
+                b.Initialize(gameObject, boss3BulletsAttackData, 1);
             return go;
         }
         return null;

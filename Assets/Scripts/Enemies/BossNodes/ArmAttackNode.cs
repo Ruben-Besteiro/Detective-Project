@@ -92,7 +92,12 @@ public class ArmAttackNode : BehaviourNode<Enemy>
             }
 
             yield return null;
-            yield return enemy.WaitWhilePaused();
+            if (PauseController.IsPaused)
+            {
+                agent.isStopped = true;
+                yield return enemy.WaitWhilePaused();
+                agent.isStopped = false;
+            }
         }
 
         agent.enabled = false;

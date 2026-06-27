@@ -29,6 +29,7 @@ public class PlayerCombatController : PlayerController
     public GunData currentGunData;
     public MeleeData currentMeleeData;
     public GameObject bulletPrefab;
+    public float damageMultiplier = 1;      // Se cambia a 1.5 si elegiste la hipótesis correcta
 
     [Header("Dash")]
     public float dashSpeed = 25;
@@ -65,6 +66,7 @@ public class PlayerCombatController : PlayerController
     {
         combatSpeed = stats.speed * 1.5f;
         currentHp = stats.maxHp;
+        damageMultiplier = GameDataManager.Instance.currentHypothesis == Hypotheses.H1 ? 1.5f : 1;
         currentState = new IdleState(this);
         currentState.Enter();
         reticle = Instantiate(reticlePrefab);
@@ -323,7 +325,7 @@ public class PlayerCombatController : PlayerController
                 if (hit.TryGetComponent<Enemy>(out var enemy))
                 {
                     if (damagedEnemies.Contains(enemy)) continue;
-                    enemy.TakeDamage(currentMeleeData.damage);
+                    enemy.TakeDamage(currentMeleeData.damage * damageMultiplier);
                     damagedEnemies.Add(enemy);
                 }
             }
