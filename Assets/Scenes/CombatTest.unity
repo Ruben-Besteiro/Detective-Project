@@ -1609,8 +1609,8 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 82eb07c9644159f4e9b6b41bfaed987f, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::BossController
-  data: {fileID: 11400000, guid: a236920900c71f0438bc77fb7df3d190, type: 2}
+  m_EditorClassIdentifier: Assembly-CSharp::Boss1Controller
+  stats: {fileID: 11400000, guid: a236920900c71f0438bc77fb7df3d190, type: 2}
   currentHp: 0
   startled: 0
   currentAttack: -1

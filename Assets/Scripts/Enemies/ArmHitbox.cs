@@ -33,9 +33,9 @@ public class ArmHitbox : MonoBehaviour
             perpendicular = -perpendicular;
 
         // Hacemos el daño según qué scriptable tenga el enemigo
-        if (enemy is BossController boss)
+        if (enemy is Boss1Controller boss)
             other.GetComponent<PlayerCombatController>().TakeDamage(boss.bossArmAttackData.damage, perpendicular, boss.bossArmAttackData.knockbackDuration, boss.bossArmAttackData.intangibilityDuration, boss.bossArmAttackData.knockbackSpeed);
-        else if (enemy is MinionController minion)
+        else if (enemy is Minion1Controller minion)
             other.GetComponent<PlayerCombatController>().TakeDamage(minion.minionArmAttackData.damage, perpendicular, minion.minionArmAttackData.knockbackDuration, minion.minionArmAttackData.intangibilityDuration, minion.minionArmAttackData.knockbackSpeed);
     }
 }

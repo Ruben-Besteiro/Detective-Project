@@ -537,8 +537,8 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 89ca8fa162faee344937d4c40cd9ddf2, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::MinionController
-  data: {fileID: 11400000, guid: b63ea8380e74ddb449fc1fffa04579bc, type: 2}
+  m_EditorClassIdentifier: Assembly-CSharp::Minion1Controller
+  stats: {fileID: 11400000, guid: b63ea8380e74ddb449fc1fffa04579bc, type: 2}
   currentHp: 0
   startled: 0
   currentAttack: -1

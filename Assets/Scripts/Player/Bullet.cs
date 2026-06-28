@@ -25,6 +25,7 @@ public class Bullet : MonoBehaviour
         if (other.CompareTag(owner.tag) || other.TryGetComponent<Bullet>(out _))
             return;
 
+        print(data.damage * damageMultiplier);
         // Si la bala es del jugador
         if (other.TryGetComponent<Enemy>(out var enemy))
             enemy.TakeDamage(data.damage * damageMultiplier);
@@ -32,7 +33,7 @@ public class Bullet : MonoBehaviour
         // Si la bala es del jefe
         else if (other.TryGetComponent<PlayerCombatController>(out var player))
         {
-            BossGunData bossData = (BossGunData)data;
+            EnemyGunData bossData = (EnemyGunData)data;
             if (player.isIntangible) return;
             player.TakeDamage(bossData.damage, (player.transform.position - transform.position).normalized, bossData.knockbackDuration, bossData.intangibilityDuration, bossData.knockbackSpeed);
         }

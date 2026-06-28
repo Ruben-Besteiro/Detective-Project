@@ -1,7 +1,7 @@
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "New Boss Gun", menuName = "Boss/Boss Gun Data")]
-public class BossGunData : GunData
+[CreateAssetMenu(fileName = "New Enemy Melee", menuName = "Enemy/Enemy Melee Data")]
+public class EnemyMeleeData : MeleeData
 {
     public float knockbackDuration;
     public float knockbackSpeed;

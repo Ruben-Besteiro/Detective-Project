@@ -392,5 +392,6 @@ public class PlayerCombatController : PlayerController
         currentState is ShootState ||
         currentState is MeleeState ||
         currentState is DashState  ||
-        currentState is DodgeState;
+        currentState is DodgeState ||
+        currentState is HurtState;
 }

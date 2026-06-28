@@ -3,7 +3,7 @@ using System.Collections;
 
 public abstract class Enemy : MonoBehaviour
 {
-   [SerializeField] public EnemyData data;
+   [SerializeField] public EnemyStats stats;
    
    public float currentHp;
    [HideInInspector] public bool startled = false;
@@ -12,7 +12,7 @@ public abstract class Enemy : MonoBehaviour
    [HideInInspector] public int currentAttack = -1;
    [HideInInspector] public bool lockRotation = false;
 
-   public virtual BossMeleeData MeleeData => null;
+   public virtual EnemyMeleeData MeleeData => null;
 
    void Awake()
    {
@@ -21,7 +21,7 @@ public abstract class Enemy : MonoBehaviour
 
    protected virtual void Start()
    {
-      currentHp = data.hp;
+      currentHp = stats.hp;
    }
 
    protected virtual void Update()
@@ -31,7 +31,7 @@ public abstract class Enemy : MonoBehaviour
 
       if (!startled)
       {
-         Collider[] hits = Physics.OverlapSphere(transform.position, data.startleRange);
+         Collider[] hits = Physics.OverlapSphere(transform.position, stats.startleRange);
          foreach (var hit in hits)
          {
             if (hit.CompareTag("Player")) { startled = true; OnStartled(); break; }
@@ -64,4 +64,20 @@ public abstract class Enemy : MonoBehaviour
       if (currentHp <= 0)
          Destroy(gameObject);
    }
+
+   // Se llama desde RangedAttackNode y SpawnMinionsNode
+    public GameObject Spawn(GameObject prefab, Vector3 position)
+    {
+        if (prefab != null)
+        {
+            GameObject go = Instantiate(prefab, position, Quaternion.identity);
+            if (go.TryGetComponent<Bullet>(out Bullet b))
+            {
+                if (this is Boss1Controller boss)
+                    b.Initialize(gameObject, boss.boss3BulletsAttackData, 1);
+            }
+            return go;
+        }
+        return null;
+    }
 }
