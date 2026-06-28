@@ -4,16 +4,23 @@ public class SaveTest : MonoBehaviour
 {
     void Update()
     {
+        if (Input.GetKeyDown(KeyCode.F4))
+        {
+            GameDataManager.Instance.IncreaseMaxHP(999999);
+            Debug.Log($"[TestHpBoost] MaxHp aumentado. Nuevo valor: {GameDataManager.Instance.PlayerMaxHp}");
+        }
+
         if (Input.GetKeyDown(KeyCode.F5))
         {
             GameDataManager.Instance.currentHypothesis = Hypotheses.H1;
             FlagManager.Instance.SetFlag("test_flag", true);
-            GameDataManager.Instance.TrySave();
+            SaveManager.Instance.TrySave();
             Debug.Log("[Test] Guardado");
         }
 
         if (Input.GetKeyDown(KeyCode.F6))
         {
+            SaveManager.Instance.TryLoadAndApply();
             Debug.Log($"[Test] MaxHp: {GameDataManager.Instance.PlayerMaxHp}");
             Debug.Log($"[Test] Hipótesis: {GameDataManager.Instance.currentHypothesis}");
             Debug.Log($"[Test] Flag test_flag: {FlagManager.Instance.HasFlag("test_flag")}");

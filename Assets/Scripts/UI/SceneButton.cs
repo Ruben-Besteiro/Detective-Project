@@ -9,7 +9,7 @@ public class SceneButton : MonoBehaviour
 
     public void LoadScene(string LevelName)
     {
-        SoundManager.Instance.PlayOneShot(sfx);
+        if (SoundManager.Instance != null) SoundManager.Instance.PlayOneShot(sfx);
 
         GameSceneManager.Instance.LoadScene(LevelName, transitionType, loadingIcon);
     }

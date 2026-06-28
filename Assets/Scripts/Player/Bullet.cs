@@ -4,11 +4,13 @@ public class Bullet : MonoBehaviour
 {
     GunData data;
     GameObject owner;
+    float damageMultiplier;
 
-    public void Initialize(GameObject owner, GunData data)
+    public void Initialize(GameObject owner, GunData data, float damageMultiplier = 1f)
     {
         this.owner = owner;
         this.data = data;
+        this.damageMultiplier = damageMultiplier;
         Destroy(gameObject, data.bulletLifetime);
     }
 
@@ -25,7 +27,7 @@ public class Bullet : MonoBehaviour
 
         // Si la bala es del jugador
         if (other.TryGetComponent<Enemy>(out var enemy))
-            enemy.TakeDamage(data.damage);
+            enemy.TakeDamage(data.damage * damageMultiplier);
 
         // Si la bala es del jefe
         else if (other.TryGetComponent<PlayerCombatController>(out var player))
