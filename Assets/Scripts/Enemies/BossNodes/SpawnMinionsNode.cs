@@ -20,7 +20,7 @@ public class SpawnMinionsNode : BehaviourNode<Enemy>
 
     IEnumerator Routine()
     {
-        BossController enemy = (BossController)ctx.agent;
+        Boss1Controller enemy = (Boss1Controller)ctx.agent;
         if (PlayerCombatController.Instance == null) { isMoving = false; yield break; }
         enemy.LookAtPlayer();
 

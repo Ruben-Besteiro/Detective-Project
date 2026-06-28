@@ -14,7 +14,7 @@ public class ArmAttackNode : BehaviourNode<Enemy>
     float cooldown;
     Enemy enemy;
 
-    BossMeleeData data;
+    EnemyMeleeData data;
 
     public override State Start()
     {
@@ -22,9 +22,9 @@ public class ArmAttackNode : BehaviourNode<Enemy>
         isMoving = true;
         mediumRange = Random.Range(0, 2) == 0;
 
-        if (enemy is BossController boss)
+        if (enemy is Boss1Controller boss)
             data = boss.bossArmAttackData;
-        else if (enemy is MinionController minion)
+        else if (enemy is Minion1Controller minion)
             data = minion.minionArmAttackData;
 
         cooldown = data.cooldown;
@@ -71,7 +71,7 @@ public class ArmAttackNode : BehaviourNode<Enemy>
     IEnumerator MoveDirectly(Enemy enemy, Transform player)
     {
         NavMeshAgent agent = enemy.GetComponent<NavMeshAgent>();
-        agent.speed = enemy.data.speed;
+        agent.speed = enemy.stats.speed;
         agent.stoppingDistance = stopDistance;
         agent.updateRotation = false;
         agent.enabled = true;
@@ -165,7 +165,7 @@ public class ArmAttackNode : BehaviourNode<Enemy>
             }
 
             Vector3 dir = (target - enemy.transform.position).normalized;
-            enemy.transform.position = Vector3.MoveTowards(enemy.transform.position, target, enemy.data.speed * Time.deltaTime);
+            enemy.transform.position = Vector3.MoveTowards(enemy.transform.position, target, enemy.stats.speed * Time.deltaTime);
             enemy.transform.forward = dir;
             yield return null;
             yield return enemy.WaitWhilePaused();
@@ -186,7 +186,7 @@ public class ArmAttackNode : BehaviourNode<Enemy>
         float elapsed = 0f;
         arm.localScale = new Vector3(originalScale.x, originalScale.y * (mediumRange ? 3 : 2), originalScale.z);
 
-        if (enemy is MinionController)
+        if (enemy is Minion1Controller)
         {
             sweepDuration = 0.5f;
             // Golpe de arriba a abajo pivotando desde el hombro

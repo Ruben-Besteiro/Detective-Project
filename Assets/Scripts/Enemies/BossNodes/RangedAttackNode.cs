@@ -8,8 +8,7 @@ public class RangedAttackNode : BehaviourNode<Enemy>
 
     public override State Start()
     {
-        Debug.Log("RangedAttackNode");
-        cooldown = ((BossController)ctx.agent).boss3BulletsAttackData.cooldown;
+        if (ctx.agent is Boss1Controller boss) cooldown = boss.boss3BulletsAttackData.cooldown;
         isMoving = true;
         ctx.agent.StartCoroutine(Routine());
         return State.IN_PROGRESS;
@@ -20,8 +19,13 @@ public class RangedAttackNode : BehaviourNode<Enemy>
 
     IEnumerator Routine()
     {
-        BossController enemy = (BossController)ctx.agent;
-        if (PlayerCombatController.Instance == null) { isMoving = false; yield break; }
+        Enemy enemy = ctx.agent;
+        if (PlayerCombatController.Instance == null)
+        {
+            isMoving = false;
+            yield break;
+        }
+
         enemy.LookAtPlayer();
 
         Vector3 spawnPos = enemy.transform.position + enemy.transform.forward * (enemy.GetComponent<Collider>().bounds.extents.z + 1);
@@ -43,9 +47,12 @@ public class RangedAttackNode : BehaviourNode<Enemy>
         isMoving = false;
     }
 
-    void FireProjectile(BossController enemy, Vector3 spawnPos, Vector3 dir)
+    void FireProjectile(Enemy enemy, Vector3 spawnPos, Vector3 dir)
     {
-        GameObject sphere = enemy.Spawn(enemy.bulletPrefab, spawnPos);
-        sphere.transform.rotation = Quaternion.LookRotation(dir);
+        if (enemy is Boss1Controller boss) 
+        {
+            GameObject sphere = enemy.Spawn(boss.bulletPrefab, spawnPos);
+            sphere.transform.rotation = Quaternion.LookRotation(dir);
+        }
     }
 }
