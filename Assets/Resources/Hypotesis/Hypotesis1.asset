@@ -20,7 +20,7 @@ MonoBehaviour:
   - VersionName: Foto quemada
     title: Es el padre
     description: "Foto quemada de la familia que habitaba esta casa. Parece que el
-      padre era bombero, viendo que iba de uniforme y est\xE1n en la estaci\xF3n,
+      padre era bombero, viendo que iba de uniforme y que est\xE1n en la estaci\xF3n,
       con un cami\xF3n detr\xE1s. "
     requiredFlags:
     - BURNPHOTO

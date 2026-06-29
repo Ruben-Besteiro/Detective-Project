@@ -19,6 +19,6 @@ MonoBehaviour:
     requiredFlags: []
   - VersionName: Collar de perlas
     title: Es la madre
-    description: 'Collar de perlas chamuscado, seguramente de la madre. '
+    description: 'Collar de perlas chamuscado, seguramente fuera de la madre. '
     requiredFlags:
     - PEARLCOLLAR
