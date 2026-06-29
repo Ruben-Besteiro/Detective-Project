@@ -48,14 +48,10 @@ public class ArmAttackNode : BehaviourNode<Enemy>
             yield break;
         }
 
-        var movement = enemy.GetComponent<EnemyMovement>();
-        movement.stopDistance = stopDistance;
-        movement.cooldown = cooldown;
-        movement.isMoving = true;
-        movement.succeeded = false;
-        yield return enemy.StartCoroutine(movement.MoveEnemy());
+        enemy.stopDistance = stopDistance;
+        yield return enemy.StartCoroutine(enemy.MoveEnemy());
 
-        if (!movement.succeeded)
+        if (!enemy.succeeded)
         {
             isMoving = false;
             yield break;
