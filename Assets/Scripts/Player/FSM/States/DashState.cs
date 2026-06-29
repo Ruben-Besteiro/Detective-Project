@@ -13,15 +13,15 @@ public class DashState : State
 
     public override void Enter()
     {
-        dashTimer = controller.dashDuration;
-        cooldownTimer = controller.dashCooldown;
+        dashTimer = controller.stats.dashDuration;
+        cooldownTimer = controller.stats.dashCooldown;
     }
 
     public override void Update()
     {
         if (dashTimer > 0f)
         {
-            controller.MoveInDirection(direction, controller.dashSpeed);
+            controller.MoveInDirection(direction, controller.stats.dashSpeed);
             dashTimer -= Time.deltaTime;
         }
         else

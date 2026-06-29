@@ -33,7 +33,7 @@ public class MeleeState : State
     {
         controller.Move();
         if (hasAimPoint)
-            controller.FaceReticleWhileAttacking(aimPoint);
+            controller.RotateTowardCursor();
 
         timer -= Time.deltaTime;
         if (timer <= 0f)

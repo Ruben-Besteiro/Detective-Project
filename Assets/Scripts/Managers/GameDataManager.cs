@@ -28,6 +28,13 @@ public class GameDataManager : MonoBehaviour, ISaveable
     {
         data.currentHypothesis = (int)currentHypothesis;
         data.playerMaxHp = playerStats.maxHp;
+        data.playerSpeed = playerStats.speed;
+        data.playerDashSpeed = playerStats.dashSpeed;
+        data.playerDashDuration = playerStats.dashDuration;
+        data.playerDashCooldown = playerStats.dashCooldown;
+        data.playerDodgeSpeed = playerStats.dodgeSpeed;
+        data.playerDodgeDuration = playerStats.dodgeDuration;
+        data.playerDodgeCooldown = playerStats.dodgeCooldown;
 
         data.inventoryItemNames = new List<string>();
         data.inventoryQuantities = new List<int>();
@@ -42,6 +49,13 @@ public class GameDataManager : MonoBehaviour, ISaveable
     {
         currentHypothesis = (Hypotheses)data.currentHypothesis;
         if (data.playerMaxHp > 0) playerStats.maxHp = data.playerMaxHp;
+        if (data.playerSpeed > 0) playerStats.speed = data.playerSpeed;
+        if (data.playerDashSpeed > 0) playerStats.dashSpeed = data.playerDashSpeed;
+        if (data.playerDashDuration > 0) playerStats.dashDuration = data.playerDashDuration;
+        if (data.playerDashCooldown > 0) playerStats.dashCooldown = data.playerDashCooldown;
+        if (data.playerDodgeSpeed > 0) playerStats.dodgeSpeed = data.playerDodgeSpeed;
+        if (data.playerDodgeDuration > 0) playerStats.dodgeDuration = data.playerDodgeDuration;
+        if (data.playerDodgeCooldown > 0) playerStats.dodgeCooldown = data.playerDodgeCooldown;
         inventory = new List<PickupData>();
 
         if (data.inventoryItemNames == null) return;

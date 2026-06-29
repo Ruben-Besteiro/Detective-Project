@@ -9,12 +9,12 @@ public class MoveState : State
     {
         if (Mouse.current != null)
         {
-            if (Mouse.current.leftButton.wasPressedThisFrame)
+            if (Mouse.current.leftButton.isPressed)
             {
                 controller.ChangeState(new ShootState(controller));
                 return;
             }
-            if (Mouse.current.rightButton.wasPressedThisFrame)
+            if (Mouse.current.rightButton.isPressed)
             {
                 controller.ChangeState(new MeleeState(controller));
                 return;

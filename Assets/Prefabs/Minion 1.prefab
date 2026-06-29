@@ -394,6 +394,7 @@ GameObject:
   - component: {fileID: 4025695631005721652}
   - component: {fileID: 5080434617677024590}
   - component: {fileID: 5204820880726741677}
+  - component: {fileID: 8080513575782195855}
   m_Layer: 0
   m_Name: Minion 1
   m_TagString: Enemy
@@ -594,6 +595,18 @@ NavMeshAgent:
   m_BaseOffset: 0.5
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
+--- !u!114 &8080513575782195855
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4627321039082742399}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c3624f016eef5fa46857863df886cc38, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::EnemyMovement
 --- !u!1 &5724249402174406000
 GameObject:
   m_ObjectHideFlags: 0

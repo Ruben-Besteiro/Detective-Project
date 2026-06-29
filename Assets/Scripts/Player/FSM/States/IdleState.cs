@@ -5,22 +5,16 @@ public class IdleState : State
 {
     public IdleState(PlayerCombatController controller) : base(controller) {}
 
-    public override void Update()
-    {
-        if (controller.isLockedOn)
-            controller.Move();
-    }
-
     public override void HandleInput()
     {
         if (Mouse.current != null)
         {
-            if (Mouse.current.leftButton.wasPressedThisFrame)
+            if (Mouse.current.leftButton.isPressed)
             {
                 controller.ChangeState(new ShootState(controller));
                 return;
             }
-            if (Mouse.current.rightButton.wasPressedThisFrame)
+            if (Mouse.current.rightButton.isPressed)
             {
                 controller.ChangeState(new MeleeState(controller));
                 return;
