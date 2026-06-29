@@ -9,11 +9,11 @@ public class PlayerCombatController : PlayerController
 {
     public static PlayerCombatController Instance;
     private float combatSpeed;
-    protected override float MoveSpeed => combatSpeed;
+    protected override float MoveSpeed => combatSpeed;      // Esto nos permite tener varias velocidades según la escena
     public float currentHp;
     public bool isIntangible = false;
 
-    public State currentState;
+    public State currentState;      // Para la máquina de estados
     public Vector2 moveInput;
     public TextMeshProUGUI playerNameText;
     [SerializeField] Image lifeBar;
@@ -29,17 +29,7 @@ public class PlayerCombatController : PlayerController
     public GunData currentGunData;
     public MeleeData currentMeleeData;
     public GameObject bulletPrefab;
-    public float damageMultiplier = 1;      // Se cambia a 1.5 si elegiste la hipótesis correcta
-
-    [Header("Dash")]
-    public float dashSpeed = 25;
-    public float dashDuration = 0.25f;     // Más que el dodge
-    public float dashCooldown = 0.4f;
-
-    [Header("Dodge")]
-    public float dodgeSpeed = 25;
-    public float dodgeDuration = 0.15f;    // Es intangible durante este tiempo
-    public float dodgeCooldown = 0.4f;
+    public float damageMultiplier = 1;      // En el Start se cambia a 1.5 si elegiste la hipótesis correcta
 
     [Header("Lock-On")]
     [SerializeField] private GameObject boss;       // Solo al jefe
@@ -81,12 +71,13 @@ public class PlayerCombatController : PlayerController
         currentState.Enter();
     }
 
+    // Esto se llama desde el MoveState, DashState y DodgeState
     public void Move()
     {
         if (isLockedOn)
             UpdateLockOnMovement(moveInput);
         else
-            base.Update();
+            base.Update();      // Movimiento básico
     }
 
     protected override void OnEnable()
@@ -126,11 +117,6 @@ public class PlayerCombatController : PlayerController
     }
 
     // --- ACCIONES BÁSICAS ---
-
-    protected override void OnPause(InputAction.CallbackContext ctx)
-    {
-        base.OnPause(ctx);
-    }
 
     private void OnShootAction(InputAction.CallbackContext ctx)
     {
@@ -196,12 +182,12 @@ public class PlayerCombatController : PlayerController
         lockOnTarget = null;
     }
 
+    // En lock-on, el jugador se mueve alrededor del enemigo
     private void UpdateLockOnMovement(Vector2 moveInput)
     {
         if (!isLockedOn || lockOnTarget == null) return;
 
-        // Re-derivar ángulo y radio desde la posición actual del jugador cada frame.
-        // Así el movimiento del enemigo no empuja al jugador para mantener el radio.
+        // Recalculamos ángulo y radio desde la posición actual del jugador cada frame por si el enemigo se mueve
         Vector3 toPlayer = transform.position - lockOnTarget.position;
         toPlayer.y = 0f;
         float actualDistance = toPlayer.magnitude;
@@ -218,7 +204,12 @@ public class PlayerCombatController : PlayerController
         float sp = this.combatSpeed;
         lockOnAngle -= moveInput.x * (sp / Mathf.Max(lockOnRadius, 0.1f)) * Mathf.Rad2Deg * Time.deltaTime;
         lockOnRadius -= moveInput.y * sp * Time.deltaTime;
-        lockOnRadius = Mathf.Clamp(lockOnRadius, minDistance, maxDistance);
+        if (lockOnRadius > maxDistance)
+        {
+            DeactivateLockOn();
+            return;
+        }
+        lockOnRadius = Mathf.Max(lockOnRadius, minDistance);
 
         float rad = lockOnAngle * Mathf.Deg2Rad;
         Vector3 orbitPos = lockOnTarget.position + new Vector3(Mathf.Sin(rad), 0f, Mathf.Cos(rad)) * lockOnRadius;
@@ -287,20 +278,16 @@ public class PlayerCombatController : PlayerController
 
     public bool HasAimPoint => !isLockedOn && cursorHasHit;
 
+    // El punto al que atacaremos
     public Vector3 GetAimPoint()
     {
-        return enemyThatTheReticleIsOnTopOf != null ? enemyThatTheReticleIsOnTopOf.position : cursorWorldPosition;
+        return enemyThatTheReticleIsOnTopOf != null ? enemyThatTheReticleIsOnTopOf.position : reticle.transform.position;
     }
 
     public void RotateTowardCursor()
     {
         if (!HasAimPoint) return;
-        FaceReticleWhileAttacking(GetAimPoint());
-    }
-
-    public void FaceReticleWhileAttacking(Vector3 target)
-    {
-        Vector3 dir = target - transform.position;
+        Vector3 dir = GetAimPoint() - transform.position;
         dir.y = 0;
         if (dir.sqrMagnitude > 0.001f)
             transform.forward = dir.normalized;
@@ -341,7 +328,6 @@ public class PlayerCombatController : PlayerController
         if (other.CompareTag("Enemy"))
         {
             if (other.gameObject.name.StartsWith("Arm")) return;    // Se hace en el ArmHitbox
-
             TakeDamage(1, (transform.position - other.transform.position).normalized, 0.5f, 0.5f);
         }
     }

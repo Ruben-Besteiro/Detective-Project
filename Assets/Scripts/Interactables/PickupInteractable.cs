@@ -20,7 +20,7 @@ public class PickupInteractable : Interactable
     private IEnumerator IE_Pickup()
     {
         promptText.text = "";
-        FeedbackAnimationManager.Instance.PlayPickupAnimation(itemData.image, itemData.name);
+        FeedbackAnimationManager.Instance.PlayPickupAnimation(itemData.image, itemData.itemName);
         // "Destruimos" el objeto
         GetComponent<Renderer>().enabled = false;
         GetComponent<Collider>().enabled = false;

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class ConsumeInteractable : Interactable
 {
-    [SerializeField] List<PickupInteractable> acceptedItems;
+    [SerializeField] List<ItemData> acceptedItems;
 
     protected override void OnTriggerEnter(Collider other)
     {
@@ -16,9 +16,9 @@ public class ConsumeInteractable : Interactable
     {
         var inventory = GameDataManager.Instance.inventory;
 
-        foreach (var pickup in acceptedItems)
+        foreach (var item in acceptedItems)
         {
-            int index = inventory.FindIndex(d => d.item == pickup.ItemData);
+            int index = inventory.FindIndex(d => d.item == item);
             if (index < 0) continue;
 
             var entry = inventory[index];
@@ -28,7 +28,7 @@ public class ConsumeInteractable : Interactable
             else
                 inventory[index] = entry;
 
-            StartCoroutine(IE_Consume(pickup.ItemData.itemName));
+            StartCoroutine(IE_Consume(item.itemName));
             return;
         }
 

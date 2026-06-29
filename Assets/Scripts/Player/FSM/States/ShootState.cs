@@ -11,8 +11,7 @@ public class ShootState : State
     public override void Enter()
     {
         timer = controller.currentGunData.cooldown;
-        hasAimPoint = controller.HasAimPoint;
-        if (hasAimPoint) aimPoint = controller.GetAimPoint();
+        if (controller.HasAimPoint) aimPoint = controller.GetAimPoint();
         controller.RotateTowardCursor();
 
         Vector3 spawnPos = controller.transform.position + controller.transform.forward + Vector3.up * 0.5f;
@@ -23,7 +22,7 @@ public class ShootState : State
     {
         controller.Move();
         if (hasAimPoint)
-            controller.FaceReticleWhileAttacking(aimPoint);
+            controller.RotateTowardCursor();
 
         timer -= Time.deltaTime;
         if (timer <= 0f)

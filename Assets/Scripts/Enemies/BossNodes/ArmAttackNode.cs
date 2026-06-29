@@ -1,8 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.AI;
-using Pathfinding;
 
 public class ArmAttackNode : BehaviourNode<Enemy>
 {
@@ -44,132 +42,39 @@ public class ArmAttackNode : BehaviourNode<Enemy>
     IEnumerator Routine()
     {
         enemy = ctx.agent;
-        if (PlayerCombatController.Instance == null) { isMoving = false; yield break; }
-        Transform player = PlayerCombatController.Instance.transform;
-        Vector3 dir = (player.position - enemy.transform.position).normalized;
+        if (PlayerCombatController.Instance == null)
+        {
+            isMoving = false;
+            yield break;
+        }
 
-        if (Physics.Raycast(enemy.transform.position, dir, out RaycastHit hit, Mathf.Infinity) && hit.collider.CompareTag("Player"))
-            yield return MoveDirectly(enemy, player);
-        else
-            yield return MoveWithPathfinding(enemy, player);
+        var movement = enemy.GetComponent<EnemyMovement>();
+        movement.stopDistance = stopDistance;
+        movement.cooldown = cooldown;
+        movement.isMoving = true;
+        movement.succeeded = false;
+        yield return enemy.StartCoroutine(movement.MoveEnemy());
+
+        if (!movement.succeeded)
+        {
+            isMoving = false;
+            yield break;
+        }
 
         if (selectedArm != null)
-            yield return SweepAttack(enemy, player);
+            yield return SweepAttack(enemy, PlayerCombatController.Instance.transform);
 
         float t = 0f;
         while (t < cooldown)
         {
             yield return null;
             yield return enemy.WaitWhilePaused();
-            t += Time.deltaTime; 
+            t += Time.deltaTime;
         }
+
         enemy.currentAttack = -1;
         succeeded = true;
         isMoving = false;
-    }
-
-    IEnumerator MoveDirectly(Enemy enemy, Transform player)
-    {
-        NavMeshAgent agent = enemy.GetComponent<NavMeshAgent>();
-        agent.speed = enemy.stats.speed;
-        agent.stoppingDistance = stopDistance;
-        agent.updateRotation = false;
-        agent.enabled = true;
-        agent.Warp(enemy.transform.position);
-
-        while (Vector3.Distance(enemy.transform.position, player.position) > stopDistance)
-        {
-            if (agent.isOnNavMesh)
-                agent.SetDestination(player.position);
-            enemy.LookAtPlayer();
-
-            Vector3 dir = (new Vector3(player.position.x, enemy.transform.position.y, player.position.z) - enemy.transform.position).normalized;
-            if (Physics.Raycast(enemy.transform.position, dir, out RaycastHit hit, Mathf.Infinity) && !hit.collider.CompareTag("Player"))
-            {
-                agent.enabled = false;
-                yield return MoveWithPathfinding(enemy, player);
-                yield break;
-            }
-
-            yield return null;
-            if (PauseController.IsPaused)
-            {
-                agent.isStopped = true;
-                yield return enemy.WaitWhilePaused();
-                agent.isStopped = false;
-            }
-        }
-
-        agent.enabled = false;
-    }
-
-    IEnumerator MoveWithPathfinding(Enemy enemy, Transform player)
-    {
-        Seeker seeker = enemy.GetComponent<Seeker>();
-        List<Vector3> pathNodes = null;
-        bool pathReady = false;
-
-        seeker.StartPath(enemy.transform.position, player.position, (Path p) =>
-        {
-            if (!p.error)
-            {
-                pathNodes = p.vectorPath;
-            }
-            pathReady = true;
-        });
-
-        yield return new WaitUntil(() => pathReady);
-
-        if (pathNodes == null || pathNodes.Count == 0)
-        {
-            succeeded = false;
-            isMoving = false;
-            yield break;
-        }
-
-        int nodeIndex = 0;
-        while (Vector3.Distance(enemy.transform.position, player.position) > stopDistance)
-        {
-            // Recalcular ruta periódicamente si el jugador se mueve
-            if (nodeIndex >= pathNodes.Count)
-            {
-                pathReady = false;
-                seeker.StartPath(enemy.transform.position, player.position, (Path p) =>
-                {
-                    if (!p.error) pathNodes = p.vectorPath;
-                    pathReady = true;
-                });
-                yield return new WaitUntil(() => pathReady);
-                nodeIndex = 0;
-                if (pathNodes == null || pathNodes.Count == 0) yield break;
-            }
-
-            Vector3 target = pathNodes[nodeIndex];
-            target.y = enemy.transform.position.y;
-
-            if (Vector3.Distance(enemy.transform.position, target) < 0.5f)
-            {
-                nodeIndex++;
-                continue;
-            }
-
-            Vector3 dirToPlayer = (player.position - enemy.transform.position).normalized;
-
-            if (Physics.Raycast(enemy.transform.position, dirToPlayer, out RaycastHit hit, Mathf.Infinity))
-            {
-                if (hit.collider.CompareTag("Player"))
-                {
-                    yield return MoveDirectly(enemy, player);
-                    yield break;
-                }
-            }
-
-            Vector3 dir = (target - enemy.transform.position).normalized;
-            enemy.transform.position = Vector3.MoveTowards(enemy.transform.position, target, enemy.stats.speed * Time.deltaTime);
-            enemy.transform.forward = dir;
-            yield return null;
-            yield return enemy.WaitWhilePaused();
-        }
     }
 
     IEnumerator SweepAttack(Enemy enemy, Transform player)

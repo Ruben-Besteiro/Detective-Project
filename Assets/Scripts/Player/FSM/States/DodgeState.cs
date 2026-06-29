@@ -13,8 +13,8 @@ public class DodgeState : State
 
     public override void Enter()
     {
-        dodgeTimer = controller.dodgeDuration;
-        cooldownTimer = controller.dodgeCooldown;
+        dodgeTimer = controller.stats.dodgeDuration;
+        cooldownTimer = controller.stats.dodgeCooldown;
         controller.StartCoroutine(controller.IE_Intangible(dodgeTimer));
     }
 
@@ -22,7 +22,7 @@ public class DodgeState : State
     {
         if (dodgeTimer > 0f)
         {
-            controller.MoveInDirection(direction, controller.dodgeSpeed);
+            controller.MoveInDirection(direction, controller.stats.dodgeSpeed);
             dodgeTimer -= Time.deltaTime;
         }
         else
