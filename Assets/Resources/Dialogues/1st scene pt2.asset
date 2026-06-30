@@ -232,7 +232,7 @@ MonoBehaviour:
   - nodeType: 0
     dialogueLine:
       speakerName: Burlone
-      text: "Hay, pero que llorica... \xBFY que pasar\xE1 si no me quedo quieto?"
+      text: "Ay, pero que llorica... \xBFY que pasar\xE1 si no me quedo quieto?"
       leftPortrait: {fileID: 21300000, guid: 677541715f37e49458209212f538fa8b, type: 3}
       rightPortrait: {fileID: 0}
     condition:
@@ -286,7 +286,7 @@ MonoBehaviour:
   - nodeType: 0
     dialogueLine:
       speakerName: Benny
-      text: CALLATE
+      text: "C\xC1LLATE"
       leftPortrait: {fileID: 21300000, guid: 677541715f37e49458209212f538fa8b, type: 3}
       rightPortrait: {fileID: 21300000, guid: ab26f63d67279e24a9c25b6ec796f7ef, type: 3}
     condition:
@@ -304,7 +304,7 @@ MonoBehaviour:
   - nodeType: 0
     dialogueLine:
       speakerName: Aurora
-      text: ... Perdona, jefe.
+      text: ...perdona, jefe.
       leftPortrait: {fileID: 21300000, guid: 677541715f37e49458209212f538fa8b, type: 3}
       rightPortrait: {fileID: 21300000, guid: ab26f63d67279e24a9c25b6ec796f7ef, type: 3}
     condition:
@@ -322,7 +322,7 @@ MonoBehaviour:
   - nodeType: 0
     dialogueLine:
       speakerName: Benny
-      text: Ah... No, perdoname tu a mi.
+      text: "Ah... No, perdoname t\xFA a m\xED."
       leftPortrait: {fileID: 21300000, guid: 677541715f37e49458209212f538fa8b, type: 3}
       rightPortrait: {fileID: 21300000, guid: ab26f63d67279e24a9c25b6ec796f7ef, type: 3}
     condition:
@@ -340,7 +340,7 @@ MonoBehaviour:
   - nodeType: 0
     dialogueLine:
       speakerName: Benny
-      text: "He estado muy cansado, y el hecho de no dormir ya esta pasando factura.
+      text: "He estado muy cansado, y el hecho de no dormir ya est\xE1 pasando factura.
         \xBFPodr\xEDas repetirlo una \xFAltima vez?"
       leftPortrait: {fileID: 21300000, guid: 677541715f37e49458209212f538fa8b, type: 3}
       rightPortrait: {fileID: 21300000, guid: ab26f63d67279e24a9c25b6ec796f7ef, type: 3}
@@ -359,8 +359,8 @@ MonoBehaviour:
   - nodeType: 0
     dialogueLine:
       speakerName: Aurora
-      text: "Ok... Las facturas del local ya hay que pagarlas, y con como hemos ido
-        este m\xE9s..."
+      text: "Ok... Las facturas del local ya hay que pagarlas, y con c\xF3mo hemos
+        ido este mes..."
       leftPortrait: {fileID: 21300000, guid: 677541715f37e49458209212f538fa8b, type: 3}
       rightPortrait: {fileID: 21300000, guid: ab26f63d67279e24a9c25b6ec796f7ef, type: 3}
     condition:
@@ -378,8 +378,8 @@ MonoBehaviour:
   - nodeType: 0
     dialogueLine:
       speakerName: Aurora
-      text: Quiza sea hora de aceptar cualquier tipo de caso, aunque resulten minimos
-        o molestos.
+      text: "Quiz\xE1 sea hora de aceptar cualquier tipo de caso, aunque resulten
+        m\xEDnimos o molestos."
       leftPortrait: {fileID: 21300000, guid: 677541715f37e49458209212f538fa8b, type: 3}
       rightPortrait: {fileID: 21300000, guid: ab26f63d67279e24a9c25b6ec796f7ef, type: 3}
     condition:
@@ -469,8 +469,8 @@ MonoBehaviour:
   - nodeType: 0
     dialogueLine:
       speakerName: "\xBF?"
-      text: "*Sollozo* Un Monstruo, del tama\xF1o de un coj\xEDn entr\xF3 en mi casa...
-        Y se comio a mi perro..."
+      text: "*Sollozo* Un monstruo, del tama\xF1o de un coj\xEDn entr\xF3 en mi casa...
+        Y se comi\xF3 a mi perro..."
       leftPortrait: {fileID: 21300000, guid: 677541715f37e49458209212f538fa8b, type: 3}
       rightPortrait: {fileID: 21300000, guid: f61f76d3f2b38b44da105fbd374b3fe2, type: 3}
     condition:

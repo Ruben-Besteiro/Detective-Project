@@ -4,7 +4,6 @@ using UnityEngine;
 public class PickupInteractable : Interactable
 {
     [SerializeField] ItemData itemData;
-    public ItemData ItemData => itemData;
 
     protected override void OnTriggerEnter(Collider other)
     {
@@ -12,7 +11,7 @@ public class PickupInteractable : Interactable
         SetPrompt("Pulsa E para obtener " + itemData.itemName);
     }
 
-    public override void OnInteract()
+    protected override void DoThing()
     {
         StartCoroutine(IE_Pickup());
     }
@@ -20,7 +19,8 @@ public class PickupInteractable : Interactable
     private IEnumerator IE_Pickup()
     {
         promptText.text = "";
-        FeedbackAnimationManager.Instance.PlayPickupAnimation(itemData.image, itemData.itemName);
+        if (FeedbackAnimationManager.Instance != null)
+            FeedbackAnimationManager.Instance.PlayPickupAnimation(itemData.image, itemData.itemName);
         // "Destruimos" el objeto
         GetComponent<Renderer>().enabled = false;
         GetComponent<Collider>().enabled = false;

@@ -9,7 +9,7 @@ public class GameDataManager : MonoBehaviour, ISaveable
     public Hypotheses currentHypothesis = Hypotheses.None;
 
     [SerializeField] private ItemData[] itemDatabase;
-    [SerializeField] private PlayerStats playerStats;
+    public PlayerStats playerStats;
 
     void Awake()
     {
@@ -48,14 +48,14 @@ public class GameDataManager : MonoBehaviour, ISaveable
     public void LoadData(SaveData data)
     {
         currentHypothesis = (Hypotheses)data.currentHypothesis;
-        if (data.playerMaxHp > 0) playerStats.maxHp = data.playerMaxHp;
-        if (data.playerSpeed > 0) playerStats.speed = data.playerSpeed;
-        if (data.playerDashSpeed > 0) playerStats.dashSpeed = data.playerDashSpeed;
-        if (data.playerDashDuration > 0) playerStats.dashDuration = data.playerDashDuration;
-        if (data.playerDashCooldown > 0) playerStats.dashCooldown = data.playerDashCooldown;
-        if (data.playerDodgeSpeed > 0) playerStats.dodgeSpeed = data.playerDodgeSpeed;
-        if (data.playerDodgeDuration > 0) playerStats.dodgeDuration = data.playerDodgeDuration;
-        if (data.playerDodgeCooldown > 0) playerStats.dodgeCooldown = data.playerDodgeCooldown;
+        playerStats.maxHp = data.playerMaxHp;
+        playerStats.speed = data.playerSpeed;
+        playerStats.dashSpeed = data.playerDashSpeed;
+        playerStats.dashDuration = data.playerDashDuration;
+        playerStats.dashCooldown = data.playerDashCooldown;
+        playerStats.dodgeSpeed = data.playerDodgeSpeed;
+        playerStats.dodgeDuration = data.playerDodgeDuration;
+        playerStats.dodgeCooldown = data.playerDodgeCooldown;
         inventory = new List<PickupData>();
 
         if (data.inventoryItemNames == null) return;
@@ -78,8 +78,7 @@ public class GameDataManager : MonoBehaviour, ISaveable
         return null;
     }
 
-    public float PlayerMaxHp => playerStats.maxHp;
-
+    // Se utiliza en el SaveTest
     public void IncreaseMaxHP(float amount)
     {
         playerStats.maxHp += amount;

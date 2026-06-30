@@ -3,25 +3,24 @@ using UnityEngine;
 
 public class SpawnMinionsNode : BehaviourNode<Enemy>
 {
-    bool isMoving;
+    State result;
     int minionCount = 3;
     float cooldown = 4;
 
     public override State Start()
     {
         Debug.Log("SpawnMinionsNode");
-        isMoving = true;
+        result = State.IN_PROGRESS;
         ctx.agent.StartCoroutine(Routine());
         return State.IN_PROGRESS;
     }
 
-    public override State Update()
-        => isMoving ? State.IN_PROGRESS : State.SUCCESS;
+    public override State Update() => result;
 
     IEnumerator Routine()
     {
         Boss1Controller enemy = (Boss1Controller)ctx.agent;
-        if (PlayerCombatController.Instance == null) { isMoving = false; yield break; }
+        if (PlayerCombatController.Instance == null) { result = State.FAILURE; yield break; }
         enemy.LookAtPlayer();
 
         for (int i = 0; i < minionCount; i++)
@@ -44,7 +43,6 @@ public class SpawnMinionsNode : BehaviourNode<Enemy>
             yield return enemy.WaitWhilePaused();
             t += Time.deltaTime;
         }
-        enemy.currentAttack = -1;
-        isMoving = false;
+        result = State.SUCCESS;
     }
 }

@@ -160,7 +160,7 @@ MonoBehaviour:
   - nodeType: 0
     dialogueLine:
       speakerName: ???
-      text: veo...
+      text: Veo...
       leftPortrait: {fileID: 0}
       rightPortrait: {fileID: 0}
     condition:
@@ -304,7 +304,9 @@ MonoBehaviour:
   - nodeType: 0
     dialogueLine:
       speakerName: ???
-      text: Yo
+      text: 'Yo...
+
+'
       leftPortrait: {fileID: 0}
       rightPortrait: {fileID: 0}
     condition:

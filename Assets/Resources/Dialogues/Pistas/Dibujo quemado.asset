@@ -35,8 +35,7 @@ MonoBehaviour:
   - nodeType: 0
     dialogueLine:
       speakerName: Benny
-      text: "El dibujo est\xE1 un un poco quemado, pero parece que hay un bombero
-        pintado."
+      text: "El dibujo est\xE1 un poco quemado, pero parece que hay un bombero pintado."
       leftPortrait: {fileID: 21300000, guid: 677541715f37e49458209212f538fa8b, type: 3}
       rightPortrait: {fileID: 0}
     condition:

@@ -46,5 +46,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::GameDataManager
   inventory: []
   currentHypothesis: 3
-  itemDatabase: []
+  itemDatabase:
+  - {fileID: 11400000, guid: 8fb5c12e472136441b8831f7a3f70cae, type: 2}
+  - {fileID: 11400000, guid: 270763f1834e3ee438a107a108f4be33, type: 2}
+  - {fileID: 11400000, guid: 45716a14c66502d4d886c053fa4b8dec, type: 2}
   playerStats: {fileID: 11400000, guid: a7cffb532fa70e848a74587d84d0e404, type: 2}

@@ -3,26 +3,25 @@ using UnityEngine;
 
 public class RangedAttackNode : BehaviourNode<Enemy>
 {
-    bool isMoving;
+    State result;
     float cooldown;
 
     public override State Start()
     {
         if (ctx.agent is Boss1Controller boss) cooldown = boss.boss3BulletsAttackData.cooldown;
-        isMoving = true;
+        result = State.IN_PROGRESS;
         ctx.agent.StartCoroutine(Routine());
         return State.IN_PROGRESS;
     }
 
-    public override State Update()
-        => isMoving ? State.IN_PROGRESS : State.SUCCESS;
+    public override State Update() => result;
 
     IEnumerator Routine()
     {
         Enemy enemy = ctx.agent;
         if (PlayerCombatController.Instance == null)
         {
-            isMoving = false;
+            result = State.FAILURE;
             yield break;
         }
 
@@ -43,8 +42,7 @@ public class RangedAttackNode : BehaviourNode<Enemy>
             yield return enemy.WaitWhilePaused();
             t += Time.deltaTime;
         }
-        enemy.currentAttack = -1;
-        isMoving = false;
+        result = State.SUCCESS;
     }
 
     void FireProjectile(Enemy enemy, Vector3 spawnPos, Vector3 dir)

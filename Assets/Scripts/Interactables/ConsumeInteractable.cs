@@ -6,13 +6,13 @@ public class ConsumeInteractable : Interactable
 {
     [SerializeField] List<ItemData> acceptedItems;
 
-    protected override void OnTriggerEnter(Collider other)
+    protected override bool ShouldSkipDialogue()
     {
-        base.OnTriggerEnter(other);
-        SetPrompt("Pulsa E para usar " + displayName);
+        var inventory = GameDataManager.Instance.inventory;
+        return acceptedItems.Exists(item => inventory.Exists(d => d.item == item && d.quantity > 0));
     }
 
-    public override void OnInteract()
+    protected override void DoThing()
     {
         var inventory = GameDataManager.Instance.inventory;
 
@@ -50,6 +50,6 @@ public class ConsumeInteractable : Interactable
     {
         promptText.text = "No tienes lo que se necesita";
         yield return new WaitForSeconds(1);
-        promptText.text = "Pulsa E para usar " + displayName;
+        promptText.text = "Pulsa E para usar " + displayMessage;
     }
 }

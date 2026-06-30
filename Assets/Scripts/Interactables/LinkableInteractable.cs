@@ -6,19 +6,13 @@ public class LinkableInteractable : Interactable
 {
     [SerializeField] private List<LinkableInteractable> compatibleObjects;
 
-    protected override void OnTriggerEnter(Collider other)
-    {
-        base.OnTriggerEnter(other);
-        SetPrompt("Pulsa E para vincular " + displayName);
-    }
-
-    public override void OnInteract()
+    protected override void DoThing()
     {
         LinkableInteractable selected = PlayerInvestigationController.Instance.currentlySelectedLinkable;
 
         if (selected == null)
         {
-            StartCoroutine(IE_PickLinkable("Has seleccionado el vinculable " + displayName));
+            StartCoroutine(IE_PickLinkable("Has seleccionado el vinculable " + displayMessage));
             PlayerInvestigationController.Instance.currentlySelectedLinkable = this;
             return;
         }
@@ -31,7 +25,7 @@ public class LinkableInteractable : Interactable
         }
 
         if (selected.compatibleObjects.Contains(this))
-            StartCoroutine(IE_PickLinkable("Has vinculado " + selected.displayName + " con " + displayName));
+            StartCoroutine(IE_PickLinkable("Has vinculado " + selected.displayMessage + " con " + displayMessage));
         else
             StartCoroutine(IE_PickLinkable("No hay correlación"));
 
