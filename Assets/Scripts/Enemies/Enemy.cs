@@ -193,7 +193,7 @@ public abstract class Enemy : MonoBehaviour
             if (go.TryGetComponent<Bullet>(out Bullet b))
             {
                 if (this is Boss1Controller boss)
-                    b.Initialize(gameObject, boss.boss3BulletsAttackData, 1);
+                    b.Initialize(gameObject, boss.boss3BulletsAttackData, boss.stats.attack);
             }
             return go;
         }

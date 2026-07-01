@@ -12,7 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 38258190efd3ea946a5f573c1041a4ed, type: 3}
   m_Name: Minion 1
   m_EditorClassIdentifier: Assembly-CSharp::EnemyData
-  name: 
+  enemyName: 
   hp: 0.001
   speed: 10
   startleRange: 15
+  attack: 1

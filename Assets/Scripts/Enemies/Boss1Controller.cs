@@ -2,16 +2,17 @@ using UnityEngine;
 using UnityEngine.Serialization;
 using TMPro;
 using UnityEngine.UI;
-using System.Collections.Generic;
+using System;
 
 public class Boss1Controller : Enemy
 {
+    public static event Action OnBossDied;
+
     [Header("Attacks")]
     public EnemyGunData boss3BulletsAttackData;
     public EnemyMeleeData bossArmAttackData;
     public GameObject bulletPrefab;
     public GameObject minionPrefab;
-    [HideInInspector] public List<GameObject> minionList;
     public float minionSpawnRadius;
 
     [Header("Stuff")]
@@ -46,12 +47,7 @@ public class Boss1Controller : Enemy
     {
         if (PlayerCombatController.Instance != null)
             PlayerCombatController.Instance.enabled = false;
-        foreach (GameObject m in minionList)
-        {
-            if (m == null) continue;
-            Minion1Controller minion = m.GetComponent<Minion1Controller>();
-            minion.TakeDamage(minion.currentHp);
-        }
+        OnBossDied?.Invoke();
         Destroy(gameObject);
     }
 }

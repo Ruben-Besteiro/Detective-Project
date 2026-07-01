@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Player Gun 1
   m_EditorClassIdentifier: Assembly-CSharp::GunData
   weaponName: Pistola
-  damage: 0.1
+  damagePercent: 33.333332
   bulletSpeed: 20
   bulletLifetime: 2
   cooldown: 0.9

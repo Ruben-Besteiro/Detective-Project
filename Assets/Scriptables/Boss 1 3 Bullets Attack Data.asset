@@ -13,9 +13,7 @@ MonoBehaviour:
   m_Name: Boss 1 3 Bullets Attack Data
   m_EditorClassIdentifier: Assembly-CSharp::BossGunData
   weaponName: '-'
-  damage: 1.5
-  bulletPrefab: {fileID: 1227268554403163030, guid: 4ab5c746706ea924f9a05e73e6b8d460,
-    type: 3}
+  damagePercent: 50
   bulletSpeed: 15
   bulletLifetime: 3
   cooldown: 3

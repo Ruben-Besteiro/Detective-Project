@@ -15,6 +15,7 @@ MonoBehaviour:
   playerName: Trollencio
   speed: 5
   maxHp: 10
+  attack: 3
   dashSpeed: 25
   dashDuration: 1
   dashCooldown: 0.4

@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Boss 1 Arm Attack Data
   m_EditorClassIdentifier: Assembly-CSharp::BossMeleeData
   weaponName: '-'
-  damage: 3
+  damagePercent: 100
   rangeX: 1
   rangeY: 1
   rangeZ: 1

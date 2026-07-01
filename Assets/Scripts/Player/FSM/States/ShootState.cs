@@ -16,7 +16,7 @@ public class ShootState : State
 
         Vector3 spawnPos = controller.transform.position + controller.transform.forward + Vector3.up * 0.5f;
         GameObject bullet = Object.Instantiate(controller.bulletPrefab, spawnPos, controller.transform.rotation);
-        bullet.GetComponent<Bullet>().Initialize(controller.gameObject, controller.currentGunData, controller.damageMultiplier);    }
+        bullet.GetComponent<Bullet>().Initialize(controller.gameObject, controller.currentGunData, controller.stats.attack, controller.damageMultiplier);    }
 
     public override void Update()
     {

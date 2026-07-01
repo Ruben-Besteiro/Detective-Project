@@ -34,8 +34,14 @@ public class ArmHitbox : MonoBehaviour
 
         // Hacemos el daño según qué scriptable tenga el enemigo
         if (enemy is Boss1Controller boss)
-            other.GetComponent<PlayerCombatController>().TakeDamage(boss.bossArmAttackData.damage, perpendicular, boss.bossArmAttackData.knockbackDuration, boss.bossArmAttackData.intangibilityDuration, boss.bossArmAttackData.knockbackSpeed);
+            other.GetComponent<PlayerCombatController>()
+                .TakeDamage(boss.stats.attack * boss.bossArmAttackData.damagePercent / 100,
+                perpendicular, boss.bossArmAttackData.knockbackDuration,
+                boss.bossArmAttackData.intangibilityDuration, boss.bossArmAttackData.knockbackSpeed);
         else if (enemy is Minion1Controller minion)
-            other.GetComponent<PlayerCombatController>().TakeDamage(minion.minionArmAttackData.damage, perpendicular, minion.minionArmAttackData.knockbackDuration, minion.minionArmAttackData.intangibilityDuration, minion.minionArmAttackData.knockbackSpeed);
+            other.GetComponent<PlayerCombatController>()
+                .TakeDamage(minion.stats.attack * minion.minionArmAttackData.damagePercent / 100,
+                perpendicular, minion.minionArmAttackData.knockbackDuration, minion.minionArmAttackData.intangibilityDuration,
+                minion.minionArmAttackData.knockbackSpeed);
     }
 }

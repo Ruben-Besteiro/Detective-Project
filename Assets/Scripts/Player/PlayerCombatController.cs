@@ -303,7 +303,7 @@ public class PlayerCombatController : PlayerController
         {
             // Recalculado cada frame porque el jugador puede moverse durante el ataque
             Vector3 boxCenter = transform.position + transform.forward * (currentMeleeData.hitboxOffset + currentMeleeData.rangeZ / 2) + Vector3.up * 0.5f;
-            DebugBoxDrawer.DrawBox(boxCenter, boxHalfExtents * 2f, transform.rotation, new Color(1f, 0.4f, 0f, 0.6f), 0.5f);
+            DebugBoxDrawer.DrawBox(boxCenter, boxHalfExtents * 2f, transform.rotation, new Color(1f, 0.4f, 0f, 0.6f), Time.deltaTime);
 
             Collider[] hits = Physics.OverlapBox(boxCenter, boxHalfExtents, transform.rotation);
             foreach (var hit in hits)
@@ -312,7 +312,7 @@ public class PlayerCombatController : PlayerController
                 if (hit.TryGetComponent<Enemy>(out var enemy))
                 {
                     if (damagedEnemies.Contains(enemy)) continue;
-                    enemy.TakeDamage(currentMeleeData.damage * damageMultiplier);
+                    enemy.TakeDamage(stats.attack * currentMeleeData.damagePercent / 100 * damageMultiplier);
                     damagedEnemies.Add(enemy);
                 }
             }

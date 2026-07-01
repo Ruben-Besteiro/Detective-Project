@@ -7,6 +7,7 @@ public class PlayerStats : ScriptableObject
     [SerializeField] public string playerName;
     [SerializeField] public float speed;
     [SerializeField] public float maxHp;
+    [SerializeField] public float attack;
 
     [Header("Dash")]
     [SerializeField] public float dashSpeed;

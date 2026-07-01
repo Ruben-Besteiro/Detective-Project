@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Minion 1 Arm Attack Data
   m_EditorClassIdentifier: Assembly-CSharp::BossMeleeData
   weaponName: '-'
-  damage: 1
+  damagePercent: 100
   rangeX: 1
   rangeY: 2
   rangeZ: 1

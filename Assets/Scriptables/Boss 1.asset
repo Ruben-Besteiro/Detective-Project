@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Boss 1
   m_EditorClassIdentifier: Assembly-CSharp::EnemyData
   enemyName: Paco
-  hp: 7.5
+  hp: 75
   speed: 4
   startleRange: 30
+  attack: 3

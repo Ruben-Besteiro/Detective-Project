@@ -33,7 +33,6 @@ public class SpawnMinionsNode : BehaviourNode<Enemy>
             float minionHalfHeight = minion.GetComponent<Collider>().bounds.extents.y;
             minion.transform.position = new Vector3(spawnPos.x, floorY + minionHalfHeight, spawnPos.z);
             minion.GetComponent<Enemy>().startled = true;
-            enemy.minionList.Add(minion);
         }
 
         float t = 0f;
