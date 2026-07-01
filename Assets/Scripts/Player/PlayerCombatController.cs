@@ -62,6 +62,8 @@ public class PlayerCombatController : PlayerController
         reticle = Instantiate(reticlePrefab);
         Cursor.visible = false;
         if (boss != null) minDistance += boss.GetComponent<Collider>().bounds.size.z / 2;
+
+        input.Player.Pause.performed -= OnPause;
     }
 
     public void ChangeState(State newState)
