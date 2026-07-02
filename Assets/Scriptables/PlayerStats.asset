@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ea9fde12fe2408640a9473ea5cdce494, type: 3}
   m_Name: PlayerStats
   m_EditorClassIdentifier: Assembly-CSharp::PlayerStats
-  playerName: Jugador
+  playerName: Benny
   speed: 5
   maxHp: 10
   attack: 3
