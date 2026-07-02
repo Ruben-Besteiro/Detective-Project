@@ -71,7 +71,11 @@ public class DialogueManager : MonoBehaviour
     {
         if (AdvancePressed())
         {
-            if (!isWaitingForInput)
+            if (isWaitingForInput)
+            {
+                advanceRequested = true;
+            }
+            else
             {
                 isSkippingText = true;
             }
@@ -169,6 +173,7 @@ public class DialogueManager : MonoBehaviour
     // NODE TYPES
     private bool isSkippingText;
     private bool isWaitingForInput;
+    private bool advanceRequested;
     private IEnumerator ProcessDialogue(DialogueNode node)
     {
         var line = node.dialogueLine;
@@ -248,8 +253,9 @@ public class DialogueManager : MonoBehaviour
     private IEnumerator WaitForClick()
     {
         isWaitingForInput = true;
+        advanceRequested = false;
 
-        while (!AdvancePressed())
+        while (!advanceRequested)
         {
             yield return null;
         }
